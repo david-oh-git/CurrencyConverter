@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TitleTextStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/project_blue</item>
+    </style>
+
+    <dimen name="title_text_size">26sp</dimen>
 </resources>
