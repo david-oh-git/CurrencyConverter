@@ -11,7 +11,7 @@ import io.audioshinigami.currencyconverter.models.Currency
 
 class SpinnerAdaptor(): BaseAdapter() {
 
-    var data:ArrayList<Currency> = arrayListOf()
+    var data:ArrayList<Currency> = Currency.getCountriesData()
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
 
@@ -21,7 +21,7 @@ class SpinnerAdaptor(): BaseAdapter() {
 
         val imageView: ImageView = row.findViewById(R.id.id_spinner_image)
         val textView: TextView = row.findViewById(R.id.id_spinner_text)
-        
+
         textView.text = currency.name
         imageView.setImageResource(currency.icon)
 

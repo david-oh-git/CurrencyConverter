@@ -1,3 +1,23 @@
 package io.audioshinigami.currencyconverter.models
 
-data class Currency(var name: String , var icon: Int ){} /*end Currency*/
+import io.audioshinigami.currencyconverter.R
+
+data class Currency(var name: String , var icon: Int ){
+
+    companion object{
+        private var allcountries: ArrayList<Currency> = ArrayList()
+
+        fun getCountriesData(): ArrayList<Currency> {
+
+
+            allcountries.add(Currency("NGN", R.drawable.nigeria))
+            allcountries.add(Currency("AFN", R.drawable.afghanistan))
+            allcountries.add(Currency("XCD", R.drawable.anguilla))
+            allcountries.add(Currency("AUD", R.drawable.australia))
+            allcountries.add(Currency("BDT", R.drawable.bangladesh))
+
+            return allcountries
+        }
+
+    }
+} /*end Currency*/
