@@ -17,5 +17,5 @@
         <item name="android:textColor">@color/project_blue</item>
     </style>
 
-    <dimen name="title_text_size">26sp</dimen>
+
 </resources>
