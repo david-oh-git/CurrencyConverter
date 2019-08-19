@@ -17,5 +17,17 @@
         <item name="android:textColor">@color/project_blue</item>
     </style>
 
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="actionBarStyle">@style/AppToolbar</item>
+        <!--<item name="android:actionMenuTextColor">@android:color/black</item>-->
+    </style>
+
+    <style name="AppToolbar" parent="AppTheme">
+        <!--<item name="android:textColor">@android:color/black</item>-->
+
+    </style>
+
 
 </resources>

@@ -3,4 +3,6 @@
 
     <dimen name="title_text_size">48sp</dimen>
     <dimen name="dimen_edittxt_size">22sp</dimen>
+    <dimen name="dimen_flag_icon">30dp</dimen>
+    <dimen name="dimen_spinner_txt_size">23sp</dimen>
 </resources>
