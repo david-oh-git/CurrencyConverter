@@ -33,14 +33,15 @@ class CurrencyParser: JsonDeserializer<CurrencyRate> {
         if(jsonObject == null )
             return null
 
-        var gson = Gson()
-        var currencyRates = HashMap<String, String>()
+        val gson = Gson()
+        val currencyRates = HashMap<String, String>()
 
 
         for(entry: Map.Entry<String, JsonElement> in jsonObject.entrySet()){
             val key = entry.key
+            Log.d("TAGU"," value is ${entry.value}")
             val value: String = gson.fromJson(entry.value, String::class.java)
-            currencyRates.put(key, value)
+            currencyRates[key] = value
         } /*end FOR*/
 
         return currencyRates

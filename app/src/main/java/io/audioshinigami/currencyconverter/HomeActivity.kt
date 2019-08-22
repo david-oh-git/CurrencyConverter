@@ -1,9 +1,7 @@
 package io.audioshinigami.currencyconverter
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
@@ -31,23 +29,25 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun convertCurrency() {
+        if(!isFormValid())
+            return
+
         val fromCurrency = Currency.getCountriesData()[id_spinner_from.selectedItemPosition].name
         val toCurrency = Currency.getCountriesData()[id_spinner_to.selectedItemPosition].name
-
-        Log.d("TAGU", "cCode is : $fromCurrency")
-        viewModel.getRate("${fromCurrency}_$toCurrency")
+        val currencyCode = "${fromCurrency}_$toCurrency,${toCurrency}_$fromCurrency"
+        var result: Map<String, String> = mutableMapOf()
+        viewModel.getRate(currencyCode)
         viewModel.rateLiveData.observe(this, Observer { data ->
+            result = data.rate
             id_txtvw_test_result.text = data.toString()
         })
-
-
 
     }
 
     private fun setUpSpinner(){
         val adaptor = SpinnerAdaptor()
-        id_spinner_to.adapter = adaptor
         id_spinner_from.adapter = adaptor
+        id_spinner_to.adapter = adaptor
     } /*end setupSpinner*/
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -55,8 +55,24 @@ class HomeActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     } /*end onCreateOptions*/
 
-    private fun setTestView(data: String){
-        id_txtvw_test_result.text = data
-    }
+    private fun isFormValid(): Boolean {
+        var valid = true
 
+        val fromCurrency = edittxt_currency_from.text
+        val toCurrency = edittxt_currenct_to.text
+
+        if( fromCurrency.isNullOrEmpty()){
+            edittxt_currency_from.error = "Required."
+            edittxt_currency_from.requestFocus()
+            valid = false
+        }
+
+        if( toCurrency.isNullOrEmpty()){
+            edittxt_currenct_to.error = "Required."
+            edittxt_currenct_to.requestFocus()
+            valid = false
+        }
+
+        return valid
+    } /*end isFormValid*/
 } /*end END*/

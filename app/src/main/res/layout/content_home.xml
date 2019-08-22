@@ -56,13 +56,15 @@
             android:layout_marginTop="64dp">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:background="@null"
-                android:layout_weight="4"
-                android:hint="25"
-                android:textSize="@dimen/dimen_edittxt_size"
+                android:id="@+id/edittxt_currency_from"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/id_edittxt_currency_from" android:fontFamily="@font/montserrat_alternates">
+                android:layout_weight="4"
+                android:background="@null"
+                android:fontFamily="@font/montserrat_alternates"
+                android:hint="25"
+                android:inputType="number"
+                android:textSize="@dimen/dimen_edittxt_size">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -91,13 +93,15 @@
             android:layout_marginEnd="32dp" android:layout_marginTop="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
-                android:background="@null"
-                android:layout_weight="4"
-                android:hint="250"
-                android:textSize="@dimen/dimen_edittxt_size"
+                android:id="@+id/edittxt_currenct_to"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/edittxt_currenct_to" android:fontFamily="@font/montserrat_alternates">
+                android:layout_weight="4"
+                android:background="@null"
+                android:fontFamily="@font/montserrat_alternates"
+                android:hint="250"
+                android:inputType="number"
+                android:textSize="@dimen/dimen_edittxt_size">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -129,7 +133,7 @@
                 android:background="@drawable/spinner_border"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/id_spinner_to"/>
+                android:id="@+id/id_spinner_from"/>
 
         <ImageView
                 android:scaleType="centerCrop"
@@ -144,20 +148,24 @@
                 android:background="@drawable/spinner_border"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/id_spinner_from"/>
+                android:id="@+id/id_spinner_to"/>
 
     </LinearLayout>
 
     <Button
+            android:id="@+id/id_btn_convert"
             style="@style/Widget.AppCompat.Button.Colored"
-            app:layout_constraintTop_toBottomOf="@+id/id_layout_spinners"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/str_btn_convert"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/id_btn_convert" android:layout_marginTop="32dp" android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp" android:textAllCaps="false"/>
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/str_btn_convert"
+            android:textAllCaps="false"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/id_layout_spinners" />
 
     <TextView
             android:id="@+id/id_txtvw_test_result"

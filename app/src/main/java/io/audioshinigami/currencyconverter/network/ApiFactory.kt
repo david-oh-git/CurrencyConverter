@@ -1,6 +1,9 @@
 package io.audioshinigami.currencyconverter.network
 
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import io.audioshinigami.currencyconverter.models.CurrencyParser
+import io.audioshinigami.currencyconverter.models.CurrencyRate
 import io.audioshinigami.currencyconverter.utils.api_key
 import io.audioshinigami.currencyconverter.utils.base_url
 import okhttp3.Interceptor
@@ -30,12 +33,20 @@ object ApiFactory {
     .addInterceptor(authInterceptor)
     .build()
 
-    private fun retrofit(): Retrofit = Retrofit.Builder()
-        .client(httpClient)
-        .baseUrl(base_url)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build()
+    private val gsonBuilder = GsonBuilder()
+
+
+    private fun retrofit(): Retrofit {
+
+        gsonBuilder.registerTypeAdapter(CurrencyRate::class.java, CurrencyParser())
+
+        return Retrofit.Builder()
+            .client(httpClient)
+            .baseUrl(base_url)
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+    }
 
     val rateApi : ConverterApi = retrofit().create(ConverterApi::class.java)
 
