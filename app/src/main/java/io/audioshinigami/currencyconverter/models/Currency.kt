@@ -15,6 +15,7 @@ data class Currency(var name: String , var icon: Int ){
             allcountries.add(Currency("XCD", R.drawable.anguilla))
             allcountries.add(Currency("AUD", R.drawable.australia))
             allcountries.add(Currency("BDT", R.drawable.bangladesh))
+            allcountries.add(Currency("USD", R.drawable.united_states_of_america))
 
             return allcountries
         }
