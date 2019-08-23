@@ -1,10 +1,8 @@
 package io.audioshinigami.currencyconverter.repository
 
 import android.util.Log
-import retrofit2.Response
-import java.io.IOException
 import io.audioshinigami.currencyconverter.network.Result
-import java.lang.Exception
+import retrofit2.Response
 
 open class BaseRepository {
 

@@ -9,7 +9,7 @@ import android.widget.TextView
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.models.Currency
 
-class SpinnerAdaptor(): BaseAdapter() {
+class SpinnerAdaptor: BaseAdapter() {
 
     var data:ArrayList<Currency> = Currency.getCountriesData()
 

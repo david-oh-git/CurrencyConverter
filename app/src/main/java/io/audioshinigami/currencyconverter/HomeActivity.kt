@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
+import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.models.Currency
+import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewmodel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
-import androidx.lifecycle.ViewModelProviders
-import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewmodel
 
 class HomeActivity : AppCompatActivity() {
 
@@ -35,11 +36,11 @@ class HomeActivity : AppCompatActivity() {
         val fromCurrency = Currency.getCountriesData()[id_spinner_from.selectedItemPosition].name
         val toCurrency = Currency.getCountriesData()[id_spinner_to.selectedItemPosition].name
         val currencyCode = "${fromCurrency}_$toCurrency,${toCurrency}_$fromCurrency"
-        var result: Map<String, String> = mutableMapOf()
+        var result: Map<String, String>
         viewModel.getRate(currencyCode)
         viewModel.rateLiveData.observe(this, Observer { data ->
             result = data.rate
-            id_txtvw_test_result.text = data.toString()
+            id_txtvw_test_result.text = result.toString()
         })
 
     }
@@ -48,6 +49,10 @@ class HomeActivity : AppCompatActivity() {
         val adaptor = SpinnerAdaptor()
         id_spinner_from.adapter = adaptor
         id_spinner_to.adapter = adaptor
+
+
+        id_spinner_to.onItemSelectedListener = SpinnerItemListener(txtvw_currency_to)
+        id_spinner_from.onItemSelectedListener = SpinnerItemListener(txtvw_currency_from)
     } /*end setupSpinner*/
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
