@@ -4,15 +4,15 @@ import android.util.Log
 import com.google.gson.*
 import java.lang.reflect.Type
 
-class CurrencyParser: JsonDeserializer<CurrencyRate> {
+class RateResponseParser: JsonDeserializer<RateResponse> {
 
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): CurrencyRate? {
+    ): RateResponse? {
 
-        val result = CurrencyRate()
+        val result = RateResponse()
 
         try {
             val map = readServiceUrlMap(json?.asJsonObject)

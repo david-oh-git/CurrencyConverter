@@ -3,18 +3,19 @@ package io.audioshinigami.currencyconverter
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.models.Currency
-import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewmodel
+import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : AppCompatActivity() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(CurrencyViewmodel::class.java) }
+    private val viewModel by lazy { ViewModelProviders.of(this).get(CurrencyViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +38,24 @@ class HomeActivity : AppCompatActivity() {
         val toCurrency = Currency.getCountriesData()[id_spinner_to.selectedItemPosition].name
         val currencyCode = "${fromCurrency}_$toCurrency,${toCurrency}_$fromCurrency"
         var result: Map<String, String>
-        viewModel.getRate(currencyCode)
+        viewModel.fetchRate(currencyCode)
         viewModel.rateLiveData.observe(this, Observer { data ->
             result = data.rate
+            calculateCurrency( "${fromCurrency}_$toCurrency", result)
             id_txtvw_test_result.text = result.toString()
         })
 
+    }
+
+    private fun calculateCurrency(code: String, result: Map<String, String>) {
+        val rate = viewModel.extractRate(code, result)
+
+        val currencyValue = edittxt_currency_from.text.toString().toDouble()
+        val convertedValue = currencyValue * rate.rateValue
+
+        edittxt_currency_to.setText(convertedValue.toString())
+
+        edittxt_currency_to.setTextColor(ContextCompat.getColor(this,R.color.project_blue))
     }
 
     private fun setUpSpinner(){
@@ -64,7 +77,7 @@ class HomeActivity : AppCompatActivity() {
         var valid = true
 
         val fromCurrency = edittxt_currency_from.text
-        val toCurrency = edittxt_currenct_to.text
+//        edittxt_currency_to.setText("350.72")
 
         if( fromCurrency.isNullOrEmpty()){
             edittxt_currency_from.error = "Required."
@@ -72,12 +85,7 @@ class HomeActivity : AppCompatActivity() {
             valid = false
         }
 
-        if( toCurrency.isNullOrEmpty()){
-            edittxt_currenct_to.error = "Required."
-            edittxt_currenct_to.requestFocus()
-            valid = false
-        }
-
         return valid
     } /*end isFormValid*/
+
 } /*end END*/
