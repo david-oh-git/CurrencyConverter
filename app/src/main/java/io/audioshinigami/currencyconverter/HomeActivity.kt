@@ -58,7 +58,7 @@ class HomeActivity : AppCompatActivity() {
         val currencyValue = edittxt_currency_from.text.toString().toDouble()
         val convertedValue = currencyValue * rate.rateValue
 
-        edittxt_currency_to.setText(convertedValue.toString())
+        edittxt_currency_to.setText(String.format("%.2f", convertedValue))
 
         edittxt_currency_to.setTextColor(ContextCompat.getColor(this,R.color.project_blue))
     }
