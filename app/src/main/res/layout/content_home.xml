@@ -73,7 +73,7 @@
                 android:background="@null"
                 android:fontFamily="@font/montserrat_alternates"
                 android:hint="25"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:paddingStart="@dimen/editxt_padding"
                 android:textSize="@dimen/dimen_edittxt_size">
 
@@ -113,7 +113,7 @@
                 android:enabled="false"
                 android:fontFamily="@font/montserrat_alternates"
                 android:hint="0.0"
-                android:inputType="number"
+                android:inputType="number|numberDecimal"
                 android:textSize="@dimen/dimen_edittxt_size">
 
         </com.google.android.material.textfield.TextInputEditText>

@@ -16,10 +16,6 @@ class CurrencyViewModel: ViewModel() {
     private val rateRepository = RateRepository(ApiFactory.rateApi)
     val rateLiveData = MutableLiveData<RateResponse>()
 
-    fun demo() = viewModelScope.launch(Dispatchers.IO) {
-        //TODO code here
-    }
-
     fun fetchRate(currencyCode: String) = viewModelScope.launch (Dispatchers.Default) {
         val data = withContext(Dispatchers.IO){ rateRepository.fetchRateFromApi(currencyCode) }
         rateLiveData.postValue(data)
