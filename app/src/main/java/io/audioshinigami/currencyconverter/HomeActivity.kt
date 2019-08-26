@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.models.Currency
+import io.audioshinigami.currencyconverter.utils.currencyFormat
 import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -24,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        /*removes title from actionBar*/
         supportActionBar?.let { it.title = "" }
 
         setUpSpinner()
@@ -58,7 +60,7 @@ class HomeActivity : AppCompatActivity() {
         val currencyValue = edittxt_currency_from.text.toString().toDouble()
         val convertedValue = currencyValue * rate.rateValue
 
-        edittxt_currency_to.setText(String.format("%.2f", convertedValue))
+        edittxt_currency_to.setText(convertedValue.currencyFormat)
 
         edittxt_currency_to.setTextColor(ContextCompat.getColor(this,R.color.project_blue))
     }
