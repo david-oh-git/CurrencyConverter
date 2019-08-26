@@ -5,4 +5,6 @@
     <dimen name="dimen_edittxt_size">22sp</dimen>
     <dimen name="dimen_flag_icon">30dp</dimen>
     <dimen name="dimen_spinner_txt_size">23sp</dimen>
+    <dimen name="editxt_padding">8dp</dimen>
+    <dimen name="editxt_margin">4dp</dimen>
 </resources>

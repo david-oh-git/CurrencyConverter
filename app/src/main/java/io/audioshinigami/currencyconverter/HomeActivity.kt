@@ -2,6 +2,7 @@ package io.audioshinigami.currencyconverter
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -23,10 +24,13 @@ class HomeActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        supportActionBar?.let { it.title = "" }
+
         setUpSpinner()
 
         id_btn_convert.setOnClickListener{
             convertCurrency()
+//            slideUp()
         }
     }
 
@@ -38,11 +42,12 @@ class HomeActivity : AppCompatActivity() {
         val toCurrency = Currency.getCountriesData()[id_spinner_to.selectedItemPosition].name
         val currencyCode = "${fromCurrency}_$toCurrency,${toCurrency}_$fromCurrency"
         var result: Map<String, String>
+
+        /*get currency rate from API*/
         viewModel.fetchRate(currencyCode)
         viewModel.rateLiveData.observe(this, Observer { data ->
             result = data.rate
             calculateCurrency( "${fromCurrency}_$toCurrency", result)
-            id_txtvw_test_result.text = result.toString()
         })
 
     }
@@ -77,7 +82,6 @@ class HomeActivity : AppCompatActivity() {
         var valid = true
 
         val fromCurrency = edittxt_currency_from.text
-//        edittxt_currency_to.setText("350.72")
 
         if( fromCurrency.isNullOrEmpty()){
             edittxt_currency_from.error = "Required."
@@ -87,5 +91,12 @@ class HomeActivity : AppCompatActivity() {
 
         return valid
     } /*end isFormValid*/
+
+    private fun slideUp(){
+        val slideUpAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_up)
+//        graph_layout.animation = slideUpAnimation
+        graph.bringToFront()
+        graph.animation = slideUpAnimation
+    } /*end slide*/
 
 } /*end END*/
