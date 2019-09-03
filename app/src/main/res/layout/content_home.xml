@@ -4,12 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/editxt_margin"
-        android:layout_marginBottom="@dimen/editxt_margin"
-        android:paddingStart="@dimen/editxt_padding"
-        android:paddingTop="@dimen/editxt_padding"
-        android:paddingBottom="@dimen/editxt_padding"
-        tools:context=".HomeActivity">
+        tools:context=".activities.HomeActivity">
 
 
     <TextView
@@ -70,11 +65,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
+                android:layout_marginStart="@dimen/editxt_padding"
                 android:background="@null"
                 android:fontFamily="@font/montserrat_alternates"
                 android:hint="25"
                 android:inputType="numberDecimal"
-                android:paddingStart="@dimen/editxt_padding"
+                android:padding="@dimen/editxt_padding"
                 android:textSize="@dimen/dimen_edittxt_size">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -108,6 +104,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/editxt_padding"
+                android:padding="@dimen/editxt_padding"
                 android:layout_weight="4"
                 android:background="@null"
                 android:enabled="false"
@@ -131,7 +128,7 @@
 
     <LinearLayout
             android:id="@+id/id_layout_spinners"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
@@ -171,14 +168,14 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
+            android:paddingTop="@dimen/dimen_btnconvert_padd"
+            android:paddingBottom="@dimen/dimen_btnconvert_padd"
             android:text="@string/str_btn_convert"
             android:textAllCaps="false"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="@+id/id_layout_spinners"
+            app:layout_constraintStart_toStartOf="@+id/id_layout_spinners"
             app:layout_constraintTop_toBottomOf="@+id/id_layout_spinners" />
 
     <LinearLayout

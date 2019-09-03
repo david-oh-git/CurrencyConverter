@@ -1,8 +1,11 @@
 package io.audioshinigami.currencyconverter.viewmodels
 
+import android.content.res.Resources
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.audioshinigami.currencyconverter.models.Currency
+import io.audioshinigami.currencyconverter.models.CurrencyData
 import io.audioshinigami.currencyconverter.models.Rate
 import io.audioshinigami.currencyconverter.models.RateResponse
 import io.audioshinigami.currencyconverter.network.ApiFactory
@@ -15,6 +18,9 @@ class CurrencyViewModel: ViewModel() {
 
     private val rateRepository = RateRepository(ApiFactory.rateApi)
     val rateLiveData = MutableLiveData<RateResponse>()
+    val flagData by lazy { Currency.getCountriesData() }
+    private var dataSize: Int? = null
+
 
     fun fetchRate(currencyCode: String) = viewModelScope.launch (Dispatchers.Default) {
         val data = withContext(Dispatchers.IO){ rateRepository.fetchRateFromApi(currencyCode) }
@@ -24,4 +30,8 @@ class CurrencyViewModel: ViewModel() {
     fun extractRate(code: String, result: Map<String, String>): Rate {
         return rateRepository.getRate(code, result)
     }/*end extractrate*/
+
+    fun getDatCount(resources: Resources): Int?{
+        return dataSize ?: CurrencyData.getCodes(resources)?.size
+    }
 }

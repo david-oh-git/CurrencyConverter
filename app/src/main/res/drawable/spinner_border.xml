@@ -18,7 +18,6 @@
             </item>
 
             <item android:drawable="@drawable/ic_arrow_down"
-
                   android:gravity="center_vertical|center_horizontal|end">
 
 

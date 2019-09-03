@@ -13,6 +13,6 @@ class SpinnerItemListener(var textView: TextView): AdapterView.OnItemSelectedLis
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, p3: Long) {
 
-        textView.text = Currency.getCountriesData()[position].name
+        textView.text = Currency.getCountriesData()!![position].code
     }
 }

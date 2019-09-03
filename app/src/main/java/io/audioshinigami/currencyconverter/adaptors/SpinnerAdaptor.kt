@@ -6,34 +6,53 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import io.audioshinigami.currencyconverter.activities.HomeActivity
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.models.Currency
 
-class SpinnerAdaptor: BaseAdapter() {
+class SpinnerAdaptor(activity: HomeActivity, val data: ArrayList<Currency>?): BaseAdapter() {
 
-    var data:ArrayList<Currency> = Currency.getCountriesData()
+    private val inflater: LayoutInflater = LayoutInflater.from(activity)
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
 
-        val row = view ?: LayoutInflater.from(parent?.context).inflate(R.layout.spinner_item, parent, false)
 
-        val currency = data[position]
+        val holder: SpinnerItemHolder
+        var row: View? = view
 
-        val imageView: ImageView = row.findViewById(R.id.id_spinner_image)
-        val textView: TextView = row.findViewById(R.id.id_spinner_text)
 
-        textView.text = currency.name
-        imageView.setImageResource(currency.icon)
+        if( view == null){
+            row = inflater.inflate(R.layout.spinner_item, parent, false)
+            holder = SpinnerItemHolder(row)
+            row.tag = holder
+        }else{
+            holder = view.tag as SpinnerItemHolder
+        }
 
-        return row
+        val currency = data?.run { this[position] }
+
+        holder.bind(currency!!)
+
+        return row!!
     }
 
     override fun getItem(position: Int): Any {
-        return data[position]
+        return data!![position]
     }
 
     override fun getItemId(p0: Int): Long = p0.toLong()
 
 
-    override fun getCount(): Int = data.size
+    override fun getCount(): Int = data!!.size
+
+    class SpinnerItemHolder(var view: View?){
+
+        var imageView: ImageView? = view?.findViewById(R.id.id_spinner_image)
+        var textView: TextView? = view?.findViewById(R.id.id_spinner_text)
+
+        fun bind(currency: Currency){
+            imageView?.setImageResource(currency.icon)
+            textView?.text = currency.code
+        }
+    }
 }
