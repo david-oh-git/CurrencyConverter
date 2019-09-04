@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import io.audioshinigami.currencyconverter.activities.HomeActivity
 import io.audioshinigami.currencyconverter.R
+import io.audioshinigami.currencyconverter.activities.HomeActivity
 import io.audioshinigami.currencyconverter.models.Currency
 
 class SpinnerAdaptor(activity: HomeActivity, val data: ArrayList<Currency>?): BaseAdapter() {
@@ -30,7 +30,6 @@ class SpinnerAdaptor(activity: HomeActivity, val data: ArrayList<Currency>?): Ba
         }
 
         val currency = data?.run { this[position] }
-
         holder.bind(currency!!)
 
         return row!!

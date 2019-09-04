@@ -1,6 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="flags">
+    <integer-array name="test_codes">
+        <item name="Albanian Lek">@drawable/albania</item>
+        <item name="East Caribbean Dollar">@drawable/oecs</item>
+        <item name="Euro">@drawable/european_union</item>
+        <item name="Barbadian Dollar">@drawable/barbados</item>
+        <item name="Bhutanese Ngultrum">@drawable/bhutan</item>
+        <item name="Brunei Dollar">@drawable/brunei</item>
+    </integer-array>
+
+    <array name="flags_codes">
+
         <item name="Albanian Lek">@drawable/albania</item>
         <item name="East Caribbean Dollar">@drawable/oecs</item>
         <item name="Euro">@drawable/european_union</item>
@@ -110,7 +121,7 @@
         <item name="Nicaraguan Cordoba">@drawable/nicaragua</item>
         <item name="Pakistani Rupee">@drawable/pakistan</item>
         <item name="Paraguayan Guarani">@drawable/paraguay</item>
-<!--        <item name="Saint Helena Pound">@drawable/</item>-->
+        <item name="Saint Helena Pound">@drawable/united_kingdom</item>
         <item name="Seychellois Rupee">@drawable/seychelles</item>
         <item name="Solomon Islands Dollar">@drawable/solomon_islands</item>
         <item name="Sri Lankan Rupee">@drawable/sri_lanka</item>
@@ -127,12 +138,12 @@
         <item name="Croatian Kuna">@drawable/croatia</item>
         <item name="Djiboutian Franc">@drawable/djibouti</item>
         <item name="Egyptian Pound">@drawable/egypt</item>
-        <item name="Ethiopian Birr">ETB</item>
+        <item name="Ethiopian Birr">@drawable/ethiopia</item>
         <item name="CFP Franc">@drawable/french_polynesia</item>
         <item name="Ghanaian Cedi">@drawable/ghana</item>
         <item name="Guinean Franc">@drawable/guinea</item>
         <item name="Hong Kong Dollar">@drawable/hong_kong</item>
-<!--        <item name="Special Drawing Rights">@drawable/</item> add IMF flag-->
+        <item name="Special Drawing Rights">@drawable/imf</item>
         <item name="Kenyan Shilling">@drawable/kenya</item>
         <item name="Kyrgyzstani Som">@drawable/kyrgyzstan</item>
         <item name="Liberian Dollar">@drawable/liberia</item>
@@ -155,7 +166,7 @@
         <item name="Turkmenistan Manat">@drawable/turkmenistan</item>
         <item name="British Pound">@drawable/united_kingdom</item>
         <item name="Zambian Kwacha">@drawable/zambia</item>
-<!--        <item name="Bitcoin">BTC</item> icon for bitcoin-->
+        <item name="Bitcoin">@drawable/bitcoin</item>
         <item name="New Belarusian Ruble">@drawable/belarus</item>
         <item name="Bermudan Dollar">@drawable/bermuda</item>
         <item name="Guernsey Pound">@drawable/guernsey</item>
@@ -165,8 +176,9 @@
         <item name="Jersey Pound">@drawable/jersey</item>
         <item name="Salvadoran Colón">@drawable/salvador</item>
         <item name="Old Zambian Kwacha">@drawable/zambia</item>
-        <item name="Silver (troy ounce)">XAG</item>
+        <item name="Silver (troy ounce)">@color/project_silver</item>
         <item name="Zimbabwean Dollar">@drawable/zimbabwe</item>
-    </string-array>
+
+    </array>
 
 </resources>

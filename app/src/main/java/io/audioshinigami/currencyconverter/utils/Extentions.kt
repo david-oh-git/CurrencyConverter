@@ -15,10 +15,6 @@ fun Map<String, String>.toApiString(): String {
 } /*end toApiString*/
 
 val Double.currencyFormat: String
-    get() {
-        val df = DecimalFormat("#,###.##")
-        df.roundingMode = RoundingMode.CEILING
+    get() = DecimalFormat("#,###.##").apply { roundingMode = RoundingMode.CEILING }.format(this)
 
-        return df.format(this)
-    }
 

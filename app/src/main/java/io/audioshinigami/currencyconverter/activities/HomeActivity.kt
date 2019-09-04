@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
+import io.audioshinigami.currencyconverter.models.FlagData
 import io.audioshinigami.currencyconverter.utils.currencyFormat
 import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewModel
 import kotlinx.android.synthetic.main.activity_home.*
@@ -38,15 +39,14 @@ class HomeActivity : AppCompatActivity() {
 //            slideUp()
         }
 
-        Log.d("TAGU", "data count is ${viewModel.getDatCount(resources)}")
     }
 
     private fun convertCurrency() {
         if(!isFormValid())
             return
 
-        val fromCurrency = viewModel.flagData!![id_spinner_from.selectedItemPosition].code
-        val toCurrency = viewModel.flagData!![id_spinner_to.selectedItemPosition].code
+        val fromCurrency = viewModel.getCode(id_spinner_from.selectedItemPosition)
+        val toCurrency = viewModel.getCode(id_spinner_to.selectedItemPosition)
         val currencyCode = "${fromCurrency}_$toCurrency,${toCurrency}_$fromCurrency"
         var result: Map<String, String>
 
@@ -73,15 +73,20 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setUpSpinner(){
-        val adaptor = SpinnerAdaptor(this, viewModel.flagData)
-        val newAdaptor = SpinnerAdaptor(this, viewModel.flagData)
+        val flagTest = viewModel.flags.size
+        Log.d("TAGU", "flag count is : $flagTest")
+        val adaptor = SpinnerAdaptor(this, viewModel.getAllCurrency())
 
         id_spinner_from.adapter = adaptor
-        id_spinner_to.adapter = newAdaptor
+        id_spinner_to.adapter = adaptor
 
+        id_spinner_to.onItemSelectedListener = SpinnerItemListener(txtvw_currency_to){
+                position -> viewModel.getCode(position)
+        }
+        id_spinner_from.onItemSelectedListener = SpinnerItemListener(txtvw_currency_from){
+            position -> viewModel.getCode(position)
+        }
 
-        id_spinner_to.onItemSelectedListener = SpinnerItemListener(txtvw_currency_to)
-        id_spinner_from.onItemSelectedListener = SpinnerItemListener(txtvw_currency_from)
     } /*end setupSpinner*/
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
