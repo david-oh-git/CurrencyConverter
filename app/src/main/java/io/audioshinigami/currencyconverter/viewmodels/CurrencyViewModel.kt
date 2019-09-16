@@ -2,10 +2,8 @@ package io.audioshinigami.currencyconverter.viewmodels
 
 import android.app.Application
 import android.content.res.TypedArray
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.models.Currency
 import io.audioshinigami.currencyconverter.models.FlagData
@@ -13,17 +11,18 @@ import io.audioshinigami.currencyconverter.models.Rate
 import io.audioshinigami.currencyconverter.models.RateResponse
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.repository.RateRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class CurrencyViewModel(application: Application): AndroidViewModel(application) {
+
+    private val viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val rateRepository = RateRepository(ApiFactory.rateApi)
     val rateLiveData = MutableLiveData<RateResponse>()
     private val flagData by lazy { FlagData.getCodes { mContext.resources.getStringArray(R.array.countries).toCollection(ArrayList()) } }
     private val mContext by lazy { getApplication<Application>().applicationContext }
-    val flags: ArrayList<Int>
+    private val flags: ArrayList<Int>
     get()
     = FlagData.getFlags {
             val results: ArrayList<Int> = arrayListOf()
@@ -37,7 +36,12 @@ class CurrencyViewModel(application: Application): AndroidViewModel(application)
             results
         }
 
-    fun fetchRate(currencyCode: String) = viewModelScope.launch (Dispatchers.Default) {
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
+    fun fetchRate(currencyCode: String) = uiScope.launch  {
         val data = withContext(Dispatchers.IO){ rateRepository.fetchRateFromApi(currencyCode) }
         rateLiveData.postValue(data)
     }
@@ -46,6 +50,10 @@ class CurrencyViewModel(application: Application): AndroidViewModel(application)
 
         return rateRepository.getRate(code, result)
     }/*end extract*/
+
+    fun getRequestCode(fromCode: String, toCode: String): String {
+        return "${fromCode}_$toCode,${toCode}_$fromCode"
+    }
 
     fun getCode(position: Int) = flagData[position]
 

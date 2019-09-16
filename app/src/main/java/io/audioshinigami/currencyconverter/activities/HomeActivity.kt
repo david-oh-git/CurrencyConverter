@@ -1,7 +1,6 @@
 package io.audioshinigami.currencyconverter.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.animation.AnimationUtils
@@ -13,7 +12,6 @@ import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
-import io.audioshinigami.currencyconverter.models.FlagData
 import io.audioshinigami.currencyconverter.utils.currencyFormat
 import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewModel
 import kotlinx.android.synthetic.main.activity_home.*
@@ -73,8 +71,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setUpSpinner(){
-        val flagTest = viewModel.flags.size
-        Log.d("TAGU", "flag count is : $flagTest")
         val adaptor = SpinnerAdaptor(this, viewModel.getAllCurrency())
 
         id_spinner_from.adapter = adaptor

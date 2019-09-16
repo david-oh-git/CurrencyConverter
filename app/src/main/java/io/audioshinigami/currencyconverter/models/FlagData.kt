@@ -13,5 +13,4 @@ object FlagData {
         synchronized(this){
             flags ?: block()
         }
-
 }

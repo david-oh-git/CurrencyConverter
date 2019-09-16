@@ -49,5 +49,12 @@
 
     </style>
 
+    <style name="currencyInputStyle">
+        <item name="android:textSize">@dimen/dimen_edittxt_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/faded_text_colour</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
 
 </resources>
