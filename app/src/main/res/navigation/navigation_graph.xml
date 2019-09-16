@@ -8,5 +8,5 @@
     <fragment
             android:id="@+id/currencyConvertFragment"
             android:name="io.audioshinigami.currencyconverter.fragments.CurrencyConvertFragment"
-            android:label="CurrencyConvertFragment" />
+            android:label="      " />
 </navigation>

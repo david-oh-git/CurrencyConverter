@@ -29,13 +29,12 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        setSupportActionBar(toolbar)
+        /*removes title from actionBar*/
+        supportActionBar?.let { it.title = "" }
+
         navigationController = findNavController(R.id.nav_host_fragment_container)
         NavigationUI.setupActionBarWithNavController(this, navigationController)
-
-//        setSupportActionBar(toolbar)
-
-        /*removes title from actionBar*/
-//        supportActionBar?.let { it.title = "" }
 
 //        setUpSpinner()
 
@@ -78,7 +77,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setUpSpinner(){
-        val adaptor = SpinnerAdaptor(this, viewModel.getAllCurrency())
+        val adaptor = SpinnerAdaptor(viewModel.getAllCurrency())
 
         id_spinner_from.adapter = adaptor
         id_spinner_to.adapter = adaptor
@@ -127,5 +126,9 @@ class HomeActivity : AppCompatActivity() {
 //        graph.bringToFront()
 //        graph.animation = slideUpAnimation
     } /*end slide*/
+
+    // performs back or Up
+    // Handles Fragments back stack
+    override fun onSupportNavigateUp() = navigationController.navigateUp()
 
 } /*end END*/

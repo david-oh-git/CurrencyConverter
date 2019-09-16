@@ -1,13 +1,12 @@
 package io.audioshinigami.currencyconverter.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import io.audioshinigami.currencyconverter.R
+import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.utils.obtainViewModel
 import io.audioshinigami.currencyconverter.viewmodels.CurrencyConvertViewModel
 
@@ -29,10 +28,7 @@ class CurrencyConvertFragment : Fragment() {
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrencyConvertViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+    private fun initSpinner(){
+    }/*end initSpinner*/
 
 }

@@ -10,9 +10,9 @@ import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.activities.HomeActivity
 import io.audioshinigami.currencyconverter.models.Currency
 
-class SpinnerAdaptor(activity: HomeActivity, val data: ArrayList<Currency>?): BaseAdapter() {
+class SpinnerAdaptor(val data: ArrayList<Currency>?): BaseAdapter() {
 
-    private val inflater: LayoutInflater = LayoutInflater.from(activity)
+//    private val inflater: LayoutInflater = LayoutInflater.from(activity)
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
 
@@ -22,7 +22,8 @@ class SpinnerAdaptor(activity: HomeActivity, val data: ArrayList<Currency>?): Ba
 
 
         if( view == null){
-            row = inflater.inflate(R.layout.spinner_item, parent, false)
+//            row = inflater.inflate(R.layout.spinner_item, parent, false)
+            row = LayoutInflater.from(parent?.context).inflate(R.layout.spinner_item, parent, false)
             holder = SpinnerItemHolder(row)
             row.tag = holder
         }else{
