@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
@@ -15,27 +18,31 @@ import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.utils.currencyFormat
 import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewModel
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.content_home.*
+import kotlinx.android.synthetic.main.currency_convert_fragment.*
 
 class HomeActivity : AppCompatActivity() {
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(CurrencyViewModel::class.java) }
+    private lateinit var navigationController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        setSupportActionBar(toolbar)
+        navigationController = findNavController(R.id.nav_host_fragment_container)
+        NavigationUI.setupActionBarWithNavController(this, navigationController)
+
+//        setSupportActionBar(toolbar)
 
         /*removes title from actionBar*/
-        supportActionBar?.let { it.title = "" }
+//        supportActionBar?.let { it.title = "" }
 
-        setUpSpinner()
+//        setUpSpinner()
 
-        id_btn_convert.setOnClickListener{
-            convertCurrency()
-//            slideUp()
-        }
+//        id_btn_convert.setOnClickListener{
+//            convertCurrency()
+////            slideUp()
+//        }
 
     }
 
@@ -117,8 +124,8 @@ class HomeActivity : AppCompatActivity() {
             R.anim.slide_up
         )
 //        graph_layout.animation = slideUpAnimation
-        graph.bringToFront()
-        graph.animation = slideUpAnimation
+//        graph.bringToFront()
+//        graph.animation = slideUpAnimation
     } /*end slide*/
 
 } /*end END*/
