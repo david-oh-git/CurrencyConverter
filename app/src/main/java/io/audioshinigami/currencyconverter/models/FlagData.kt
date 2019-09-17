@@ -4,8 +4,6 @@ object FlagData {
     private var codes: ArrayList<String>? = null
     private var flags: ArrayList<Int>? = null
 
-
-
     fun getCodes(block: () -> ArrayList<String>) =
         codes ?: block()
 
