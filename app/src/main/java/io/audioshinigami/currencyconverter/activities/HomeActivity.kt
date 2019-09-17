@@ -36,13 +36,6 @@ class HomeActivity : AppCompatActivity() {
         navigationController = findNavController(R.id.nav_host_fragment_container)
         NavigationUI.setupActionBarWithNavController(this, navigationController)
 
-//        setUpSpinner()
-
-//        id_btn_convert.setOnClickListener{
-//            convertCurrency()
-////            slideUp()
-//        }
-
     }
 
     private fun convertCurrency() {

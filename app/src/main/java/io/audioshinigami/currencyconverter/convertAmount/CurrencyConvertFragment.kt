@@ -1,4 +1,4 @@
-package io.audioshinigami.currencyconverter.fragments
+package io.audioshinigami.currencyconverter.convertAmount
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.audioshinigami.currencyconverter.R
-import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.utils.obtainViewModel
-import io.audioshinigami.currencyconverter.viewmodels.CurrencyConvertViewModel
 
 class CurrencyConvertFragment : Fragment() {
 
     companion object {
-        fun newInstance() = CurrencyConvertFragment()
+        fun newInstance() =
+            CurrencyConvertFragment()
     }
 
     private lateinit var viewModel: CurrencyConvertViewModel

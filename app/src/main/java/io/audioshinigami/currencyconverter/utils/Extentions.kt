@@ -3,8 +3,7 @@ package io.audioshinigami.currencyconverter.utils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import io.audioshinigami.currencyconverter.viewmodels.CurrencyConvertVMFactory
+import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertVMFactory
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -20,7 +19,8 @@ fun Map<String, String>.toApiString(): String {
 } /*end toApiString*/
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>): T {
-    val viewModelFactory = CurrencyConvertVMFactory()
+    val viewModelFactory =
+        CurrencyConvertVMFactory()
     return ViewModelProvider(this, viewModelFactory).get(viewModelClass)
 }
 

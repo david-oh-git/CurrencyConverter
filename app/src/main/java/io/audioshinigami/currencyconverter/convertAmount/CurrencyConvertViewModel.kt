@@ -1,4 +1,4 @@
-package io.audioshinigami.currencyconverter.viewmodels
+package io.audioshinigami.currencyconverter.convertAmount
 
 import androidx.lifecycle.ViewModel
 import io.audioshinigami.currencyconverter.models.RateResponse
@@ -16,4 +16,4 @@ class CurrencyConvertViewModel : ViewModel() {
     fun getRate(code: String): RateResponse? {
         return null
     }
-}
+} /*END*/

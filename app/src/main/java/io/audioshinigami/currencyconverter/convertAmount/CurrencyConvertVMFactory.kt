@@ -1,4 +1,4 @@
-package io.audioshinigami.currencyconverter.viewmodels
+package io.audioshinigami.currencyconverter.convertAmount
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

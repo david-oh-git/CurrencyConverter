@@ -111,6 +111,8 @@ dependencies {
 
     // Local Unit tests dependencies
     testImplementation "junit:junit:$junit_version"
+    //Test helpers for LiveData
+    testImplementation "androidx.arch.core:core-testing:$arch_core_test"
         // Robolectric
     testImplementation "org.robolectric:robolectric:$robolectric_version"
         // Mockito
