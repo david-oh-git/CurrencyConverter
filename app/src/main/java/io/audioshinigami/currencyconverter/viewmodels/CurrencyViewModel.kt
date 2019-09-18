@@ -5,7 +5,7 @@ import android.content.res.TypedArray
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import io.audioshinigami.currencyconverter.R
-import io.audioshinigami.currencyconverter.models.Currency
+import io.audioshinigami.currencyconverter.models.CurrencyItem
 import io.audioshinigami.currencyconverter.models.FlagData
 import io.audioshinigami.currencyconverter.models.Rate
 import io.audioshinigami.currencyconverter.models.RateResponse
@@ -20,7 +20,7 @@ class CurrencyViewModel(application: Application): AndroidViewModel(application)
 
     private val rateRepository = RateRepository(ApiFactory.rateApi)
     val rateLiveData = MutableLiveData<RateResponse>()
-    private val flagData by lazy { FlagData.getCodes { mContext.resources.getStringArray(R.array.countries).toCollection(ArrayList()) } }
+    private val currencyCodes by lazy { FlagData.getCodes { mContext.resources.getStringArray(R.array.countries).toCollection(ArrayList()) } }
     private val mContext by lazy { getApplication<Application>().applicationContext }
     private val flags: ArrayList<Int>
     get()
@@ -55,14 +55,14 @@ class CurrencyViewModel(application: Application): AndroidViewModel(application)
         return "${fromCode}_$toCode,${toCode}_$fromCode"
     }
 
-    fun getCode(position: Int) = flagData[position]
+    fun getCode(position: Int) = currencyCodes[position]
 
     fun getAllCurrency() =
         synchronized(this){
-            val result: ArrayList<Currency> = arrayListOf()
+            val result: ArrayList<CurrencyItem> = arrayListOf()
             flags.forEachIndexed{
                 index, flag ->
-                result.add( Currency(flagData[index], flag))
+                result.add( CurrencyItem(currencyCodes[index], flag))
             }
 
             result

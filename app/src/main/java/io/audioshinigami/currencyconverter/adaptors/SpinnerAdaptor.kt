@@ -7,10 +7,9 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import io.audioshinigami.currencyconverter.R
-import io.audioshinigami.currencyconverter.activities.HomeActivity
-import io.audioshinigami.currencyconverter.models.Currency
+import io.audioshinigami.currencyconverter.models.CurrencyItem
 
-class SpinnerAdaptor(val data: ArrayList<Currency>?): BaseAdapter() {
+class SpinnerAdaptor(val data: ArrayList<CurrencyItem>?): BaseAdapter() {
 
 //    private val inflater: LayoutInflater = LayoutInflater.from(activity)
 
@@ -50,7 +49,7 @@ class SpinnerAdaptor(val data: ArrayList<Currency>?): BaseAdapter() {
         var imageView: ImageView? = view?.findViewById(R.id.id_spinner_image)
         var textView: TextView? = view?.findViewById(R.id.id_spinner_text)
 
-        fun bind(currency: Currency){
+        fun bind(currency: CurrencyItem){
             imageView?.setImageResource(currency.icon)
             textView?.text = currency.code
         }

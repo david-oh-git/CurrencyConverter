@@ -3,8 +3,6 @@ package io.audioshinigami.currencyconverter.listeners
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TextView
-import io.audioshinigami.currencyconverter.models.Currency
-import io.audioshinigami.currencyconverter.models.FlagData
 
 class SpinnerItemListener(private var textView: TextView? = null, val block: (Int) -> String): AdapterView.OnItemSelectedListener {
 
