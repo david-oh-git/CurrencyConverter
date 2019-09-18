@@ -10,6 +10,10 @@ class CurrencyConvertViewModel : ViewModel() {
     val convertedAmount = MutableLiveData<String>()
     val inputAmount = MutableLiveData<String>()
 
+    fun start(){
+
+    }
+
     fun convertCurrency(inputValue: Double? = inputAmount.value?.toDouble(), fromCode: String, toCode: String){
 
     }

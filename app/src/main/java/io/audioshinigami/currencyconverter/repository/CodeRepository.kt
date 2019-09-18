@@ -8,30 +8,29 @@ import kotlinx.coroutines.Dispatchers
 /*
 * A repository for getting all currency code eg. NGN or USD
 * and flag icon resource id
-* ++ also use the inno to generate all [(CurrencyItem)] needed
+* ++ also use the inno to generate all [Curr] needed
 */
 
 class CodeRepository(
-
-    private val application: App = App.instance ,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val application: App = App.instance
     ) {
+
     private var codes: ArrayList<String>? = null
     private var flages: ArrayList<Int>? = null
     private val context = application.applicationContext
 
 
-    suspend fun getCodes(): ArrayList<String> =
+    fun getCodes(): ArrayList<String> =
         synchronized(this){
             arrayListOf()
         }
 
-    suspend fun getFlags(): ArrayList<Int> =
+    fun getFlags(): ArrayList<Int> =
         synchronized(this){
             arrayListOf()
         }
 
-    suspend fun getAllCurrency(): ArrayList<CurrencyItem> =
+    fun getAllCurrency(): ArrayList<CurrencyItem> =
         synchronized(this){
 
             arrayListOf()

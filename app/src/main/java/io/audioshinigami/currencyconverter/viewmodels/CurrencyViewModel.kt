@@ -11,6 +11,7 @@ import io.audioshinigami.currencyconverter.models.Rate
 import io.audioshinigami.currencyconverter.models.RateResponse
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.repository.RateRepository
+import io.audioshinigami.currencyconverter.utils.currency_codes_total
 import kotlinx.coroutines.*
 
 class CurrencyViewModel(application: Application): AndroidViewModel(application) {
@@ -28,7 +29,7 @@ class CurrencyViewModel(application: Application): AndroidViewModel(application)
             val results: ArrayList<Int> = arrayListOf()
             val images: TypedArray = mContext.resources.obtainTypedArray(R.array.flags_codes)
 
-            for( index in 0 until 166 ){
+            for( index in 0 until currency_codes_total ){
                 val id: Int = images.getResourceId(index, -1)
                 results.add(index, id)
             }
