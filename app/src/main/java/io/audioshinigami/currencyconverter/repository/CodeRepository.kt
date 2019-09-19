@@ -1,9 +1,10 @@
 package io.audioshinigami.currencyconverter.repository
 
+import android.content.res.TypedArray
 import io.audioshinigami.currencyconverter.App
+import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.models.CurrencyItem
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import io.audioshinigami.currencyconverter.utils.currency_codes_total
 
 /*
 * A repository for getting all currency code eg. NGN or USD
@@ -12,28 +13,40 @@ import kotlinx.coroutines.Dispatchers
 */
 
 class CodeRepository(
-    private val application: App = App.instance
+    application: App = App.instance
     ) {
 
     private var codes: ArrayList<String>? = null
-    private var flages: ArrayList<Int>? = null
+    private val _flags: ArrayList<Int> = arrayListOf()
     private val context = application.applicationContext
-
+    private val allCurrencyItems: ArrayList<CurrencyItem> = arrayListOf()
 
     fun getCodes(): ArrayList<String> =
         synchronized(this){
-            arrayListOf()
+            codes ?: context.resources.getStringArray(R.array.countries).toCollection(ArrayList())
         }
 
     fun getFlags(): ArrayList<Int> =
         synchronized(this){
-            arrayListOf()
+            if( _flags.isEmpty()){
+                val flags: TypedArray = context.resources.obtainTypedArray(R.array.flags_codes)
+
+                for( index in 0 until currency_codes_total){
+                    val id: Int = flags.getResourceId(index, -1)
+                    _flags.add(index, id)
+                }
+                flags.recycle()
+            }
+           _flags
         }
 
     fun getAllCurrency(): ArrayList<CurrencyItem> =
         synchronized(this){
-
-            arrayListOf()
+            getFlags().forEachIndexed{
+                index, flag ->
+                allCurrencyItems.add(index, CurrencyItem(getCodes()[index], flag))
+            }
+            allCurrencyItems
         }
 
 }/*END*/
