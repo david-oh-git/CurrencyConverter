@@ -9,7 +9,7 @@ import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
-import io.audioshinigami.currencyconverter.repository.CodeRepository
+import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.utils.obtainViewModel
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
 
@@ -45,16 +45,16 @@ class CurrencyConvertFragment : Fragment() {
     }
 
     private fun initSpinner(){
-        val adaptor = SpinnerAdaptor(CodeRepository().getAllCurrency())
+        val adaptor = SpinnerAdaptor(FlagDataRepository().getAllCurrency())
 
         id_spinner_from.adapter = adaptor
         id_spinner_to.adapter = adaptor
 
         id_spinner_to.onItemSelectedListener = SpinnerItemListener(txtvw_currency_to){
-                position -> CodeRepository().getCodes()[position]
+                position -> FlagDataRepository().getCodes()[position]
         }
         id_spinner_from.onItemSelectedListener = SpinnerItemListener(txtvw_currency_from){
-                position -> CodeRepository().getCodes()[position]
+                position -> FlagDataRepository().getCodes()[position]
         }
     }/*end initSpinner*/
 

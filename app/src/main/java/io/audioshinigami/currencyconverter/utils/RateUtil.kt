@@ -1,6 +1,5 @@
 package io.audioshinigami.currencyconverter.utils
 
-
 /*
 * simple utility object takes rate and amount returns converted amount
 * & other currency codes manipulations */

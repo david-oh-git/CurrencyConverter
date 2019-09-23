@@ -12,20 +12,19 @@ import org.junit.Rule
 import kotlin.random.Random
 
 
-class CodeRepositoryTestShared {
+class FlagDataRepositoryTestShared {
 
     @Rule
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var codeRepository: CodeRepository
+    private lateinit var flagDataRepository: FlagDataRepository
     private lateinit var app: App
 
 
     @Before
     fun initTest(){
-        app = App.instance
-        codeRepository = CodeRepository(app)
+        flagDataRepository = FlagDataRepository()
     }
 
     @Test
@@ -34,7 +33,7 @@ class CodeRepositoryTestShared {
         val currencyItemsTotal = currency_codes_total
 
         //Act
-        val result = codeRepository.getAllCurrency().size
+        val result = flagDataRepository.getAllCurrency().size
 
         //Assert
         assertEquals(currencyItemsTotal, result)
@@ -44,13 +43,13 @@ class CodeRepositoryTestShared {
     fun getAllCurrencyItem_positionCorrect(){
         //Arrange
         val position = Random.nextInt(currency_codes_total) // randomly generates position 0 - 165
-        val codes = codeRepository.getCodes()
-        val flags = codeRepository.getFlags()
+        val codes = flagDataRepository.getCodes()
+        val flags = flagDataRepository.getFlags()
         val testItem = CurrencyItem(codes[position], flags[position])
 
         //Act
-        val allItems = codeRepository.getAllCurrency()
-        val expectedItem = allItems[position]
+        val allItems = flagDataRepository.getAllCurrency()
+        val expectedItem = allItems.let { it[position] }
 
         assertEquals(expectedItem, testItem)
     }
@@ -61,7 +60,7 @@ class CodeRepositoryTestShared {
         val flagsCodesTotal = currency_codes_total
 
         //Act
-        val result = codeRepository.getFlags().size
+        val result = flagDataRepository.getFlags().size
 
         //Assert
         assertEquals(flagsCodesTotal, result)
@@ -73,7 +72,7 @@ class CodeRepositoryTestShared {
         val currencyCodesTotal = currency_codes_total
 
         //Act
-        val result = codeRepository.getCodes().size
+        val result = flagDataRepository.getCodes().size
 
         //Assert
         assertEquals(result, currencyCodesTotal)
@@ -85,7 +84,7 @@ class CodeRepositoryTestShared {
         val currencyCodesTotalWrong = 42
 
         //Act
-        val result = codeRepository.getCodes().size
+        val result = flagDataRepository.getCodes().size
 
         //Assert
         assertNotEquals(result, currencyCodesTotalWrong)
@@ -96,13 +95,12 @@ class CodeRepositoryTestShared {
         // Test if certain currency codes are present
         //Arrange  ... list of verified codes that it should contain
         // get random code from list
-        val codes = arrayListOf<String>("NGN", "AUD", "CNY", "RWF", "LAK", "IRR", "ALL", "ANG")
-        val code = codes.let { it[Random.nextInt(it.size)] }
-
+        val code = arrayListOf("NGN", "AUD", "CNY", "RWF", "LAK", "IRR", "ALL", "ANG").let{
+            it[Random.nextInt(it.size)]
+        }
         //Act
-        val result = codeRepository.getCodes()
-
+        val result = flagDataRepository.getCodes()
         //Assert
-        assertEquals(true, codes.contains(code))
+        assertEquals(true, result.contains(code))
     }
 } /*END*/
