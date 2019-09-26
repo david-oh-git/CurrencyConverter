@@ -9,4 +9,8 @@
     <color name="project_silver">#C0C0C0</color>
     <color name="faded_text_colour">#C4C4C4</color>
 
+<!--    to support dark theme-->
+    <color name="background_color">@color/md_white_1000</color>
+    <color name="editxt_bg_color">@color/md_green_100</color>
+
 </resources>

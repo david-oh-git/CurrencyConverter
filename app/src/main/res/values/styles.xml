@@ -1,11 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/white</item>
         <item name="colorPrimaryDark">@color/project_green</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@color/background_color</item>
+
     </style>
 
     <style name="TitleTextStyle" parent="@android:style/Widget.TextView">
@@ -43,7 +45,6 @@
 
     </style>
 
-
     <style name="actionBtnStyle" parent="@style/Widget.AppCompat.ActionButton">
 
 
@@ -55,6 +56,5 @@
         <item name="android:textColor">@color/faded_text_colour</item>
         <item name="android:textAlignment">center</item>
     </style>
-
 
 </resources>
