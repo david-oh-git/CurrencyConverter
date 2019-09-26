@@ -4,7 +4,7 @@ import io.audioshinigami.currencyconverter.models.AllCurrencyItemsData
 import io.audioshinigami.currencyconverter.models.CurrencyItem
 
 /*
-* A repository for getting all currency code eg. NGN or USD
+* A repository for getting all currency convertCode eg. NGN or USD
 * and flag icon resource id
 * ++ also use the inno to generate all [Curr] needed
 */

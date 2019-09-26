@@ -1,17 +1,23 @@
 package io.audioshinigami.currencyconverter.convertAmount
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
+import io.audioshinigami.currencyconverter.convertAmount.events.ToastEvent
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
+import io.audioshinigami.currencyconverter.utils.isNetworkAvailable
 import io.audioshinigami.currencyconverter.utils.obtainViewModel
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 /**
 *  Main UI to covert amount . user enters value , selects currency codes and convert
@@ -28,6 +34,7 @@ class CurrencyConvertFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.currency_convert_fragment, container, false)
         viewModel = obtainViewModel(CurrencyConvertViewModel::class.java)
+        viewModel.networkAvailable = { isNetworkAvailable() }
         viewDataBinding = CurrencyConvertFragmentBinding.bind(root).apply {
             this.vm = viewModel
         }
@@ -58,4 +65,18 @@ class CurrencyConvertFragment : Fragment() {
         }
     }/*end initSpinner*/
 
+    @Subscribe
+    fun sendToastMessage( toastEvent: ToastEvent){
+        Toast.makeText(context, toastEvent.toastMessage, Toast.LENGTH_LONG).show()
+    } // sendToastmsg
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        EventBus.getDefault().unregister(this)
+    }
 }

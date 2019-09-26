@@ -39,7 +39,6 @@ class RateResponseParser: JsonDeserializer<RateResponse> {
 
         for(entry: Map.Entry<String, JsonElement> in jsonObject.entrySet()){
             val key = entry.key
-            Log.d("TAGU"," value is ${entry.value}")
             val value: String = gson.fromJson(entry.value, String::class.java)
             currencyRates[key] = value
         } /*end FOR*/

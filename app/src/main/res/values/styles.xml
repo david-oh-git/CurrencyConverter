@@ -26,15 +26,15 @@
     </style>
 
     <style name="AppToolbar" parent="AppTheme">
-        <!--<item code="android:textAllCaps">false</item>-->
+        <!--<item convertCode="android:textAllCaps">false</item>-->
         <item name="actionMenuTextColor">@color/project_green</item>
         <item name="actionMenuTextAppearance">@style/AppBarTextTitle</item>
 
     </style>
 
     <style name="toolbarStyle" parent="AppTheme">
-        <!--<item code="android:titleTextStyle">@style/AppBarTextTitle</item>-->
-        <!--<item code="android:textColor">@android:color/black</item>-->
+        <!--<item convertCode="android:titleTextStyle">@style/AppBarTextTitle</item>-->
+        <!--<item convertCode="android:textColor">@android:color/black</item>-->
 
     </style>
 

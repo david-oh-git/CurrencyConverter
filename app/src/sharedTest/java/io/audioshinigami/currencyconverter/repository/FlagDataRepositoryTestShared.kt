@@ -94,7 +94,7 @@ class FlagDataRepositoryTestShared {
     fun getCodes_containsCode() {
         // Test if certain currency codes are present
         //Arrange  ... list of verified codes that it should contain
-        // get random code from list
+        // get random convertCode from list
         val code = arrayListOf("NGN", "AUD", "CNY", "RWF", "LAK", "IRR", "ALL", "ANG").let{
             it[Random.nextInt(it.size)]
         }

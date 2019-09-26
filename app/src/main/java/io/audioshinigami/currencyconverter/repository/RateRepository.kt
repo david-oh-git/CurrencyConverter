@@ -6,8 +6,6 @@ import io.audioshinigami.currencyconverter.network.ConverterApi
 
 class RateRepository(private val api: ConverterApi): BaseRepository() {
 
-
-
     suspend fun fetchRateFromApi(currencyCode: String): RateResponse? {
 
         return safeApiCall(
