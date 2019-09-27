@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertVMFactory
+import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertViewModel
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
@@ -25,13 +26,6 @@ fun Map<String, String>.toApiString(): String {
     return result.removePrefix("&")
 
 } /*end toApiString*/
-
-fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>): T {
-    val codeRepository = FlagDataRepository()
-    val rateRepository = RateRepository(ApiFactory.rateApi)
-    val viewModelFactory = CurrencyConvertVMFactory(codeRepository, rateRepository)
-    return ViewModelProvider(this, viewModelFactory).get(viewModelClass)
-}
 
 val Double.currencyFormat: String
     get() = DecimalFormat("#,###.##").apply { roundingMode = RoundingMode.CEILING }.format(this)
