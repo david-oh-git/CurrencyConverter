@@ -21,8 +21,8 @@ class SpinnerAdaptor(val data: ArrayList<CurrencyItem>?): BaseAdapter() {
 
 
         if( view == null){
-//            row = inflater.inflate(R.layout.spinner_item, parent, false)
-            row = LayoutInflater.from(parent?.context).inflate(R.layout.spinner_item, parent, false)
+//            row = inflater.inflate(R.layout.currency_item_rview, parent, false)
+            row = LayoutInflater.from(parent?.context).inflate(R.layout.currency_item_rview, parent, false)
             holder = SpinnerItemHolder(row)
             row.tag = holder
         }else{
@@ -46,8 +46,8 @@ class SpinnerAdaptor(val data: ArrayList<CurrencyItem>?): BaseAdapter() {
 
     class SpinnerItemHolder(var view: View?){
 
-        var imageView: ImageView? = view?.findViewById(R.id.id_spinner_image)
-        var textView: TextView? = view?.findViewById(R.id.id_spinner_text)
+        var imageView: ImageView? = view?.findViewById(R.id.currency_flag)
+        var textView: TextView? = view?.findViewById(R.id.currency_code)
 
         fun bind(currency: CurrencyItem){
             imageView?.setImageResource(currency.icon)
