@@ -9,6 +9,7 @@ object AllCurrencyItemsData {
     // gets the resource id for all flag icons
     val flags: ArrayList<Int>
         get() {
+
             val results: ArrayList<Int> = arrayListOf()
             val images: TypedArray =
                 App.instance.applicationContext.resources.obtainTypedArray(R.array.flags_codes)
@@ -40,6 +41,5 @@ object AllCurrencyItemsData {
         }
         return items
     }
-
 
 } // AllCurrencyItems

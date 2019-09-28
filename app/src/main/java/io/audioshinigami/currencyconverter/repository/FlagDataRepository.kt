@@ -9,7 +9,6 @@ import io.audioshinigami.currencyconverter.models.CurrencyItem
 * ++ also use the inno to generate all [Curr] needed
 */
 
-// TODO move away from main thread
 class FlagDataRepository {
 
     fun getCodes(): ArrayList<String> =
