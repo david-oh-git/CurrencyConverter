@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.convertAmount.events.ToastEvent
@@ -49,6 +50,8 @@ class CurrencyConvertFragment : Fragment() {
 
         // initialize both spinners
         initSpinner()
+        // click listener for textView
+        initTextViewClicks()
     }
 
     private fun initSpinner(){
@@ -64,6 +67,13 @@ class CurrencyConvertFragment : Fragment() {
                 position -> FlagDataRepository().getCodes()[position]
         }
     }/*end initSpinner*/
+
+    private fun initTextViewClicks(){
+
+        txtvw_currency_from.setOnClickListener {
+            findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment)
+        }
+    }
 
     @Subscribe
     fun sendToastMessage( toastEvent: ToastEvent){

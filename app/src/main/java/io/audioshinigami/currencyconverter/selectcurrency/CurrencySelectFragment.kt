@@ -6,26 +6,46 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import io.audioshinigami.currencyconverter.R
+import io.audioshinigami.currencyconverter.utils.obtainViewModel
+import kotlinx.android.synthetic.main.currency_select_fragment.*
 
 class CurrencySelectFragment : DialogFragment() {
 
-    companion object {
-        fun newInstance() = CurrencySelectFragment()
-    }
-
     private lateinit var viewModel: CurrencySelectViewModel
+    private val adaptor: CurrencyItemAdaptor by lazy { CurrencyItemAdaptor() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.currency_select_fragment, container, false)
+        val view = inflater.inflate(R.layout.currency_select_fragment, container, false)
+        viewModel = obtainViewModel(CurrencySelectViewModel::class.java)
+        //load currency items wit coroutines
+        viewModel.loadCurrencyItems()
+
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
+
+        // init recylerView
+        setupRecyclerView()
+        // assign currencyItems to recyelerview adaptor
+
+        viewModel.currencyItems.observe(viewLifecycleOwner, Observer {
+            adaptor.addCurrencyItems(it)
+        })
+
+    }
+
+    private fun setupRecyclerView(){
+        currencyItem_recyclerview.adapter = adaptor
+        currencyItem_recyclerview.layoutManager = GridLayoutManager(activity, 3)
     }
 
 }

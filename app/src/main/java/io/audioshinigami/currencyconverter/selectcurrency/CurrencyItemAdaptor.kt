@@ -1,5 +1,6 @@
 package io.audioshinigami.currencyconverter.selectcurrency
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,7 @@ import io.audioshinigami.currencyconverter.models.CurrencyItem
 
 class CurrencyItemAdaptor: RecyclerView.Adapter<CurrencyItemViewHolder>() {
 
-    private lateinit var currencyItems: ArrayList<CurrencyItem>
+    private var _currencyItems: ArrayList<CurrencyItem> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyItemViewHolder {
 
@@ -17,13 +18,19 @@ class CurrencyItemAdaptor: RecyclerView.Adapter<CurrencyItemViewHolder>() {
 
     }
 
-    override fun getItemCount(): Int = if(currencyItems.isEmpty() ) 0 else currencyItems.size
+    override fun getItemCount(): Int = if(_currencyItems.isEmpty() ) 0 else _currencyItems.size
 
     override fun onBindViewHolder(holder: CurrencyItemViewHolder, position: Int) {
 
-        currencyItems.apply {
+        _currencyItems.apply {
             if(this.isNotEmpty())
                 holder.bind(this[position])
         }
-    }
+    } //end onBindViewHolder
+
+    fun addCurrencyItems(currencyItems: ArrayList<CurrencyItem>){
+        _currencyItems = currencyItems
+        notifyDataSetChanged()
+
+    }//end addCurrency
 }

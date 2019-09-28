@@ -16,7 +16,7 @@ class CurrencySelectViewModel(private val flagDataRepository: FlagDataRepository
     private val _currencyItems = MutableLiveData<ArrayList<CurrencyItem>>().apply { value = arrayListOf() }
     val currencyItems: LiveData<ArrayList<CurrencyItem>> = _currencyItems
 
-    fun getAllCurrencyItems(){
+    fun loadCurrencyItems(){
         // populates currencyItems with data
         viewModelScope.launch(Dispatchers.Main){
 
