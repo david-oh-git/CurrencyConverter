@@ -13,7 +13,7 @@ class CurrencyItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val currencyCode = view.findViewById<TextView>(R.id.currency_code)
 
     fun bind(currencyItem: CurrencyItem){
-        
+
         currencyItem.apply {
             flagIcon.setImageResource(this.icon)
             currencyCode.text = currencyItem.code
