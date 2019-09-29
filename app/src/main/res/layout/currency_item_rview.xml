@@ -11,6 +11,7 @@
 
     <ImageView
             android:contentDescription="@string/str_flag_con"
+            android:background="@android:color/transparent"
             android:layout_gravity="center"
             android:layout_width="@dimen/dimen_flag_icon"
             android:layout_height="@dimen/dimen_flag_icon"
@@ -27,5 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/currency_code"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            />
 </LinearLayout>

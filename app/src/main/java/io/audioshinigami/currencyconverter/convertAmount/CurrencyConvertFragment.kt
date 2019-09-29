@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
@@ -72,6 +73,7 @@ class CurrencyConvertFragment : Fragment() {
 
         txtvw_currency_from.setOnClickListener {
             findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment)
+//            Navigation.findNavController(parentFragment?.view!!).navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment)
         }
     }
 
