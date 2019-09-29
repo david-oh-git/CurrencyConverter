@@ -5,6 +5,8 @@
         android:background="@color/project_blue"
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -22,12 +24,13 @@
 
     <TextView
             android:background="@color/project_blue"
+            android:maxLines="1"
             android:padding="4dp"
             android:textSize="@dimen/dimen_spinner_txt_size"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/currency_code"
-            android:layout_weight="1"
+            android:layout_weight="31"
             />
 </LinearLayout>
