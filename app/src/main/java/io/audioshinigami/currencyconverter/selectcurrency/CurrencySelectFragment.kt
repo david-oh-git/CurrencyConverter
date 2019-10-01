@@ -5,18 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleEventObserver
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import io.audioshinigami.currencyconverter.R
+import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertVMFactory
+import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertViewModel
+import io.audioshinigami.currencyconverter.network.ApiFactory
+import io.audioshinigami.currencyconverter.repository.FlagDataRepository
+import io.audioshinigami.currencyconverter.repository.RateRepository
+import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
+import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.obtainViewModel
 import kotlinx.android.synthetic.main.currency_select_fragment.*
 
 class CurrencySelectFragment : DialogFragment() {
 
     private lateinit var viewModel: CurrencySelectViewModel
-    private val adaptor: CurrencyItemAdaptor by lazy { CurrencyItemAdaptor() }
+    private val adaptor: CurrencyItemAdaptor by lazy{ CurrencyItemAdaptor{
+            code ->
+            onItemClicked(code)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,17 +46,51 @@ class CurrencySelectFragment : DialogFragment() {
 
         // init recylerView
         setupRecyclerView()
-        // assign currencyItems to recyelerview adaptor
+        // assign currencyItems to recyclerView adaptor
 
         viewModel.currencyItems.observe(viewLifecycleOwner, Observer {
             adaptor.addCurrencyItems(it)
         })
 
+        arguments?.also {
+            val key = it.getString(FROM_CODE_KEY)
+        }
+
+
     }
 
     private fun setupRecyclerView(){
+
+        // TODO save state abi remember position
         currencyItem_recyclerview.adapter = adaptor
         currencyItem_recyclerview.layoutManager = GridLayoutManager(activity, 3)
+        currencyItem_recyclerview.hasFixedSize()
+    }
+
+    private fun onItemClicked(code: String){
+        // Restarts navigation start fragment with args
+        val callerCode: String
+        arguments?.apply {
+            callerCode = getString("key") ?: "0"
+            setCode(callerCode, code)
+        }
+
+        findNavController().popBackStack()
+    } //END onItemClick
+
+    private fun setCode(callerCode: String,code: String){
+        // init ShareViewModel to assign the currency Code to [CurrencyConvertFragment]
+        val testFactory : CurrencyConvertVMFactory by lazy { CurrencyConvertVMFactory(
+            FlagDataRepository(), RateRepository(
+                ApiFactory.rateApi)
+        ) }
+        val viewModel: CurrencyConvertViewModel by activityViewModels { testFactory }
+
+        if( callerCode == FROM_CODE_KEY)
+            viewModel.setFromCode(code)
+
+        if( callerCode == TO_CODE_KEY)
+            viewModel.setToCode(code)
     }
 
 }

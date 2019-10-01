@@ -2,19 +2,27 @@ package io.audioshinigami.currencyconverter.convertAmount
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.convertAmount.events.ToastEvent
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
+import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
+import io.audioshinigami.currencyconverter.repository.RateRepository
+import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
+import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.isNetworkAvailable
 import io.audioshinigami.currencyconverter.utils.obtainViewModel
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
@@ -27,7 +35,10 @@ import org.greenrobot.eventbus.Subscribe
 
 class CurrencyConvertFragment : Fragment() {
 
-    private lateinit var viewModel: CurrencyConvertViewModel
+    private val testFactory : CurrencyConvertVMFactory by lazy { CurrencyConvertVMFactory(FlagDataRepository(), RateRepository(
+        ApiFactory.rateApi)
+    ) }
+    private val viewModel: CurrencyConvertViewModel by activityViewModels { testFactory }
     private lateinit var viewDataBinding: CurrencyConvertFragmentBinding
 
     override fun onCreateView(
@@ -35,7 +46,8 @@ class CurrencyConvertFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.currency_convert_fragment, container, false)
-        viewModel = obtainViewModel(CurrencyConvertViewModel::class.java)
+//        viewModel = obtainViewModel(CurrencyConvertViewModel::class.java)
+
         viewModel.networkAvailable = { isNetworkAvailable() }
         viewDataBinding = CurrencyConvertFragmentBinding.bind(root).apply {
             this.vm = viewModel
@@ -43,6 +55,7 @@ class CurrencyConvertFragment : Fragment() {
 
         //Set lifecycler owner of view
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+
         return viewDataBinding.root
     }
 
@@ -50,9 +63,10 @@ class CurrencyConvertFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // initialize both spinners
-        initSpinner()
+//        initSpinner()
         // click listener for textView
         initTextViewClicks()
+
     }
 
     private fun initSpinner(){
@@ -72,8 +86,14 @@ class CurrencyConvertFragment : Fragment() {
     private fun initTextViewClicks(){
 
         txtvw_currency_from.setOnClickListener {
-            findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment)
+            val myBundle = bundleOf("key" to FROM_CODE_KEY)
+            findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment, myBundle)
 //            Navigation.findNavController(parentFragment?.view!!).navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment)
+        }
+
+        txtvw_currency_to.setOnClickListener {
+            val myBundle = bundleOf("key" to TO_CODE_KEY)
+            findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment, myBundle)
         }
     }
 
@@ -91,4 +111,5 @@ class CurrencyConvertFragment : Fragment() {
         super.onDetach()
         EventBus.getDefault().unregister(this)
     }
+
 }

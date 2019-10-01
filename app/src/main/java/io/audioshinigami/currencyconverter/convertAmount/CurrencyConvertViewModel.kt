@@ -1,7 +1,7 @@
 package io.audioshinigami.currencyconverter.convertAmount
 
-import android.app.admin.DevicePolicyManager
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,12 +23,17 @@ class CurrencyConvertViewModel(
 ) : ViewModel() {
 
     // Two-way databinding, exposing MutableLiveData
-    val convertedAmount = MutableLiveData<String>()
+    private val _convertedAmount = MutableLiveData<String>()
+    val convertedAmount: LiveData<String> = _convertedAmount
     val inputAmount = MutableLiveData<String?>()
-    val fromCode = MutableLiveData<String>()
-    val toCode = MutableLiveData<String>()
+
+    private val _fromCode = MutableLiveData<String>().apply { value = "NGN" }
+    val fromCode: LiveData<String> = _fromCode
+
+    private val _toCode = MutableLiveData<String>().apply { value = "USD" }
+    val toCode: LiveData<String> = _toCode
+
     var ratesCache = mutableMapOf<String, Double>() // contains all ratesCache since app started.
-    var rateValue: Double = 0.0
 
     lateinit var networkAvailable: () -> Boolean
 
@@ -117,7 +122,7 @@ class CurrencyConvertViewModel(
     fun setConvertedAmount(rate: Double){
         // set converted Amount
         val inputValue = inputAmount.value?.toDoubleOrNull() ?: 0.0
-        convertedAmount.value = ( inputValue * rate ).currencyFormat
+        _convertedAmount.value = ( inputValue * rate ).currencyFormat
     }
 
 
@@ -132,4 +137,13 @@ class CurrencyConvertViewModel(
     fun getRequestCode(fromCode: String, toCode: String): String {
         return "${fromCode}_${toCode},${toCode}_${fromCode}"
     }
+
+    fun setFromCode(code: String){
+        _fromCode.value = code
+    }
+
+    fun setToCode(code: String){
+        _toCode.value = code
+    }
+
 } /*END*/

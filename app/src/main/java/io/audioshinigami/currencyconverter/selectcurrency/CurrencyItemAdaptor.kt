@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.models.CurrencyItem
 
-class CurrencyItemAdaptor: RecyclerView.Adapter<CurrencyItemViewHolder>() {
+class CurrencyItemAdaptor(private val onCurrencyItemClicked: (String) -> Unit): RecyclerView.Adapter<CurrencyItemViewHolder>() {
 
     private var _currencyItems: ArrayList<CurrencyItem> = arrayListOf()
 
@@ -23,8 +23,8 @@ class CurrencyItemAdaptor: RecyclerView.Adapter<CurrencyItemViewHolder>() {
     override fun onBindViewHolder(holder: CurrencyItemViewHolder, position: Int) {
 
         _currencyItems.apply {
-            if(this.isNotEmpty())
-                holder.bind(this[position])
+            if(isNotEmpty())
+                holder.bind(this[position], onCurrencyItemClicked )
         }
     } //end onBindViewHolder
 
@@ -33,4 +33,5 @@ class CurrencyItemAdaptor: RecyclerView.Adapter<CurrencyItemViewHolder>() {
         notifyDataSetChanged()
 
     }//end addCurrency
+
 }

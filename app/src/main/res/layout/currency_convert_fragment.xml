@@ -17,7 +17,6 @@
             android:layout_height="match_parent"
             tools:context=".activities.HomeActivity">
 
-
         <TextView
                 android:id="@+id/textView"
                 style="@style/TitleTextStyle"
@@ -89,7 +88,7 @@
 
             <TextView
                     style="@style/currencyInputStyle"
-                    android:text="@={vm.fromCode}"
+                    android:text="@{vm.fromCode}"
                     android:id="@+id/txtvw_currency_from"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -120,7 +119,7 @@
                     android:background="@null"
                     android:enabled="false"
                     android:fontFamily="@font/montserrat_alternates"
-                    android:text="@={vm.convertedAmount}"
+                    android:text="@{vm.convertedAmount}"
                     android:hint="@string/_0_0"
                     android:inputType="text"
                     android:textSize="@dimen/dimen_edittxt_size">
@@ -130,7 +129,7 @@
             <TextView
                     style="@style/currencyInputStyle"
                     android:id="@+id/txtvw_currency_to"
-                    android:text="@={vm.toCode}"
+                    android:text="@{vm.toCode}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -138,6 +137,7 @@
         </LinearLayout>
 
         <LinearLayout
+                android:visibility="invisible"
                 android:id="@+id/id_layout_spinners"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
