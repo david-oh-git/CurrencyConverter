@@ -2,7 +2,6 @@ package io.audioshinigami.currencyconverter.convertAmount
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.convertAmount.events.ToastEvent
@@ -21,10 +18,11 @@ import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
+import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
+import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.isNetworkAvailable
-import io.audioshinigami.currencyconverter.utils.obtainViewModel
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -35,10 +33,14 @@ import org.greenrobot.eventbus.Subscribe
 
 class CurrencyConvertFragment : Fragment() {
 
-    private val testFactory : CurrencyConvertVMFactory by lazy { CurrencyConvertVMFactory(FlagDataRepository(), RateRepository(
-        ApiFactory.rateApi)
-    ) }
-    private val viewModel: CurrencyConvertViewModel by activityViewModels { testFactory }
+    private val testFactoryShared : SharedCurrencyVMFactory by lazy {
+        SharedCurrencyVMFactory(
+            FlagDataRepository(), RateRepository(
+                ApiFactory.rateApi
+            )
+        )
+    }
+    private val viewModelShared: SharedCurrencyViewModel by activityViewModels { testFactoryShared }
     private lateinit var viewDataBinding: CurrencyConvertFragmentBinding
 
     override fun onCreateView(
@@ -46,11 +48,11 @@ class CurrencyConvertFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.currency_convert_fragment, container, false)
-//        viewModel = obtainViewModel(CurrencyConvertViewModel::class.java)
+//        viewModelShared = obtainViewModel(SharedCurrencyViewModel::class.java)
 
-        viewModel.networkAvailable = { isNetworkAvailable() }
+        viewModelShared.networkAvailable = { isNetworkAvailable() }
         viewDataBinding = CurrencyConvertFragmentBinding.bind(root).apply {
-            this.vm = viewModel
+            this.vm = viewModelShared
         }
 
         //Set lifecycler owner of view

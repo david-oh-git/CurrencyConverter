@@ -10,8 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import io.audioshinigami.currencyconverter.R
-import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertVMFactory
-import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertViewModel
+import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
+import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
@@ -80,17 +80,20 @@ class CurrencySelectFragment : DialogFragment() {
 
     private fun setCode(callerCode: String,code: String){
         // init ShareViewModel to assign the currency Code to [CurrencyConvertFragment]
-        val testFactory : CurrencyConvertVMFactory by lazy { CurrencyConvertVMFactory(
-            FlagDataRepository(), RateRepository(
-                ApiFactory.rateApi)
-        ) }
-        val viewModel: CurrencyConvertViewModel by activityViewModels { testFactory }
+        val testFactoryShared : SharedCurrencyVMFactory by lazy {
+            SharedCurrencyVMFactory(
+                FlagDataRepository(), RateRepository(
+                    ApiFactory.rateApi
+                )
+            )
+        }
+        val viewModelShared: SharedCurrencyViewModel by activityViewModels { testFactoryShared }
 
         if( callerCode == FROM_CODE_KEY)
-            viewModel.setFromCode(code)
+            viewModelShared.setFromCode(code)
 
         if( callerCode == TO_CODE_KEY)
-            viewModel.setToCode(code)
+            viewModelShared.setToCode(code)
     }
 
 }

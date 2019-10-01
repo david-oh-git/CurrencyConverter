@@ -1,4 +1,4 @@
-package io.audioshinigami.currencyconverter.convertAmount
+package io.audioshinigami.currencyconverter.sharedviewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.EventBus
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class CurrencyConvertViewModel(
+class SharedCurrencyViewModel(
     val flagDataRepository: FlagDataRepository? = null,
     val rateRepository: RateRepository? = null
 ) : ViewModel() {
@@ -54,8 +54,6 @@ class CurrencyConvertViewModel(
     }
 
     fun fetchRate(code: String) {
-        // TODO use repo to fetchRate data
-        // TODO call extractRate with data if not null
 
         val requestCode = getRequestCode(fromCode.value ?: "", toCode.value ?: "")
          viewModelScope.launch(Dispatchers.Main) {
@@ -115,25 +113,17 @@ class CurrencyConvertViewModel(
             fetchRate(code)
     }
 
-    fun extractRate(data: Map<String, String>){
-        //TODO updates ratesCache Map
-    }
-
     fun setConvertedAmount(rate: Double){
         // set converted Amount
         val inputValue = inputAmount.value?.toDoubleOrNull() ?: 0.0
         _convertedAmount.value = ( inputValue * rate ).currencyFormat
     }
 
-
     fun checkRateCache(code: String): Boolean {
         //check if rate for code already exists
         return ratesCache.contains(code)
     }
 
-    fun getRate(requestCode: String){
-
-    }
     fun getRequestCode(fromCode: String, toCode: String): String {
         return "${fromCode}_${toCode},${toCode}_${fromCode}"
     }

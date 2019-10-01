@@ -4,15 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertVMFactory
-import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertViewModel
-import io.audioshinigami.currencyconverter.network.ApiFactory
-import io.audioshinigami.currencyconverter.repository.FlagDataRepository
-import io.audioshinigami.currencyconverter.repository.RateRepository
 import java.math.RoundingMode
 import java.text.DecimalFormat
 

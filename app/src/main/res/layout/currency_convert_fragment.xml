@@ -9,7 +9,7 @@
 
         <variable
                 name="vm"
-                type="io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertViewModel" />
+                type="io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
