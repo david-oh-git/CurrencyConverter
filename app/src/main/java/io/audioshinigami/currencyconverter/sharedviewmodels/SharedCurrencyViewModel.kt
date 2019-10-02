@@ -117,6 +117,8 @@ class SharedCurrencyViewModel(
         //check for network b4 calling [fetchRate] TODO now check for internet
         if( networkAvailable.invoke())
             fetchRate(code)
+        else
+            EventBus.getDefault().post( ToastEvent( "Internet required .." ))
     }
 
     fun setConvertedAmount(rate: Double){
