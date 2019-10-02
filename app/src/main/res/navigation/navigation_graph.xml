@@ -12,7 +12,8 @@
             android:label="      " >
         <action
                 android:id="@+id/action_currencyConvertFragment_to_currencySelectFragment"
-                app:destination="@id/currencySelectFragment" />
+                app:destination="@id/currencySelectFragment"
+                app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <dialog
             android:id="@+id/currencySelectFragment"

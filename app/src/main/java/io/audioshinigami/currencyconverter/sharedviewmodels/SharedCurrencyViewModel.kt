@@ -49,6 +49,12 @@ class SharedCurrencyViewModel(
     }
 
     fun start(){
+        // check if both codes are same hence no conversion required
+        if( _fromCode.value == _toCode.value){
+            _convertedAmount.value = inputAmount.value
+            return
+        }
+
         val code = convertCode(fromCode.value.toString(), toCode.value.toString())
         initRateProcess(code)
     }
