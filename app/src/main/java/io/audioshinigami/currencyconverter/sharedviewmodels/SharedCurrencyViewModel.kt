@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.audioshinigami.currencyconverter.convertAmount.events.ToastEvent
+import io.audioshinigami.currencyconverter.convertAmount.events.Event
 import io.audioshinigami.currencyconverter.models.CurrencyItem
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
@@ -79,21 +79,21 @@ class SharedCurrencyViewModel(
 
                  // Send a toast of the error message
                  e.message?.apply{
-                     EventBus.getDefault().post( ToastEvent( e.message!! ))
+                     EventBus.getDefault().post(Event.ToastEvent(e.message!!))
                  }
              }
              catch (e : SocketTimeoutException){
                  Log.d("TAGU", " error message is : ${e.message}")
 
                  e.message?.apply{
-                     EventBus.getDefault().post( ToastEvent( e.message!! ))
+                     EventBus.getDefault().post(Event.ToastEvent(e.message!!))
                  }
              }
              catch (e : Exception){
                  Log.d("TAGU", " error message is : ${e.message}")
 
                  e.message?.apply{
-                     EventBus.getDefault().post( ToastEvent( e.message!! ))
+                     EventBus.getDefault().post(Event.ToastEvent(e.message!!))
                  }
              }
         } // end [viewModelScope]
@@ -118,7 +118,7 @@ class SharedCurrencyViewModel(
         if( networkAvailable.invoke())
             fetchRate(code)
         else
-            EventBus.getDefault().post( ToastEvent( "Internet required .." ))
+            EventBus.getDefault().post( Event.ToastEvent( "Internet required .." ))
     }
 
     fun setConvertedAmount(rate: Double){

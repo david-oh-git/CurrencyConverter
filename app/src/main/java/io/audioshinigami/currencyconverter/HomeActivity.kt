@@ -1,4 +1,4 @@
-package io.audioshinigami.currencyconverter.activities
+package io.audioshinigami.currencyconverter
 
 import android.os.Bundle
 import android.view.Menu
@@ -12,7 +12,6 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
-import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.utils.currencyFormat

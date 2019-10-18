@@ -10,9 +10,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
-import io.audioshinigami.currencyconverter.convertAmount.events.ToastEvent
+import io.audioshinigami.currencyconverter.convertAmount.events.Event
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.network.ApiFactory
@@ -53,6 +54,7 @@ class CurrencyConvertFragment : Fragment() {
         viewModelShared.networkAvailable = { isNetworkAvailable() }
         viewDataBinding = CurrencyConvertFragmentBinding.bind(root).apply {
             this.vm = viewModelShared
+
         }
 
         //Set lifecycler owner of view
@@ -100,9 +102,14 @@ class CurrencyConvertFragment : Fragment() {
     }
 
     @Subscribe
-    fun sendToastMessage( toastEvent: ToastEvent){
-        Toast.makeText(context, toastEvent.toastMessage, Toast.LENGTH_LONG).show()
+    fun sendToastMessage( toastEvent: Event.ToastEvent){
+        Toast.makeText(context, toastEvent.message, Toast.LENGTH_LONG).show()
     } // sendToastmsg
+
+    @Subscribe
+    fun sendSnackMessage(snackBarEvent: Event.SnackBarEvent){
+        Snackbar.make( convert_currency_layout , snackBarEvent.message, Snackbar.LENGTH_SHORT).show()
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

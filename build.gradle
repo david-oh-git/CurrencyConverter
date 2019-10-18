@@ -8,7 +8,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:3.5.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -53,4 +53,5 @@ ext {
     arch_core_test = "2.1.0-rc01"
     arch_core_runtime = "2.1.0-rc01"
     event_bus_version = "3.0.0"
+    core_ktx = "1.1.0"
 }
