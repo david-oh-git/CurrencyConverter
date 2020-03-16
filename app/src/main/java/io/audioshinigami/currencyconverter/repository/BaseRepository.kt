@@ -1,8 +1,8 @@
 package io.audioshinigami.currencyconverter.repository
 
-import android.util.Log
 import io.audioshinigami.currencyconverter.network.Result
 import retrofit2.Response
+import timber.log.Timber
 
 open class BaseRepository {
 
@@ -14,7 +14,7 @@ open class BaseRepository {
         when(result){
             is Result.Success -> data = result.data
             is Result.Error -> {
-                Log.d("TAGU","Error !!! : $errorMsg")
+                Timber.d("Error !!! : $errorMsg")
             }
         } /* end when*/
 

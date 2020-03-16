@@ -1,7 +1,7 @@
 package io.audioshinigami.currencyconverter.models
 
-import android.util.Log
 import com.google.gson.*
+import timber.log.Timber
 import java.lang.reflect.Type
 
 class RateResponseParser: JsonDeserializer<RateResponse> {
@@ -21,7 +21,7 @@ class RateResponseParser: JsonDeserializer<RateResponse> {
                 result.rate = map
         }catch (e: JsonSyntaxException){
 
-            Log.d("TAGU", "Parser error:\n error message : ${e.printStackTrace()}")
+            Timber.d( "Parser error:\n error message : ${e.printStackTrace()}")
             return null
         }
 

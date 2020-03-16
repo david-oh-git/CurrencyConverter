@@ -1,6 +1,5 @@
 package io.audioshinigami.currencyconverter.sharedviewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.EventBus
+import timber.log.Timber
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
@@ -75,7 +75,7 @@ class SharedCurrencyViewModel(
 
                  setConvertedAmount(ratesCache[code] ?: 0.0)
              }catch (e : UnknownHostException){
-                 Log.d("TAGU", " error message is : ${e.message}")
+                 Timber.d( " error message is : ${e.message}")
 
                  // Send a toast of the error message
                  e.message?.apply{
@@ -83,14 +83,14 @@ class SharedCurrencyViewModel(
                  }
              }
              catch (e : SocketTimeoutException){
-                 Log.d("TAGU", " error message is : ${e.message}")
+                 Timber.d( " error message is : ${e.message}")
 
                  e.message?.apply{
                      EventBus.getDefault().post(Event.ToastEvent(e.message!!))
                  }
              }
              catch (e : Exception){
-                 Log.d("TAGU", " error message is : ${e.message}")
+                 Timber.d( " error message is : ${e.message}")
 
                  e.message?.apply{
                      EventBus.getDefault().post(Event.ToastEvent(e.message!!))

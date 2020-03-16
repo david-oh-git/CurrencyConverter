@@ -1,1 +1,1 @@
-include ':app', ':countriesmodule'
+include ':app'

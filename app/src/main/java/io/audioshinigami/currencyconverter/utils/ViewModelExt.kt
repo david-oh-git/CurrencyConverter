@@ -13,7 +13,6 @@ import io.audioshinigami.currencyconverter.selectcurrency.CurrencySelectViewMode
 
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>): T {
-    val caller = this.activity ?: this
     return when{
         viewModelClass.isAssignableFrom(SharedCurrencyViewModel::class.java) -> ViewModelProvider(this.activity!!, setUpCurrencyConvertFactory()).get(viewModelClass)
         viewModelClass.isAssignableFrom(CurrencySelectViewModel::class.java) -> ViewModelProvider(this, setupCurrencySelectFactory() ).get(viewModelClass)

@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "io.audioshinigami.currencyconverter"
         minSdkVersion rootProject.minSdkVersion
@@ -93,8 +93,10 @@ dependencies {
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
     //gson
     implementation "com.google.code.gson:gson:$gson_version"
@@ -111,9 +113,10 @@ dependencies {
     // Architecture Components ########
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
 
     // Local Unit tests dependencies #####
     testImplementation "junit:junit:$junit_version"
@@ -129,12 +132,9 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$test_runner_version"
 //    androidTestImplementation "androidx.arch.core:core-runtime:$arch_core_runtime"
     //Test helpers for LiveData
-    androidTestImplementation "androidx.arch.core:core-testing:$arch_core_test"
+//    androidTestImplementation "androidx.arch.core:core-testing:$arch_core_test"
     // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_core_version"
     // Mockito
     androidTestImplementation "org.mockito:mockito-android:$mockito_version"
-
-    //    add viewModelScope
-//    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 }
