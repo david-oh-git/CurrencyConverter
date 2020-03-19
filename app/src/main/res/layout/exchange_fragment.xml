@@ -4,16 +4,32 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/exchange_view_background"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".exchange.ExchangeFragment">
 
     <com.google.android.material.textview.MaterialTextView
             style="@style/TextAppearance.MaterialComponents.Headline3"
+            android:id="@+id/title"
             android:text="@string/exchange_title"
+            android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/currency_input"
             android:layout_marginStart="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    <io.audioshinigami.currencyconverter.views.ExchangeView
+            android:id="@+id/currency_input"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:icon_border_color="#2F2691"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
 
