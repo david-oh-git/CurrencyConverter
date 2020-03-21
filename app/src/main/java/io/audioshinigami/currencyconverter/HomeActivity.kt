@@ -28,12 +28,13 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
         /*removes title from actionBar*/
-        supportActionBar?.let { it.title = "" }
+//        supportActionBar?.let { it.title = "" }
 
         navigationController = findNavController(R.id.nav_host_fragment_container)
-        NavigationUI.setupActionBarWithNavController(this, navigationController)
+//        NavigationUI.setupActionBarWithNavController(this, navigationController)
+        NavigationUI.setupWithNavController(bottom_navigation, navigationController)
 
     }
 
@@ -83,18 +84,18 @@ class HomeActivity : AppCompatActivity() {
 
     } /*end setupSpinner*/
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.home_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    } /*end onCreateOptions*/
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if( item.itemId == R.id.action_sign_up){
-            Snackbar.make( parent_layout , "To be implemented soon :)", Snackbar.LENGTH_LONG).show()
-        }
-
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.home_menu, menu)
+//        return super.onCreateOptionsMenu(menu)
+//    } /*end onCreateOptions*/
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if( item.itemId == R.id.action_sign_up){
+//            Snackbar.make( parent_layout , "To be implemented soon :)", Snackbar.LENGTH_LONG).show()
+//        }
+//
+//        return true
+//    }
 
     private fun isFormValid(): Boolean {
         var valid = true

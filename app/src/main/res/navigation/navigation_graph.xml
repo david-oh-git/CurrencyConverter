@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/navgation_graph"
-        app:startDestination="@id/currencyConvertFragment">
+        app:startDestination="@id/exchangeFragment">
 
     <fragment
             android:id="@+id/currencyConvertFragment"
@@ -20,4 +20,12 @@
             android:name="io.audioshinigami.currencyconverter.selectcurrency.CurrencySelectFragment"
             android:label="currency_select_fragment"
             tools:layout="@layout/currency_select_fragment" />
+    <fragment
+            android:id="@+id/exchangeFragment"
+            android:name="io.audioshinigami.currencyconverter.exchange.ExchangeFragment"
+            tools:layout="@layout/exchange_fragment">
+        <action
+                android:id="@+id/action_exchangeFragment_to_currencyConvertFragment"
+                app:destination="@id/currencyConvertFragment" />
+    </fragment>
 </navigation>

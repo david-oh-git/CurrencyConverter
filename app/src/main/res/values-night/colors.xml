@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--    to support dark theme-->
-    <color name="background_color">@color/md_black_1000</color>
+    <color name="background_color">#3C2F73</color>
 <!--    edit text background colour -->
     <color name="editxt_bg_color">@color/background_color</color>
 
@@ -15,5 +15,10 @@
     <color name="exchange_image_background">#3C2F73</color>
     <color name="exchange_icon">@android:color/white</color>
     <color name="exchange_text_colour">@android:color/white</color>
+
+
+    <!--    Bottom nav bar-->
+    <color name="bottom_nav">@color/background_color</color>
+    <color name="bottom_icon">@color/md_grey_900</color>
 
 </resources>
