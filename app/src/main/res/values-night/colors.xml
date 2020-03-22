@@ -11,7 +11,7 @@
     <color name="design_snackbar_background_color" tools:override="true">@color/background_color</color>
 
     <!--    ExchangeView colours-->
-    <color name="exchange_view_background">#30265C</color>
+    <color name="exchange_view_background">#0D1E4C</color>
     <color name="exchange_image_background">#3C2F73</color>
     <color name="exchange_icon">@android:color/white</color>
     <color name="exchange_text_colour">@android:color/white</color>

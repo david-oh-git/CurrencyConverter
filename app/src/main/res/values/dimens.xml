@@ -8,4 +8,5 @@
     <dimen name="editxt_padding">10dp</dimen>
     <dimen name="editxt_margin">4dp</dimen>
     <dimen name="dimen_btnconvert_padd">20dp</dimen>
+    <dimen name="title_top_margin">64dp</dimen>
 </resources>

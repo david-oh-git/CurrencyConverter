@@ -41,8 +41,7 @@ class CurrencyConvertFragment : Fragment() {
             )
         )
     }
-    private val viewModelShared: SharedCurrencyViewModel by activityViewModels { testFactoryShared }
-    private lateinit var binding: CurrencyConvertFragmentBinding
+    private val viewModel: SharedCurrencyViewModel by activityViewModels { testFactoryShared }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,14 +50,12 @@ class CurrencyConvertFragment : Fragment() {
         val root = inflater.inflate(R.layout.currency_convert_fragment, container, false)
 //        viewModelShared = obtainViewModel(SharedCurrencyViewModel::class.java)
 
-        viewModelShared.networkAvailable = { isNetworkAvailable() }
-        binding = CurrencyConvertFragmentBinding.bind(root).apply {
-            this.vm = viewModelShared
-
-        }
-
-        //Set lifecycler owner of view
-        binding.lifecycleOwner = this.viewLifecycleOwner
+        viewModel.networkAvailable = { isNetworkAvailable() }
+        val binding = CurrencyConvertFragmentBinding.inflate(inflater, container, false)
+            .apply {
+                vm = viewModel
+                lifecycleOwner = this@CurrencyConvertFragment.viewLifecycleOwner
+            }
 
         return binding.root
     }
