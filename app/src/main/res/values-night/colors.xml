@@ -2,16 +2,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--    to support dark theme-->
-    <color name="background_color">#3C2F73</color>
+    <color name="background_color">#000080</color>
 <!--    edit text background colour -->
     <color name="editxt_bg_color">@color/background_color</color>
 
     <color name="text_color">@color/md_grey_300</color>
 <!--    snackbar color-->
-    <color name="design_snackbar_background_color" tools:override="true">@color/background_color</color>
+<!--    <color name="design_snackbar_background_color" tools:override="true">@color/background_color</color>-->
 
     <!--    ExchangeView colours-->
-    <color name="exchange_view_background">#0D1E4C</color>
+    <color name="exchange_view_background">#022c6e</color>
     <color name="exchange_image_background">#3C2F73</color>
     <color name="exchange_icon">@android:color/white</color>
     <color name="exchange_text_colour">@android:color/white</color>
@@ -20,5 +20,7 @@
     <!--    Bottom nav bar-->
     <color name="bottom_nav">@color/background_color</color>
     <color name="bottom_icon">@color/md_grey_900</color>
+    <!--    Exchange Fragment-->
+    <color name="divider">#3C2F73</color>
 
 </resources>
