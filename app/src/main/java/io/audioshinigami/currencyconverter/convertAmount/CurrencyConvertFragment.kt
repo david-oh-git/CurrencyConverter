@@ -23,7 +23,7 @@ import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFact
 import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
-import io.audioshinigami.currencyconverter.utils.isNetworkAvailable
+import io.audioshinigami.currencyconverter.utils.extentions.isNetworkAvailable
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -60,14 +60,10 @@ class CurrencyConvertFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
 
-        // initialize both spinners
-//        initSpinner()
-        // click listener for textView
         initTextViewClicks()
-
     }
 
     private fun initSpinner(){
@@ -87,14 +83,11 @@ class CurrencyConvertFragment : Fragment() {
     private fun initTextViewClicks(){
 
         txtvw_currency_from.setOnClickListener {
-            val myBundle = bundleOf("key" to FROM_CODE_KEY)
-            findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment, myBundle)
-//            Navigation.findNavController(parentFragment?.view!!).navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment)
+            startSelectCurrencyFragment(FROM_CODE_KEY)
         }
 
         txtvw_currency_to.setOnClickListener {
-            val myBundle = bundleOf("key" to TO_CODE_KEY)
-            findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment, myBundle)
+            startSelectCurrencyFragment(TO_CODE_KEY)
         }
     }
 
@@ -118,4 +111,8 @@ class CurrencyConvertFragment : Fragment() {
         EventBus.getDefault().unregister(this)
     }
 
+    private fun startSelectCurrencyFragment(code: String){
+        val bundle = bundleOf( "key" to code)
+        findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment, bundle)
+    }
 }
