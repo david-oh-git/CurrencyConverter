@@ -47,8 +47,6 @@ class CurrencyConvertFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.currency_convert_fragment, container, false)
-//        viewModelShared = obtainViewModel(SharedCurrencyViewModel::class.java)
 
         viewModel.networkAvailable = { isNetworkAvailable() }
         val binding = CurrencyConvertFragmentBinding.inflate(inflater, container, false)

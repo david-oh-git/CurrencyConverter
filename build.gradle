@@ -55,4 +55,5 @@ ext {
     event_bus_version = "3.0.0"
     core_ktx = "1.1.0"
     timber_version = "4.7.1"
+    room_version = "2.2.5"
 }

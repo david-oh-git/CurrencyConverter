@@ -1,8 +1,6 @@
 package io.audioshinigami.currencyconverter
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.utils.currencyFormat
@@ -123,5 +120,4 @@ class HomeActivity : AppCompatActivity() {
     // performs back or Up
     // Handles Fragments back stack
     override fun onSupportNavigateUp() = navigationController.navigateUp()
-
 } /*end END*/
