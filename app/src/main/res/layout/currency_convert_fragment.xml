@@ -175,7 +175,7 @@
 
         <Button
                 android:id="@+id/id_btn_convert"
-                style="@style/Widget.AppCompat.Button.Colored"
+                android:background="@color/button_background"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"

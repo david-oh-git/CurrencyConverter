@@ -6,6 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_home.*
 
 // check if network is available
 fun Fragment.isNetworkAvailable(): Boolean {
@@ -37,5 +38,9 @@ fun Fragment.isNetworkAvailable(): Boolean {
 
 // sends a Snack message
 fun Fragment.sendSnack(message: String){
-    Snackbar.make(this.requireView(), message , Snackbar.LENGTH_SHORT).show()
+    Snackbar.make(this.requireView(), message , Snackbar.LENGTH_SHORT)
+        .apply {
+            anchorView = bottom_navigation
+            show()
+        }
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.utils.currencyFormat
@@ -120,4 +121,14 @@ class HomeActivity : AppCompatActivity() {
     // performs back or Up
     // Handles Fragments back stack
     override fun onSupportNavigateUp() = navigationController.navigateUp()
+
+    fun sendSnackBar(message: String){
+
+        Snackbar.make(parent_layout, message, Snackbar.LENGTH_SHORT)
+            .apply {
+                anchorView = bottom_navigation
+                show()
+            }
+    }
+
 } /*end END*/

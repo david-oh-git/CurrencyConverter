@@ -4,15 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.audioshinigami.currencyconverter.convertAmount.events.Event
 import io.audioshinigami.currencyconverter.models.CurrencyItem
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
+import io.audioshinigami.currencyconverter.utils.OneTimeLiveData
 import io.audioshinigami.currencyconverter.utils.currencyFormat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -48,6 +47,8 @@ class SharedCurrencyViewModel(
 
     }
 
+    val snackMessage = OneTimeLiveData<SnackMessage>()
+
     fun start(){
         // check if both codes are same hence no conversion required
         if( _fromCode.value == _toCode.value){
@@ -78,23 +79,16 @@ class SharedCurrencyViewModel(
                  Timber.d( " error message is : ${e.message}")
 
                  // Send a toast of the error message
-                 e.message?.apply{
-                     EventBus.getDefault().post(Event.ToastEvent(e.message!!))
-                 }
+                snackMessage.sendData( SnackMessage(e.message ?: "UnknownHost"))
              }
              catch (e : SocketTimeoutException){
                  Timber.d( " error message is : ${e.message}")
 
-                 e.message?.apply{
-                     EventBus.getDefault().post(Event.ToastEvent(e.message!!))
-                 }
+                 snackMessage.sendData( SnackMessage(e.message ?: "Socket Timeout"))
              }
              catch (e : Exception){
                  Timber.d( " error message is : ${e.message}")
-
-                 e.message?.apply{
-                     EventBus.getDefault().post(Event.ToastEvent(e.message!!))
-                 }
+                 snackMessage.sendData( SnackMessage(e.message ?: "Error"))
              }
         } // end [viewModelScope]
     }
@@ -118,7 +112,7 @@ class SharedCurrencyViewModel(
         if( networkAvailable.invoke())
             fetchRate(code)
         else
-            EventBus.getDefault().post( Event.ToastEvent( "Internet required .." ))
+            snackMessage.sendData( SnackMessage("Internet required .."))
     }
 
     fun setConvertedAmount(rate: Double){
@@ -143,5 +137,7 @@ class SharedCurrencyViewModel(
     fun setToCode(code: String){
         _toCode.value = code
     }
+
+    data class SnackMessage(val message: String )
 
 } /*END*/

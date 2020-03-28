@@ -1,16 +1,21 @@
 package io.audioshinigami.currencyconverter.convertAmount
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import io.audioshinigami.currencyconverter.HomeActivity
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.convertAmount.events.Event
@@ -24,9 +29,12 @@ import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewMo
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.extentions.isNetworkAvailable
+import io.audioshinigami.currencyconverter.utils.extentions.sendSnack
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
+import kotlinx.coroutines.delay
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import timber.log.Timber
 
 /**
 *  Main UI to covert amount . user enters value , selects currency codes and convert
@@ -55,13 +63,22 @@ class CurrencyConvertFragment : Fragment() {
                 lifecycleOwner = this@CurrencyConvertFragment.viewLifecycleOwner
             }
 
+        subscribeData(binding)
+
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-
         initTextViewClicks()
+    }
+
+    private fun subscribeData( binding: CurrencyConvertFragmentBinding){
+
+        viewModel.snackMessage.observe(binding.lifecycleOwner!!, Observer {
+            hideKeyboard(edittxt_currency_from)
+            ( activity as HomeActivity ).sendSnackBar(it.message)
+        })
     }
 
     private fun initSpinner(){
@@ -112,5 +129,13 @@ class CurrencyConvertFragment : Fragment() {
     private fun startSelectCurrencyFragment(code: String){
         val bundle = bundleOf( "key" to code)
         findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment, bundle)
+    }
+
+    private fun hideKeyboard(view: View){
+        (context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager )
+            .apply {
+                hideSoftInputFromWindow(view.windowToken, 0)
+            }
+
     }
 }

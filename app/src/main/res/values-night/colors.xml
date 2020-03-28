@@ -23,4 +23,7 @@
     <!--    Exchange Fragment-->
     <color name="divider">#3C2F73</color>
 
+    <!--    currency convert -->
+    <color name="button_background">#02D99A</color>
+
 </resources>
