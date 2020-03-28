@@ -1,24 +1,19 @@
 package io.audioshinigami.currencyconverter.convertAmount
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.HomeActivity
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
-import io.audioshinigami.currencyconverter.convertAmount.events.Event
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.network.ApiFactory
@@ -29,12 +24,7 @@ import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewMo
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.extentions.isNetworkAvailable
-import io.audioshinigami.currencyconverter.utils.extentions.sendSnack
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
-import kotlinx.coroutines.delay
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import timber.log.Timber
 
 /**
 *  Main UI to covert amount . user enters value , selects currency codes and convert
@@ -104,26 +94,6 @@ class CurrencyConvertFragment : Fragment() {
         txtvw_currency_to.setOnClickListener {
             startSelectCurrencyFragment(TO_CODE_KEY)
         }
-    }
-
-    @Subscribe
-    fun sendToastMessage( toastEvent: Event.ToastEvent){
-        Toast.makeText(context, toastEvent.message, Toast.LENGTH_LONG).show()
-    } // sendToastmsg
-
-    @Subscribe
-    fun sendSnackMessage(snackBarEvent: Event.SnackBarEvent){
-        Snackbar.make( convert_currency_layout , snackBarEvent.message, Snackbar.LENGTH_SHORT).show()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        EventBus.getDefault().register(this)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        EventBus.getDefault().unregister(this)
     }
 
     private fun startSelectCurrencyFragment(code: String){
