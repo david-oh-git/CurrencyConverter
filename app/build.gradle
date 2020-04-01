@@ -111,6 +111,7 @@ dependencies {
     // Dagger2
     implementation "com.google.dagger:dagger:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
+    kaptTest "com.google.dagger:dagger-compiler:$dagger2_version"
     // Architecture Components ########
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
