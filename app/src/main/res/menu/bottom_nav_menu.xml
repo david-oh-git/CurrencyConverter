@@ -3,20 +3,18 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+            android:icon="@drawable/ic_money"
+            android:id="@+id/currencyConvertFragment"
+            android:title="@string/currencies" />
+
+    <item
             app:showAsAction="always"
             android:id="@+id/exchangeFragment"
             android:icon="@drawable/ic_exchange"
             android:title="@string/exchange_title" />
 
     <item
-            android:icon="@drawable/ic_money"
-        android:id="@+id/currencyConvertFragment"
-        android:title="@string/currencies" />
-
-    <item
         android:title="More"
         android:icon="@drawable/ic_more"
         />
-
-
 </menu>
