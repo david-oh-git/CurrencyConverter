@@ -3,6 +3,8 @@ package io.audioshinigami.currencyconverter
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,16 +13,23 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
+import io.audioshinigami.currencyconverter.data.AppRepository
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
+import io.audioshinigami.currencyconverter.utils.DEFAULT_PREF_INT_VALUE
+import io.audioshinigami.currencyconverter.utils.THEME_PREF_KEY
 import io.audioshinigami.currencyconverter.utils.currencyFormat
 import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(CurrencyViewModel::class.java) }
     private lateinit var navigationController: NavController
+
+    @Inject lateinit var appRepository: AppRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +43,9 @@ class HomeActivity : AppCompatActivity() {
 //        NavigationUI.setupActionBarWithNavController(this, navigationController)
         NavigationUI.setupWithNavController(bottom_navigation, navigationController)
 
+        ( application as App ).appComponent.inject(this)
+
+        initTheme()
     }
 
     private fun convertCurrency() {
@@ -129,6 +141,32 @@ class HomeActivity : AppCompatActivity() {
                 anchorView = bottom_navigation
                 show()
             }
+    }
+
+    private fun initTheme() = runBlocking {
+
+        appRepository.getInt(THEME_PREF_KEY)
+            .apply {
+                when(this){
+                    DEFAULT_PREF_INT_VALUE -> {
+                        // save follow system as default the 1st time
+                        appRepository.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
+                        MODE_NIGHT_FOLLOW_SYSTEM
+                    }
+                    null -> {
+                        // save follow system as default the 1st time
+                        appRepository.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
+                        MODE_NIGHT_FOLLOW_SYSTEM
+                    }
+
+                    else -> {
+                        AppCompatDelegate.setDefaultNightMode(
+                            this
+                        )
+                    }
+                }
+            }
+
     }
 
 } /*end END*/

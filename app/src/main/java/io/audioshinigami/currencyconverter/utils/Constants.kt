@@ -10,3 +10,7 @@ const val TO_CODE_KEY = "to_code_key"
 const val UNKNOWN_CODE = "unknow_code"
 const val PAPER_TABLE_NAME = "currency_db"
 const val RATES_TABLE_NAME = "rates_db"
+const val THEME_PREF_KEY = "io.audioshinigami.currencyconverter.utils.theme_key"
+const val SETTINGS_PREF_NAME = "io.audioshinigami.currencyconverter.utils.settings_name"
+const val DEFAULT_PREF_INT_VALUE = -999
+const val APP_DB_FILENAME = "io.audioshinigami.currencyconverter.utils.app_db.db"

@@ -7,10 +7,10 @@ import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.utils.RATES_TABLE_NAME
 
 @Dao
-abstract class RateDao {
+abstract class RateDao: BaseDao<Rate> {
 
     @Query("SELECT * FROM $RATES_TABLE_NAME ORDER BY rowid ASC")
-    abstract fun observeRates():LiveData<Rate>
+    abstract fun observeRates():LiveData<List<Rate>>
 
     @Query("SELECT * FROM $RATES_TABLE_NAME ORDER BY rowid ASC")
     abstract suspend fun getRates(): List<Rate>

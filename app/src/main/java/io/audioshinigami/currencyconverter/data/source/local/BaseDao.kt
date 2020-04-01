@@ -15,7 +15,7 @@ interface BaseDao<T> {
     fun add(obj: T)
 
     @Insert
-    fun add(vararg objs: T)
+    fun add(vararg objects: T)
 
     @Delete
     fun delete(obj: T)

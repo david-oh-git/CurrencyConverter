@@ -55,4 +55,5 @@ ext {
     core_ktx = "1.1.0"
     timber_version = "4.7.1"
     room_version = "2.2.5"
+    dagger2_version = "2.23.1"
 }
