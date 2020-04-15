@@ -2,7 +2,7 @@ package io.audioshinigami.currencyconverter.data.source.local
 
 import io.audioshinigami.currencyconverter.data.SharedPreferenceSource
 
-class FakePreferenceSourceTest(
+class FakePreferenceSource(
     var sharedPreference: MutableMap<String, Any> = mutableMapOf()
 ) : SharedPreferenceSource {
 
@@ -18,8 +18,8 @@ class FakePreferenceSourceTest(
         sharedPreference[key] = value
     }
 
-    override suspend fun getString(key: String): String? {
-        return ( sharedPreference[key] as String?)
+    override suspend fun getString(key: String): String {
+        return ( sharedPreference[key] as String)
     }
 
     override suspend fun getBoolean(key: String): Boolean {

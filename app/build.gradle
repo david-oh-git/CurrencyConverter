@@ -6,6 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion "29.0.3"
@@ -123,6 +124,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+
     // Local Unit tests dependencies #####
     testImplementation "junit:junit:$junit_version"
     //Test helpers for LiveData
@@ -133,8 +136,19 @@ dependencies {
     testImplementation "org.mockito:mockito-android:$mockito_version"
     // Espresso
     testImplementation "androidx.test.espresso:espresso-core:$expresso_core_version"
+    // Coroutines test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
+    kaptTest "com.google.dagger:dagger-compiler:$dagger2_version"
+    // Hamcrest
+    testImplementation "org.hamcrest:hamcrest:$hamcrest_version"
+    testImplementation "org.hamcrest:hamcrest-library:$hamcrest_version"
+    testImplementation "com.google.truth:truth:$truth_version"
+
+    
     // Android unit dependencies ###
     androidTestImplementation "androidx.test:runner:$test_runner_version"
+    // Coroutines test
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
 //    androidTestImplementation "androidx.arch.core:core-runtime:$arch_core_runtime"
     //Test helpers for LiveData
 //    androidTestImplementation "androidx.arch.core:core-testing:$arch_core_test"

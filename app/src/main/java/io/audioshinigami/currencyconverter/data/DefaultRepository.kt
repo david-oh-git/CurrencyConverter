@@ -1,6 +1,7 @@
 package io.audioshinigami.currencyconverter.data
 
 import androidx.lifecycle.LiveData
+import io.audioshinigami.currencyconverter.network.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -8,6 +9,7 @@ import kotlinx.coroutines.withContext
 class DefaultRepository(
     private val databaseSource: DatabaseSource,
     private val sharedPreference: SharedPreferenceSource,
+    private val remoteDataSource: DatabaseSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): AppRepository {
 
@@ -61,5 +63,9 @@ class DefaultRepository(
 
     override suspend fun <T> deleteAll(type: Class<T>) = withContext(ioDispatcher){
         databaseSource.deleteAll(type)
+    }
+
+    override suspend fun getResult(code: String): Result<List<Rate>> = withContext(ioDispatcher){
+        return@withContext Result.Error(Exception("Not implemented"))
     }
 }

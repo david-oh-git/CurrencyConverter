@@ -1,6 +1,7 @@
 package io.audioshinigami.currencyconverter.data
 
 import androidx.lifecycle.LiveData
+import io.audioshinigami.currencyconverter.network.Result
 
 interface DatabaseSource {
 
@@ -18,4 +19,9 @@ interface DatabaseSource {
 
     suspend fun <T> deleteAll( type: Class<T> )
 
+    suspend fun getResult(code: String): Result<List<Rate>>
+
+    suspend fun deleteAllRates()
+
+    suspend fun deleteAllPaper()
 }

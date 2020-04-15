@@ -8,7 +8,7 @@ interface SharedPreferenceSource {
 
     suspend fun save( key: String , value: Int )
 
-    suspend fun getString( key: String ) : String?
+    suspend fun getString( key: String ) : String
 
     suspend fun getBoolean( key: String ) : Boolean
 

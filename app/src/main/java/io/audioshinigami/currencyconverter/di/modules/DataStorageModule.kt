@@ -10,14 +10,18 @@ import io.audioshinigami.currencyconverter.data.DatabaseSource
 import io.audioshinigami.currencyconverter.data.DefaultRepository
 import io.audioshinigami.currencyconverter.data.SharedPreferenceSource
 import io.audioshinigami.currencyconverter.data.source.local.*
+import io.audioshinigami.currencyconverter.data.source.remote.RemoteDataSource
+import io.audioshinigami.currencyconverter.network.ConverterApi
 import io.audioshinigami.currencyconverter.utils.APP_DB_FILENAME
+import io.audioshinigami.currencyconverter.utils.DATASOURCE_LOCAL
+import io.audioshinigami.currencyconverter.utils.DATASOURCE_REMOTE
 import io.audioshinigami.currencyconverter.utils.SETTINGS_PREF_NAME
 import javax.inject.Named
 import javax.inject.Singleton
 
 
 @Module
-class DataStorageModule {
+open class DataStorageModule {
 
     @Provides
     @Named(SETTINGS_PREF_NAME)
@@ -51,14 +55,23 @@ class DataStorageModule {
 
     @Provides
     @Singleton
-    fun provideDatabaseSource(paperDao: PaperDao, rateDao: RateDao): DatabaseSource =
+    @Named(DATASOURCE_LOCAL)
+    fun provideLocalDatabaseSource(paperDao: PaperDao, rateDao: RateDao): DatabaseSource =
         LocalDatabaseSource(paperDao,rateDao)
 
     @Provides
     @Singleton
-    fun provideDefaultRepository( databaseSource: DatabaseSource,
-                                  sharedPreferenceSource: SharedPreferenceSource): AppRepository =
+    @Named(DATASOURCE_REMOTE)
+    fun provideRemoteDataSource(api: ConverterApi): DatabaseSource =
+        RemoteDataSource(api)
+
+    @Provides
+    @Singleton
+    fun provideDefaultRepository(@Named(DATASOURCE_LOCAL) databaseSource: DatabaseSource,
+                                 sharedPreferenceSource: SharedPreferenceSource,
+                                 @Named(DATASOURCE_REMOTE) remoteDataSource: DatabaseSource
+    ): AppRepository =
         DefaultRepository(
-            databaseSource, sharedPreferenceSource
+            databaseSource, sharedPreferenceSource, remoteDataSource
         )
 }

@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
     private val viewModel by lazy { ViewModelProviders.of(this).get(CurrencyViewModel::class.java) }
     private lateinit var navigationController: NavController
 
-    @Inject lateinit var appRepository: AppRepository
+    @Inject lateinit var repository: AppRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,17 +145,17 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initTheme() = runBlocking {
 
-        appRepository.getInt(THEME_PREF_KEY)
+        repository.getInt(THEME_PREF_KEY)
             .apply {
                 when(this){
                     DEFAULT_PREF_INT_VALUE -> {
                         // save follow system as default the 1st time
-                        appRepository.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
+                        repository.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
                         MODE_NIGHT_FOLLOW_SYSTEM
                     }
                     null -> {
                         // save follow system as default the 1st time
-                        appRepository.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
+                        repository.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
                         MODE_NIGHT_FOLLOW_SYSTEM
                     }
 

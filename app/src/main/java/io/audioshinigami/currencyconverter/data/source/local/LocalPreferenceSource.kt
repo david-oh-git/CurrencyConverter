@@ -31,8 +31,8 @@ class LocalPreferenceSource(
         }
     }
 
-    override suspend fun getString(key: String): String? = withContext(ioDispatcher){
-        return@withContext sharedPreferences.getString(key, "" )
+    override suspend fun getString(key: String): String = withContext(ioDispatcher){
+        return@withContext sharedPreferences.getString(key, "" ) ?: ""
     }
 
     override suspend fun getBoolean(key: String): Boolean = withContext(ioDispatcher){

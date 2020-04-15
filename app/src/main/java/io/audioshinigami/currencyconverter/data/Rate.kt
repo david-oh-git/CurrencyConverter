@@ -19,5 +19,6 @@ import io.audioshinigami.currencyconverter.utils.RATES_TABLE_NAME
 data class Rate(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name="rowid") val id: Int,
     @ColumnInfo val code: String,
-    @ColumnInfo val rate: Double
+    @ColumnInfo val rate: Double,
+    @ColumnInfo val date: String
 )

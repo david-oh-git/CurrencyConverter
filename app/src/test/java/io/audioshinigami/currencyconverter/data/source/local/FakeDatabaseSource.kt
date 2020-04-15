@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import io.audioshinigami.currencyconverter.data.DatabaseSource
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.Rate
+import io.audioshinigami.currencyconverter.network.Result
 
-class FakeDatabaseSourceTest(
+class FakeDatabaseSource(
     var paperStorage: MutableList<Paper> = mutableListOf(),
     var rateStorage: MutableList<Rate> = mutableListOf()
 ): DatabaseSource {
@@ -46,5 +47,17 @@ class FakeDatabaseSourceTest(
             type.isAssignableFrom(Paper::class.java) -> paperStorage.clear()
             type.isAssignableFrom(Rate::class.java) -> rateStorage.clear()
         }
+    }
+
+    override suspend fun getResult(code: String): Result<List<Rate>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteAllRates() {
+        rateStorage.clear()
+    }
+
+    override suspend fun deleteAllPaper() {
+        paperStorage.clear()
     }
 }

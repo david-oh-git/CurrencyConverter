@@ -14,3 +14,5 @@ const val THEME_PREF_KEY = "io.audioshinigami.currencyconverter.utils.theme_key"
 const val SETTINGS_PREF_NAME = "io.audioshinigami.currencyconverter.utils.settings_name"
 const val DEFAULT_PREF_INT_VALUE = -999
 const val APP_DB_FILENAME = "io.audioshinigami.currencyconverter.utils.app_db.db"
+const val DATASOURCE_LOCAL = "LocalDatabaseSource"
+const val DATASOURCE_REMOTE = "RemoteDataSource"

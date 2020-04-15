@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import io.audioshinigami.currencyconverter.data.DatabaseSource
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.Rate
+import io.audioshinigami.currencyconverter.network.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -46,5 +47,18 @@ class LocalDatabaseSource(
 
     override suspend fun getAllRates(): List<Rate> = withContext(ioDispatcher){
         return@withContext rateDao.getRates()
+    }
+
+    override suspend fun getResult(code: String): Result<List<Rate>> {
+        // Not needed
+        return Result.Error( Exception("Not needed"))
+    }
+
+    override suspend fun deleteAllRates() = withContext(ioDispatcher){
+        rateDao.deleteAllRates()
+    }
+
+    override suspend fun deleteAllPaper() = withContext(ioDispatcher){
+        paperDao.deleteAllPaper()
     }
 }
