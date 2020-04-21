@@ -41,7 +41,6 @@ class DefaultRepositoryTest {
 
         repository = DefaultRepository(
             databaseSource,
-            sharedPreferenceSource,
             remoteDataSource,
             Dispatchers.Unconfined
         )
@@ -61,70 +60,6 @@ class DefaultRepositoryTest {
 
     }
 
-    @Test
-    fun saveInteger_getFromSharedPreferenceSource() = runBlockingTest {
-        // Arrange : save integer value
-        val VALUE_KEY = "value_key"
-        val value = 789
-        repository.save(VALUE_KEY, value)
-
-        // Act: retrieve the value
-        val result = repository.getInt(VALUE_KEY)
-
-        // Assert: confirm result is same as value
-        assertThat(value, `is`(result))
-    }
-
-    @Test
-    fun saveString_getFromSharedPreferenceSource() = runBlockingTest {
-        // Arrange : save integer value
-        val VALUE_KEY = "value_key"
-        val value = "my cat"
-        repository.save(VALUE_KEY, value)
-
-        // Act: retrieve the value
-        val result = repository.getString(VALUE_KEY)
-
-        // Assert: confirm result is same as value
-        assertThat(value, `is`(result))
-    }
-
-    @Test
-    fun saveBoolean_getFromSharedPreferenceSource() = runBlockingTest {
-        // Arrange : save integer value
-        val VALUE_KEY = "value_key"
-        val value = true
-        repository.save(VALUE_KEY, value)
-
-        // Act: retrieve the value
-        val result = repository.getBoolean(VALUE_KEY)
-
-        // Assert: confirm result is same as value
-        assertThat(value, `is`(result) )
-    }
-
-    @Test
-    fun removeKey_confirmFromSharedPreferenceSource() = runBlockingTest {
-        // Arrange : save integer value
-        val VALUE_KEY = "value_key"
-        val VALUE_KEY2 = "value_key2"
-        val value = 789
-        val value2 = 300
-        repository.save(VALUE_KEY, value)
-        repository.save(VALUE_KEY2, value2)
-
-        // Act: retrieve the value
-        repository.remove(VALUE_KEY)
-        val resultInt = repository.getInt(VALUE_KEY)
-        val resultBoolean = repository.getBoolean(VALUE_KEY)
-        val resultString = repository.getString(VALUE_KEY)
-
-        // Assert: confirm result is same as value
-        assertThat(resultInt, `is`(DEFAULT_PREF_INT_VALUE))
-        assertThat(resultString, `is`(""))
-        assertThat(resultBoolean, `is`(false))
-
-    }
 
     @Test
     fun deleteAllRates_DeleteAllRatesFromLocalDataSource() = runBlockingTest {

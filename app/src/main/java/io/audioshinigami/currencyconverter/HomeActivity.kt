@@ -13,7 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
-import io.audioshinigami.currencyconverter.data.AppRepository
+import io.audioshinigami.currencyconverter.data.SharedPreferenceSource
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
 import io.audioshinigami.currencyconverter.utils.DEFAULT_PREF_INT_VALUE
 import io.audioshinigami.currencyconverter.utils.THEME_PREF_KEY
@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
     private val viewModel by lazy { ViewModelProviders.of(this).get(CurrencyViewModel::class.java) }
     private lateinit var navigationController: NavController
 
-    @Inject lateinit var repository: AppRepository
+    @Inject lateinit var sharedPreferenceSource: SharedPreferenceSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,17 +145,17 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initTheme() = runBlocking {
 
-        repository.getInt(THEME_PREF_KEY)
+        sharedPreferenceSource.getInt(THEME_PREF_KEY)
             .apply {
                 when(this){
                     DEFAULT_PREF_INT_VALUE -> {
                         // save follow system as default the 1st time
-                        repository.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
+                        sharedPreferenceSource.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
                         MODE_NIGHT_FOLLOW_SYSTEM
                     }
                     null -> {
                         // save follow system as default the 1st time
-                        repository.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
+                        sharedPreferenceSource.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
                         MODE_NIGHT_FOLLOW_SYSTEM
                     }
 

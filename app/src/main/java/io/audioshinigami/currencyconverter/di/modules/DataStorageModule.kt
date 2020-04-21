@@ -68,10 +68,9 @@ open class DataStorageModule {
     @Provides
     @Singleton
     fun provideDefaultRepository(@Named(DATASOURCE_LOCAL) databaseSource: DatabaseSource,
-                                 sharedPreferenceSource: SharedPreferenceSource,
                                  @Named(DATASOURCE_REMOTE) remoteDataSource: DatabaseSource
     ): AppRepository =
         DefaultRepository(
-            databaseSource, sharedPreferenceSource, remoteDataSource
+            databaseSource, remoteDataSource
         )
 }
