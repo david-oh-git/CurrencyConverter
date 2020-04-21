@@ -2,7 +2,10 @@
 <resources>
 
     <declare-styleable name="ExchangeView">
+
         <attr name="currency_editable" format="boolean" />
         <attr name="icon_border_color" format="color" />
+        <attr name="text" format="string" />
+
     </declare-styleable>
 </resources>

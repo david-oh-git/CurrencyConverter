@@ -7,19 +7,19 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-            tools:src="@drawable/ic_money"
-            android:id="@+id/currency_icon"
+
+    <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/currency_code"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/currency_name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintHorizontal_weight="1"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="8dp"
+            android:gravity="center"
             android:background="@drawable/squircle"
+            tools:text="NGNZ"
+            android:textSize="24sp"
             android:layout_width="0dp"
             android:layout_height="0dp" />
 
@@ -30,9 +30,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
-            app:layout_constraintTop_toTopOf="@id/currency_icon"
+            app:layout_constraintTop_toTopOf="@id/currency_code"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/currency_icon"
+            app:layout_constraintStart_toEndOf="@id/currency_code"
             app:layout_constraintHorizontal_weight="3"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@id/currency_name"
             app:layout_constraintStart_toStartOf="@id/currency_name"
             app:layout_constraintEnd_toEndOf="@id/currency_name"
-            app:layout_constraintBottom_toBottomOf="@id/currency_icon"
+            app:layout_constraintBottom_toBottomOf="@id/currency_code"
             android:background="@android:color/transparent"
             android:enabled="false"
             android:hint="@string/_0_0"

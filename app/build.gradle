@@ -15,7 +15,7 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -27,11 +27,27 @@ android {
         }
 
         debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
             minifyEnabled false
             testCoverageEnabled true
-//            useProguard false
+
+        }
+
+        beta {
+            versionNameSuffix "-beta"
+            minifyEnabled true
+            shrinkResources true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            testProguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        alpha {
+            versionNameSuffix "-alpha"
+            minifyEnabled true
+            shrinkResources true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 

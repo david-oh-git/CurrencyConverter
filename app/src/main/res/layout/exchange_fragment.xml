@@ -72,6 +72,4 @@
             app:layout_constraintEnd_toEndOf="@id/currency_input"
             app:layout_constraintTop_toTopOf="@id/currency_input" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

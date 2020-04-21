@@ -165,7 +165,7 @@ class HomeActivity : AppCompatActivity() {
                         )
                     }
                 }
-            }
+            } // END apply
 
     }
 

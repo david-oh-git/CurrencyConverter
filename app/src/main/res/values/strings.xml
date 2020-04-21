@@ -11,5 +11,7 @@
     <string name="exchange_title">Exchange</string>
     <string name="currencies">Currencies</string>
 
+    <string name="LEK" translatable="false">\u20AC</string>
+
 
 </resources>

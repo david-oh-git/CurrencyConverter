@@ -2,14 +2,12 @@ package io.audioshinigami.currencyconverter.views
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import io.audioshinigami.currencyconverter.R
-import kotlinx.android.synthetic.main.exchange_view.view.currency_icon
-import kotlinx.android.synthetic.main.exchange_view.view.currency_value
+import kotlinx.android.synthetic.main.exchange_view.view.*
 
 class ExchangeView @JvmOverloads constructor(
     context: Context,
@@ -35,6 +33,13 @@ class ExchangeView @JvmOverloads constructor(
     // color of icon boundary
     var iconBorderColor = DEFAULT_ICON_BORDER_COLOR
 
+    // text value
+    var text = ""
+        set(value) {
+            field = value
+            currency_code.text = field
+        }
+
     init {
         View.inflate(context, R.layout.exchange_view, this)
 
@@ -44,16 +49,14 @@ class ExchangeView @JvmOverloads constructor(
                     // get attributes here
                     editCurrencyValue = getBoolean( R.styleable.ExchangeView_currency_editable, DEFAULT_EDIT_CURRENCY)
                     iconBorderColor = getColor(R.styleable.ExchangeView_icon_border_color, DEFAULT_ICON_BORDER_COLOR )
+                    text = getString(R.styleable.ExchangeView_text) ?: ""
 
                 }finally {
                     recycle()
                 }
             }
 
-        ( currency_icon.background as GradientDrawable )
-            .apply {
-                setStroke(4.dip, iconBorderColor)
-            }
+        currency_code.text = text
 
         currency_value.isEnabled = editCurrencyValue
     }// END init

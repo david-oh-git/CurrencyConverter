@@ -65,10 +65,18 @@ class CurrencyConvertFragment : Fragment() {
 
     private fun subscribeData( binding: CurrencyConvertFragmentBinding){
 
-        viewModel.snackMessage.observe(binding.lifecycleOwner!!, Observer {
-            hideKeyboard(edittxt_currency_from)
-            ( activity as HomeActivity ).sendSnackBar(it.message)
-        })
+        binding.lifecycleOwner
+            ?.run {
+                viewModel.snackMessage.observe(this, Observer {
+                    hideKeyboard(edittxt_currency_from)
+                    ( activity as HomeActivity ).sendSnackBar(it.message)
+                })
+            }
+
+//        viewModel.snackMessage.observe(binding.lifecycleOwner!!, Observer {
+//            hideKeyboard(edittxt_currency_from)
+//            ( activity as HomeActivity ).sendSnackBar(it.message)
+//        })
     }
 
     private fun initSpinner(){
