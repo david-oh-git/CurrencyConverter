@@ -11,17 +11,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.data.SharedPreferenceSource
 import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
-import io.audioshinigami.currencyconverter.utils.DEFAULT_PREF_INT_VALUE
-import io.audioshinigami.currencyconverter.utils.THEME_PREF_KEY
 import io.audioshinigami.currencyconverter.utils.currencyFormat
 import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.currency_convert_fragment.*
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
@@ -130,8 +128,7 @@ class HomeActivity : AppCompatActivity() {
 //        graph.animation = slideUpAnimation
     } /*end slide*/
 
-    // performs back or Up
-    // Handles Fragments back stack
+    // Handles Fragments back stack & performs back or Up
     override fun onSupportNavigateUp() = navigationController.navigateUp()
 
     fun sendSnackBar(message: String){
@@ -143,30 +140,29 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    private fun initTheme() = runBlocking {
-
-        sharedPreferenceSource.getInt(THEME_PREF_KEY)
+    private fun initTheme(){
+        PreferenceManager.getDefaultSharedPreferences(this@HomeActivity).getString( getString(R.string.theme_key), "0")
             .apply {
-                when(this){
-                    DEFAULT_PREF_INT_VALUE -> {
-                        // save follow system as default the 1st time
-                        sharedPreferenceSource.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
-                        MODE_NIGHT_FOLLOW_SYSTEM
-                    }
-                    null -> {
-                        // save follow system as default the 1st time
-                        sharedPreferenceSource.save(THEME_PREF_KEY, MODE_NIGHT_FOLLOW_SYSTEM)
-                        MODE_NIGHT_FOLLOW_SYSTEM
-                    }
-
-                    else -> {
-                        AppCompatDelegate.setDefaultNightMode(
-                            this
-                        )
-                    }
-                }
-            } // END apply
-
+                setTheme(this ?: "0")
+            }
     }
+
+    private fun setTheme(value: String) {
+
+        when(value){
+            "0" -> {
+                AppCompatDelegate.setDefaultNightMode( MODE_NIGHT_FOLLOW_SYSTEM )
+
+            }
+            "1" -> {
+                AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_YES )
+
+            }
+            "2" -> {
+                AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_NO )
+            }
+
+        }
+    } //END setTheme
 
 } /*end END*/

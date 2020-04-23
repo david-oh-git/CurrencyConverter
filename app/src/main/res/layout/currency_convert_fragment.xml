@@ -173,18 +173,20 @@
 
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/id_btn_convert"
-                android:background="@color/button_background"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:paddingTop="@dimen/dimen_btnconvert_padd"
                 android:paddingBottom="@dimen/dimen_btnconvert_padd"
                 android:text="@string/str_btn_convert"
+                android:textColor="@color/button_text"
                 android:textAllCaps="false"
                 android:textSize="22sp"
                 android:onClick="@{ () -> vm.start()}"
+                app:elevation="4dp"
+                app:backgroundTint="@color/button_background"
                 app:layout_constraintEnd_toEndOf="@+id/id_layout_spinners"
                 app:layout_constraintStart_toStartOf="@+id/id_layout_spinners"
                 app:layout_constraintTop_toBottomOf="@+id/id_layout_spinners" />

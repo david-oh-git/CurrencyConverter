@@ -1,0 +1,26 @@
+<PreferenceScreen
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/pref_theme_title">
+
+        <ListPreference
+            app:defaultValue="System default"
+            app:entries="@array/theme_entries"
+                app:entryValues="@array/theme_values"
+            app:key="@string/theme_key"
+            app:title="@string/select_theme_pref"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/api_category_title_pref">
+
+        <EditTextPreference
+            app:key="@string/api_key_pref"
+            app:title="@string/api_title_pref"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

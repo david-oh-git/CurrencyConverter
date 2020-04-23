@@ -25,5 +25,6 @@
 
     <!--    currency convert -->
     <color name="button_background">#02D99A</color>
+    <color name="button_text">@android:color/white</color>
 
 </resources>

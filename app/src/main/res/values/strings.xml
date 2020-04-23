@@ -11,7 +11,14 @@
     <string name="exchange_title">Exchange</string>
     <string name="currencies">Currencies</string>
 
-    <string name="LEK" translatable="false">\u20AC</string>
+
+    <!-- Sync Preferences -->
+    <string name="pref_theme_title">Theme</string>
+    <string name="theme_key">theme_key</string>
+    <string name="api_key_pref">API_KEY</string>
+    <string name="api_title_pref">Your API key</string>
+    <string name="api_category_title_pref">API</string>
+    <string name="select_theme_pref">Select Theme</string>
 
 
 </resources>
