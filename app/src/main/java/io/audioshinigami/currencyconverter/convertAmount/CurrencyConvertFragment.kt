@@ -32,14 +32,13 @@ import kotlinx.android.synthetic.main.currency_convert_fragment.*
 
 class CurrencyConvertFragment : Fragment() {
 
-    private val testFactoryShared : SharedCurrencyVMFactory by lazy {
+    private val viewModel: SharedCurrencyViewModel by activityViewModels {
         SharedCurrencyVMFactory(
             FlagDataRepository(), RateRepository(
                 ApiFactory.rateApi
             )
         )
     }
-    private val viewModel: SharedCurrencyViewModel by activityViewModels { testFactoryShared }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +50,7 @@ class CurrencyConvertFragment : Fragment() {
             .apply {
                 vm = viewModel
                 lifecycleOwner = this@CurrencyConvertFragment.viewLifecycleOwner
+
             }
 
         subscribeData(binding)

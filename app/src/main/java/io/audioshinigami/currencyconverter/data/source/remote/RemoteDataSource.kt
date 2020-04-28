@@ -31,6 +31,20 @@ class RemoteDataSource(
 
     }
 
+    private suspend fun fetchRates(code: String) = withContext(ioDispatcher){
+        safeApiCall(
+            call = {api.getRates(currencyCode = code).await() },
+            errorMsg = "Failed to retrieve Rates"
+        )
+    }
+
+    private suspend fun fetchCurrencies() = withContext(ioDispatcher){
+        safeApiCall(
+            call = {api.getCurrencies().await() },
+            errorMsg = "Failed to retrieve Currencies"
+        )
+    }
+
     fun getRate(code: String, result: Map<String, String>): List<Rate> {
 
 
@@ -73,9 +87,11 @@ class RemoteDataSource(
         return MutableLiveData(mutableListOf())
     }
 
-    override suspend fun getAllPapers(): List<Paper> {
+    override suspend fun getAllPapers(): List<Paper> = withContext(ioDispatcher) {
         // Not needed
-        return mutableListOf()
+        val result = fetchCurrencies()
+
+        return@withContext result?.data ?: mutableListOf()
     }
 
     override suspend fun <T> deleteAll(type: Class<T>) {

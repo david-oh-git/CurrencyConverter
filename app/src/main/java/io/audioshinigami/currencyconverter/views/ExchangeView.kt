@@ -2,6 +2,7 @@ package io.audioshinigami.currencyconverter.views
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -59,6 +60,13 @@ class ExchangeView @JvmOverloads constructor(
         currency_code.text = text
 
         currency_value.isEnabled = editCurrencyValue
+
+        ( currency_code.background as GradientDrawable )
+            .apply {
+                setStroke(3.dip, iconBorderColor)
+            }
+
+
     }// END init
 
 }

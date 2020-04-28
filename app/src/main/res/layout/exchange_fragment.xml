@@ -1,75 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/exchange_view_background"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".exchange.ExchangeFragment">
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <View
-            android:id="@+id/divider"
-            android:background="@color/divider"
-            app:layout_constraintStart_toStartOf="@id/currency_input"
-            app:layout_constraintEnd_toEndOf="@id/currency_input"
-            app:layout_constraintTop_toTopOf="@id/exchange_icon"
-            app:layout_constraintBottom_toBottomOf="@id/exchange_icon"
-            android:layout_width="0dp"
-            android:layout_height="2dp"/>
+    <data>
 
-    <com.google.android.material.textview.MaterialTextView
-            style="@style/TextAppearance.MaterialComponents.Headline3"
-            android:id="@+id/title"
-            android:text="@string/exchange_title"
-            android:background="@android:color/transparent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="@dimen/title_top_margin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+        <variable
+                name="vm"
+                type="io.audioshinigami.currencyconverter.exchange.ExchangeViewModel" />
+    </data>
 
-    <io.audioshinigami.currencyconverter.views.ExchangeView
-            android:id="@+id/currency_input"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/currency_output"
-            app:icon_border_color="#2F2691"
-            android:layout_marginTop="28dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="2dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <io.audioshinigami.currencyconverter.views.ExchangeView
-            android:id="@+id/currency_output"
-            app:layout_constraintTop_toBottomOf="@id/currency_input"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:icon_border_color="@android:color/holo_orange_light"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_color"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            tools:context=".exchange.ExchangeFragment">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/exchange_icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="24dp"
-            android:src="@drawable/ic_repeat"
-            android:background="@drawable/small_squircle"
-            app:layout_constraintBottom_toBottomOf="@id/currency_output"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintHorizontal_bias="0.033"
-            app:layout_constraintStart_toStartOf="@id/currency_input"
-            app:layout_constraintEnd_toEndOf="@id/currency_input"
-            app:layout_constraintTop_toTopOf="@id/currency_input" />
+        <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.MaterialComponents.Headline3"
+                android:id="@+id/title"
+                android:text="@string/exchange_title"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="@dimen/title_top_margin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <io.audioshinigami.currencyconverter.views.ExchangeView
+                android:id="@+id/currency_input"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/currency_output"
+                app:icon_border_color="@android:color/holo_green_light"
+                app:currency_editable="true"
+                app:text="NGN"
+                android:layout_marginTop="28dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="2dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        <io.audioshinigami.currencyconverter.views.ExchangeView
+                android:id="@+id/currency_output"
+                app:layout_constraintTop_toBottomOf="@id/currency_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:icon_border_color="@android:color/holo_orange_light"
+                app:text="USD"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/get_exchange_rate_btn"
+                app:layout_constraintTop_toBottomOf="@id/currency_output"
+                app:layout_constraintStart_toStartOf="@id/currency_output"
+                app:layout_constraintEnd_toEndOf="@id/currency_output"
+                app:backgroundTint="@color/colorAccent"
+                android:layout_marginTop="16dp"
+                android:text="Exchange"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_exchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/test_result"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@id/get_exchange_rate_btn"
+                app:layout_constraintStart_toStartOf="@id/currency_output"
+                app:layout_constraintEnd_toEndOf="@id/currency_output"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import io.audioshinigami.currencyconverter.utils.PAPER_TABLE_NAME
 
 /**
@@ -16,6 +17,9 @@ import io.audioshinigami.currencyconverter.utils.PAPER_TABLE_NAME
 
 @Entity(tableName = PAPER_TABLE_NAME, indices = [ Index( value = ["code"], unique = true)])
 data class Paper(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name="rowid") val id: Int,
-    @ColumnInfo val name: String,
-    @ColumnInfo val code: String )
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name="rowid") val id: Int = 0,
+    @ColumnInfo @SerializedName("currencyName") val name: String = "",
+    @ColumnInfo @SerializedName("currencyId") val code: String = "",
+    @ColumnInfo(name = "country_name") @SerializedName("name") val countryName: String = "",
+    @ColumnInfo @SerializedName("currencySymbol") val symbol: String = ""
+)

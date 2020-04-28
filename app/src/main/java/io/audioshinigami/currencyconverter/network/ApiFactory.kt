@@ -8,6 +8,7 @@ import io.audioshinigami.currencyconverter.utils.api_key
 import io.audioshinigami.currencyconverter.utils.base_url
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -28,9 +29,15 @@ object ApiFactory {
         chain.proceed(newRequest)
     }
 
+    private val logginingInterceptor = HttpLoggingInterceptor()
+        .apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
 //    client for http request url
     private val httpClient = OkHttpClient().newBuilder()
     .addInterceptor(authInterceptor)
+    .addInterceptor(logginingInterceptor)
     .build()
 
     private val gsonBuilder = GsonBuilder()
@@ -38,7 +45,7 @@ object ApiFactory {
 
     private fun retrofit(): Retrofit {
 
-        gsonBuilder.registerTypeAdapter(RateResponse::class.java, RateResponseParser())
+//        gsonBuilder.registerTypeAdapter(RateResponse::class.java, RateResponseParser())
 
         return Retrofit.Builder()
             .client(httpClient)

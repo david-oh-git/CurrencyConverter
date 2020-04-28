@@ -1,10 +1,12 @@
-package io.audioshinigami.currencyconverter.models
+package io.audioshinigami.currencyconverter.network
 
 import com.google.gson.*
+import io.audioshinigami.currencyconverter.data.Rate
+import io.audioshinigami.currencyconverter.utils.Date
 import timber.log.Timber
 import java.lang.reflect.Type
 
-class RateResponseParser: JsonDeserializer<RateResponse> {
+class RateDeserializer: JsonDeserializer<RateResponse> {
 
     override fun deserialize(
         json: JsonElement?,
@@ -12,35 +14,38 @@ class RateResponseParser: JsonDeserializer<RateResponse> {
         context: JsonDeserializationContext?
     ): RateResponse? {
 
-        val result = RateResponse()
 
         try {
-            val map = readServiceUrlMap(json?.asJsonObject)
+            val rates = readServiceUrlMap(json?.asJsonObject)
 
-            if(map != null)
-                result.rate = map
+            if(rates.isNotEmpty())
+                return RateResponse(rates)
+
         }catch (e: JsonSyntaxException){
 
             Timber.d( "Parser error:\n error message : ${e.printStackTrace()}")
             return null
         }
 
-        return result
-    } /*end Deserialize*/
+        return null
+    }
 
     @Throws(JsonSyntaxException::class)
-    private fun readServiceUrlMap(jsonObject: JsonObject?): HashMap<String, String>? {
+    private fun readServiceUrlMap(jsonObject: JsonObject?): List<Rate> {
+        val currencyRates = mutableListOf<Rate>()
+
         if(jsonObject == null )
-            return null
+            return currencyRates
 
         val gson = Gson()
-        val currencyRates = HashMap<String, String>()
 
 
         for(entry: Map.Entry<String, JsonElement> in jsonObject.entrySet()){
             val key = entry.key
             val value: String = gson.fromJson(entry.value, String::class.java)
-            currencyRates[key] = value
+
+            val rate = Rate(0, key, value.toDouble(), Date.currentDate)
+            currencyRates.add(rate)
         } /*end FOR*/
 
         return currencyRates

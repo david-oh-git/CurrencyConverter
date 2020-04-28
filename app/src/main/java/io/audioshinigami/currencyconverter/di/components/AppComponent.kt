@@ -5,6 +5,7 @@ import io.audioshinigami.currencyconverter.HomeActivity
 import io.audioshinigami.currencyconverter.di.modules.AppModule
 import io.audioshinigami.currencyconverter.di.modules.DataStorageModule
 import io.audioshinigami.currencyconverter.di.modules.RetrofitModule
+import io.audioshinigami.currencyconverter.exchange.ExchangeFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -12,4 +13,6 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(target: HomeActivity)
+
+    fun inject(target: ExchangeFragment)
 }
