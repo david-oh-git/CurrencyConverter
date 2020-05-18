@@ -17,9 +17,10 @@ import io.audioshinigami.currencyconverter.utils.PAPER_TABLE_NAME
 
 @Entity(tableName = PAPER_TABLE_NAME, indices = [ Index( value = ["code"], unique = true)])
 data class Paper(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name="rowid") val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo val paperId: Int = 0,
     @ColumnInfo @SerializedName("currencyName") val name: String = "",
     @ColumnInfo @SerializedName("currencyId") val code: String = "",
     @ColumnInfo(name = "country_name") @SerializedName("name") val countryName: String = "",
-    @ColumnInfo @SerializedName("currencySymbol") val symbol: String = ""
+    @ColumnInfo @SerializedName("currencySymbol") val symbol: String = "",
+    @ColumnInfo val imageUrl: String
 )

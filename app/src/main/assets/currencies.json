@@ -1,0 +1,1610 @@
+[
+    {
+        "paperId": 0,
+        "code": "AFN",
+        "name": "Afghan afghani",
+        "countryName": "Afghanistan",
+        "symbol": "\u060b",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 1,
+        "code": "XCD",
+        "name": "East Caribbean dollar",
+        "countryName": "Anguilla",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 2,
+        "code": "AUD",
+        "name": "Australian dollar",
+        "countryName": "Australia",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 3,
+        "code": "BDT",
+        "name": "Bangladeshi taka",
+        "countryName": "Bangladesh",
+        "symbol": "\u09f3",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 4,
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "countryName": "Benin",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 5,
+        "code": "BRL",
+        "name": "Brazilian real",
+        "countryName": "Brazil",
+        "symbol": "R$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 6,
+        "code": "KHR",
+        "name": "Cambodian riel",
+        "countryName": "Cambodia",
+        "symbol": "\u17db",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 7,
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "countryName": "Chad",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 8,
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "countryName": "Congo",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 9,
+        "code": "CUP",
+        "name": "Cuban peso",
+        "countryName": "Cuba",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 10,
+        "code": "XCD",
+        "name": "East Caribbean dollar",
+        "countryName": "Dominica",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 11,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Finland",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 12,
+        "code": "GEL",
+        "name": "Georgian lari",
+        "countryName": "Georgia",
+        "symbol": "\u20be",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 13,
+        "code": "XCD",
+        "name": "East Caribbean dollar",
+        "countryName": "Grenada",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 14,
+        "code": "HTG",
+        "name": "Haitian gourde",
+        "countryName": "Haiti",
+        "symbol": "G",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 15,
+        "code": "INR",
+        "name": "Indian rupee",
+        "countryName": "India",
+        "symbol": "\u20b9",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 16,
+        "code": "ILS",
+        "name": "Israeli new sheqel",
+        "countryName": "Israel",
+        "symbol": "\u20aa",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 17,
+        "code": "KZT",
+        "name": "Kazakhstani tenge",
+        "countryName": "Kazakhstan",
+        "symbol": "\u043b\u0432",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 18,
+        "code": "KWD",
+        "name": "Kuwaiti dinar",
+        "countryName": "Kuwait",
+        "symbol": "\u062f.\u0643",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 19,
+        "code": "LSL",
+        "name": "Lesotho loti",
+        "countryName": "Lesotho",
+        "symbol": "L",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 20,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Luxembourg",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 21,
+        "code": "MYR",
+        "name": "Malaysian ringgit",
+        "countryName": "Malaysia",
+        "symbol": "RM",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 22,
+        "code": "MUR",
+        "name": "Mauritian rupee",
+        "countryName": "Mauritius",
+        "symbol": "\u20a8",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 23,
+        "code": "MNT",
+        "name": "Mongolian tugrik",
+        "countryName": "Mongolia",
+        "symbol": "\u20ae",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 24,
+        "code": "MMK",
+        "name": "Myanma kyat",
+        "countryName": "Myanmar",
+        "symbol": "Ks",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 25,
+        "code": "XPF",
+        "name": "CFP franc",
+        "countryName": "New Caledonia",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 26,
+        "code": "NOK",
+        "name": "Norwegian krone",
+        "countryName": "Norway",
+        "symbol": "kr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 27,
+        "code": "PGK",
+        "name": "Papua New Guinean kina",
+        "countryName": "Papua New Guinea",
+        "symbol": "K",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 28,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Portugal",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 29,
+        "code": "RWF",
+        "name": "Rwandan franc",
+        "countryName": "Rwanda",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 30,
+        "code": "WST",
+        "name": "Samoan tala",
+        "countryName": "Samoa (Western)",
+        "symbol": "T",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 31,
+        "code": "RSD",
+        "name": "Serbian dinar",
+        "countryName": "Serbia",
+        "symbol": "\u0414\u0438\u043d.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 32,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Slovenia",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 33,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Spain",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 34,
+        "code": "SEK",
+        "name": "Swedish krona",
+        "countryName": "Sweden",
+        "symbol": "kr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 35,
+        "code": "TZS",
+        "name": "Tanzanian shilling",
+        "countryName": "Tanzania",
+        "symbol": "TSh",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 36,
+        "code": "TND",
+        "name": "Tunisian dinar",
+        "countryName": "Tunisia",
+        "symbol": "\u0645\u0644\u0651\u064a\u0645",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 37,
+        "code": "UAH",
+        "name": "Ukrainian hryvnia",
+        "countryName": "Ukraine",
+        "symbol": "\u20b4",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 38,
+        "code": "UZS",
+        "name": "Uzbekistani som",
+        "countryName": "Uzbekistan",
+        "symbol": "\u043b\u0432",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 39,
+        "code": "YER",
+        "name": "Yemeni rial",
+        "countryName": "Yemen",
+        "symbol": "\ufdfc",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 40,
+        "code": "DZD",
+        "name": "Algerian dinar",
+        "countryName": "Algeria",
+        "symbol": "\u062f.\u062c",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 41,
+        "code": "ARS",
+        "name": "Argentine peso",
+        "countryName": "Argentina",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 42,
+        "code": "AZN",
+        "name": "Azerbaijani manat",
+        "countryName": "Azerbaijan",
+        "symbol": "\u043c\u0430\u043d",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 43,
+        "code": "BYN",
+        "name": "New Belarusian ruble",
+        "countryName": "Belarus",
+        "symbol": "p.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 44,
+        "code": "BOB",
+        "name": "Bolivian boliviano",
+        "countryName": "Bolivia",
+        "symbol": "$b",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 45,
+        "code": "BGN",
+        "name": "Bulgarian lev",
+        "countryName": "Bulgaria",
+        "symbol": "\u043b\u0432",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 46,
+        "code": "CAD",
+        "name": "Canadian dollar",
+        "countryName": "Canada",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 47,
+        "code": "CNY",
+        "name": "Chinese renminbi",
+        "countryName": "China",
+        "symbol": "\u00a5",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 48,
+        "code": "CRC",
+        "name": "Costa Rican colon",
+        "countryName": "Costa Rica",
+        "symbol": "\u20a1",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 49,
+        "code": "CZK",
+        "name": "Czech koruna",
+        "countryName": "Czech Republic",
+        "symbol": "K\u010d",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 50,
+        "code": "USD",
+        "name": "U.S. Dollar",
+        "countryName": "Ecuador",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 51,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Estonia",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 52,
+        "code": "XPF",
+        "name": "CFP franc",
+        "countryName": "French Polynesia",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 53,
+        "code": "GHS",
+        "name": "Ghanaian cedi",
+        "countryName": "Ghana",
+        "symbol": "\u20b5",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 54,
+        "code": "GNF",
+        "name": "Guinean franc",
+        "countryName": "Guinea",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 55,
+        "code": "HKD",
+        "name": "Hong Kong dollar",
+        "countryName": "Hong Kong",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 56,
+        "code": "IRR",
+        "name": "Iranian rial",
+        "countryName": "Iran, Islamic Republic of",
+        "symbol": "\ufdfc",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 57,
+        "code": "JMD",
+        "name": "Jamaican dollar",
+        "countryName": "Jamaica",
+        "symbol": "J$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 58,
+        "code": "AUD",
+        "name": "Australian dollar",
+        "countryName": "Kiribati",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 59,
+        "code": "LAK",
+        "name": "Lao kip",
+        "countryName": "Laos",
+        "symbol": "\u20ad",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 60,
+        "code": "LYD",
+        "name": "Libyan dinar",
+        "countryName": "Libya",
+        "symbol": "\u0644.\u062f",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 61,
+        "code": "MKD",
+        "name": "Macedonian denar",
+        "countryName": "Macedonia (Former Yug. Rep.)",
+        "symbol": "\u0434\u0435\u043d",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 62,
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "countryName": "Mali",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 63,
+        "code": "USD",
+        "name": "U.S. Dollar",
+        "countryName": "Micronesia",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 64,
+        "code": "XCD",
+        "name": "East Caribbean dollar",
+        "countryName": "Montserrat",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 65,
+        "code": "AUD",
+        "name": "Australian dollar",
+        "countryName": "Nauru",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 66,
+        "code": "NIO",
+        "name": "Nicaraguan cordoba",
+        "countryName": "Nicaragua",
+        "symbol": "C$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 67,
+        "code": "PKR",
+        "name": "Pakistani rupee",
+        "countryName": "Pakistan",
+        "symbol": "\u20a8",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 68,
+        "code": "PEN",
+        "name": "Peruvian nuevo sol",
+        "countryName": "Peru",
+        "symbol": "S/.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 69,
+        "code": "QAR",
+        "name": "Qatari riyal",
+        "countryName": "Qatar",
+        "symbol": "\ufdfc",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 70,
+        "code": "XCD",
+        "name": "East Caribbean dollar",
+        "countryName": "Saint Kitts and Nevis",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 71,
+        "code": "STD",
+        "name": "Sao Tome and Principe dobra",
+        "countryName": "Sao Tome and Principe",
+        "symbol": "Db",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 72,
+        "code": "SLL",
+        "name": "Sierra Leonean leone",
+        "countryName": "Sierra Leone",
+        "symbol": "Le",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 73,
+        "code": "SOS",
+        "name": "Somali shilling",
+        "countryName": "Somalia",
+        "symbol": "S",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 74,
+        "code": "SDG",
+        "name": "Sudanese pound",
+        "countryName": "Sudan",
+        "symbol": "\u062c.\u0633.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 75,
+        "code": "SYP",
+        "name": "Syrian pound",
+        "countryName": "Syria",
+        "symbol": "\u00a3",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 76,
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "countryName": "Togo",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 77,
+        "code": "TMT",
+        "name": "Turkmenistan manat",
+        "countryName": "Turkmenistan",
+        "symbol": "m",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 78,
+        "code": "GBP",
+        "name": "British pound",
+        "countryName": "United Kingdom",
+        "symbol": "\u00a3",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 79,
+        "code": "VEF",
+        "name": "Venezuelan bolivar",
+        "countryName": "Venezuela",
+        "symbol": "Bs",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 80,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Andorra",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 81,
+        "code": "AMD",
+        "name": "Armenian dram",
+        "countryName": "Armenia",
+        "symbol": "\u058f",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 82,
+        "code": "BSD",
+        "name": "Bahamian dollar",
+        "countryName": "Bahamas",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 83,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Belgium",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 84,
+        "code": "BAM",
+        "name": "Bosnia and Herzegovina konvertibilna marka",
+        "countryName": "Bosnia-Herzegovina",
+        "symbol": "KM",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 85,
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "countryName": "Burkina Faso",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 86,
+        "code": "KYD",
+        "name": "Cayman Islands dollar",
+        "countryName": "Cayman Islands",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 87,
+        "code": "COP",
+        "name": "Colombian peso",
+        "countryName": "Colombia",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 88,
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "countryName": "C\u00f4te d'Ivoire",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 89,
+        "code": "DKK",
+        "name": "Danish krone",
+        "countryName": "Denmark",
+        "symbol": "kr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 90,
+        "code": "EGP",
+        "name": "Egyptian pound",
+        "countryName": "Egypt",
+        "symbol": "\u00a3",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 91,
+        "code": "ETB",
+        "name": "Ethiopian birr",
+        "countryName": "Ethiopia",
+        "symbol": "Br",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 92,
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "countryName": "Gabon",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 93,
+        "code": "GIP",
+        "name": "Gibraltar pound",
+        "countryName": "Gibraltar",
+        "symbol": "\u00a3",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 94,
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "countryName": "Guinea-Bissau",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 95,
+        "code": "HUF",
+        "name": "Hungarian forint",
+        "countryName": "Hungary",
+        "symbol": "Ft",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 96,
+        "code": "IQD",
+        "name": "Iraqi dinar",
+        "countryName": "Iraq",
+        "symbol": "\u0639.\u062f",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 97,
+        "code": "JPY",
+        "name": "Japanese yen",
+        "countryName": "Japan",
+        "symbol": "\u00a5",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 98,
+        "code": "KPW",
+        "name": "North Korean won",
+        "countryName": "Korea North",
+        "symbol": "\u20a9",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 99,
+        "code": "LVL",
+        "name": "Latvian lats",
+        "countryName": "Latvia",
+        "symbol": "Ls",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 100,
+        "code": "CHF",
+        "name": "Swiss Franc",
+        "countryName": "Liechtenstein",
+        "symbol": "Fr.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 101,
+        "code": "MGA",
+        "name": "Malagasy ariary",
+        "countryName": "Madagascar",
+        "symbol": "Ar",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 102,
+        "code": "EUR",
+        "name": "European Euro",
+        "countryName": "Malta",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 103,
+        "code": "MDL",
+        "name": "Moldovan leu",
+        "countryName": "Moldova",
+        "symbol": "L",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 104,
+        "code": "MAD",
+        "name": "Moroccan dirham",
+        "countryName": "Morocco",
+        "symbol": "\u062f.\u0645.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 105,
+        "code": "NPR",
+        "name": "Nepalese rupee",
+        "countryName": "Nepal",
+        "symbol": "\u20a8",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 106,
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "countryName": "Niger",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 107,
+        "code": "USD",
+        "name": "U.S. Dollar",
+        "countryName": "Palau",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 108,
+        "code": "PHP",
+        "name": "Philippine peso",
+        "countryName": "Philippines",
+        "symbol": "\u20b1",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 109,
+        "code": "RON",
+        "name": "Romanian leu",
+        "countryName": "Romania",
+        "symbol": "lei",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 110,
+        "code": "XCD",
+        "name": "East Caribbean dollar",
+        "countryName": "Saint Lucia",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 111,
+        "code": "SAR",
+        "name": "Saudi riyal",
+        "countryName": "Saudi Arabia",
+        "symbol": "\ufdfc",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 112,
+        "code": "SGD",
+        "name": "Singapore dollar",
+        "countryName": "Singapore",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 113,
+        "code": "ZAR",
+        "name": "South African rand",
+        "countryName": "South Africa",
+        "symbol": "R",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 114,
+        "code": "SRD",
+        "name": "Surinamese dollar",
+        "countryName": "Suriname",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 115,
+        "code": "TWD",
+        "name": "New Taiwan dollar",
+        "countryName": "Taiwan",
+        "symbol": "NT$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 116,
+        "code": "TOP",
+        "name": "Paanga",
+        "countryName": "Tonga",
+        "symbol": "T$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 117,
+        "code": "AUD",
+        "name": "Australian dollar",
+        "countryName": "Tuvalu",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 118,
+        "code": "USD",
+        "name": "United States dollar",
+        "countryName": "United States of America",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 119,
+        "code": "VND",
+        "name": "Vietnamese dong",
+        "countryName": "Vietnam",
+        "symbol": "\u20ab",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 120,
+        "code": "ALL",
+        "name": "Albanian lek",
+        "countryName": "Albania",
+        "symbol": "Lek",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 121,
+        "code": "XCD",
+        "name": "East Caribbean dollar",
+        "countryName": "Antigua and Barbuda",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 122,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Austria",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 123,
+        "code": "BBD",
+        "name": "Barbadian dollar",
+        "countryName": "Barbados",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 124,
+        "code": "BTN",
+        "name": "Bhutanese ngultrum",
+        "countryName": "Bhutan",
+        "symbol": "Nu.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 125,
+        "code": "BND",
+        "name": "Brunei dollar",
+        "countryName": "Brunei",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 126,
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "countryName": "Cameroon",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 127,
+        "code": "CLP",
+        "name": "Chilean peso",
+        "countryName": "Chile",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 128,
+        "code": "CDF",
+        "name": "Congolese franc",
+        "countryName": "Congo, Democratic Republic",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 129,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Cyprus",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 130,
+        "code": "DOP",
+        "name": "Dominican peso",
+        "countryName": "Dominican Republic",
+        "symbol": "RD$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 131,
+        "code": "ERN",
+        "name": "Eritrean nakfa",
+        "countryName": "Eritrea",
+        "symbol": "Nfk",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 132,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "France",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 133,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Germany",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 134,
+        "code": "GTQ",
+        "name": "Guatemalan quetzal",
+        "countryName": "Guatemala",
+        "symbol": "Q",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 135,
+        "code": "HNL",
+        "name": "Honduran lempira",
+        "countryName": "Honduras",
+        "symbol": "L",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 136,
+        "code": "IDR",
+        "name": "Indonesian rupiah",
+        "countryName": "Indonesia",
+        "symbol": "Rp",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 137,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Italy",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 138,
+        "code": "KES",
+        "name": "Kenyan shilling",
+        "countryName": "Kenya",
+        "symbol": "KSh",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 139,
+        "code": "KGS",
+        "name": "Kyrgyzstani som",
+        "countryName": "Kyrgyzstan",
+        "symbol": "\u043b\u0432",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 140,
+        "code": "LRD",
+        "name": "Liberian dollar",
+        "countryName": "Liberia",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 141,
+        "code": "MOP",
+        "name": "Macanese pataca",
+        "countryName": "Macau",
+        "symbol": "P",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 142,
+        "code": "MVR",
+        "name": "Maldivian rufiyaa",
+        "countryName": "Maldives",
+        "symbol": ".\u0783",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 143,
+        "code": "MXN",
+        "name": "Mexican peso",
+        "countryName": "Mexico",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 144,
+        "code": "EUR",
+        "name": "European Euro",
+        "countryName": "Montenegro",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 145,
+        "code": "NAD",
+        "name": "Namibian dollar",
+        "countryName": "Namibia",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 146,
+        "code": "NZD",
+        "name": "New Zealand dollar",
+        "countryName": "New Zealand",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 147,
+        "code": "OMR",
+        "name": "Omani rial",
+        "countryName": "Oman",
+        "symbol": "\ufdfc",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 148,
+        "code": "PYG",
+        "name": "Paraguayan guarani",
+        "countryName": "Paraguay",
+        "symbol": "Gs",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 149,
+        "code": "USD",
+        "name": "U.S. Dollar",
+        "countryName": "Puerto Rico",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 150,
+        "code": "SHP",
+        "name": "Saint Helena pound",
+        "countryName": "Saint Helena",
+        "symbol": "\u00a3",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 151,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "San Marino",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 152,
+        "code": "SCR",
+        "name": "Seychellois rupee",
+        "countryName": "Seychelles",
+        "symbol": "\u20a8",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 153,
+        "code": "SBD",
+        "name": "Solomon Islands dollar",
+        "countryName": "Solomon Islands",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 154,
+        "code": "LKR",
+        "name": "Sri Lankan rupee",
+        "countryName": "Sri Lanka",
+        "symbol": "\u20a8",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 155,
+        "code": "CHF",
+        "name": "Swiss franc",
+        "countryName": "Switzerland",
+        "symbol": "Fr.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 156,
+        "code": "THB",
+        "name": "Thai baht",
+        "countryName": "Thailand",
+        "symbol": "\u0e3f",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 157,
+        "code": "TRY",
+        "name": "Turkish new lira",
+        "countryName": "Turkey",
+        "symbol": "\u20ba",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 158,
+        "code": "AED",
+        "name": "UAE dirham",
+        "countryName": "United Arab Emirates",
+        "symbol": "\u0641\u0644\u0633",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 159,
+        "code": "VUV",
+        "name": "Vanuatu vatu",
+        "countryName": "Vanuatu",
+        "symbol": "Vt",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 160,
+        "code": "ZMW",
+        "name": "Zambian kwacha",
+        "countryName": "Zambia",
+        "symbol": "ZK",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 161,
+        "code": "AOA",
+        "name": "Angolan kwanza",
+        "countryName": "Angola",
+        "symbol": "Kz",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 162,
+        "code": "AWG",
+        "name": "Aruban florin",
+        "countryName": "Aruba",
+        "symbol": "\u0192",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 163,
+        "code": "BHD",
+        "name": "Bahraini dinar",
+        "countryName": "Bahrain",
+        "symbol": "\u062f\u064a\u0646\u0627\u0631",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 164,
+        "code": "BZD",
+        "name": "Belize dollar",
+        "countryName": "Belize",
+        "symbol": "BZ$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 165,
+        "code": "BWP",
+        "name": "Botswana pula",
+        "countryName": "Botswana",
+        "symbol": "P",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 166,
+        "code": "BIF",
+        "name": "Burundi franc",
+        "countryName": "Burundi",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 167,
+        "code": "XAF",
+        "name": "Central African CFA franc",
+        "countryName": "Central African Republic",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 168,
+        "code": "KMF",
+        "name": "Comorian franc",
+        "countryName": "Comoros",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 169,
+        "code": "HRK",
+        "name": "Croatian kuna",
+        "countryName": "Croatia",
+        "symbol": "kn",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 170,
+        "code": "DJF",
+        "name": "Djiboutian franc",
+        "countryName": "Djibouti",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 171,
+        "code": "USD",
+        "name": "U.S. Dollar",
+        "countryName": "El Salvador",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 172,
+        "code": "FJD",
+        "name": "Fijian dollar",
+        "countryName": "Fiji",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 173,
+        "code": "GMD",
+        "name": "Gambian dalasi",
+        "countryName": "Gambia",
+        "symbol": "D",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 174,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Greece",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 175,
+        "code": "GYD",
+        "name": "Guyanese dollar",
+        "countryName": "Guyana",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 176,
+        "code": "ISK",
+        "name": "Icelandic kr\u00f3na",
+        "countryName": "Iceland",
+        "symbol": "kr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 177,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Ireland",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 178,
+        "code": "JOD",
+        "name": "Jordanian dinar",
+        "countryName": "Jordan",
+        "symbol": "\u062f.\u0627 ",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 179,
+        "code": "KRW",
+        "name": "South Korean won",
+        "countryName": "Korea South",
+        "symbol": "\u20a9",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 180,
+        "code": "LBP",
+        "name": "Lebanese lira",
+        "countryName": "Lebanon",
+        "symbol": "\u00a3",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 181,
+        "code": "MWK",
+        "name": "Malawian kwacha",
+        "countryName": "Malawi",
+        "symbol": "MK",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 182,
+        "code": "MRO",
+        "name": "Mauritanian ouguiya",
+        "countryName": "Mauritania",
+        "symbol": "UM",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 183,
+        "code": "EUR",
+        "name": "European Euro",
+        "countryName": "Monaco",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 184,
+        "code": "MZN",
+        "name": "Mozambican metical",
+        "countryName": "Mozambique",
+        "symbol": "MT",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 185,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Netherlands",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 186,
+        "code": "NGN",
+        "name": "Nigerian naira",
+        "countryName": "Nigeria",
+        "symbol": "\u20a6",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 187,
+        "code": "PAB",
+        "name": "Panamanian balboa",
+        "countryName": "Panama",
+        "symbol": "B/.",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 188,
+        "code": "PLN",
+        "name": "Polish zloty",
+        "countryName": "Poland",
+        "symbol": "z\u0142",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 189,
+        "code": "RUB",
+        "name": "Russian ruble",
+        "countryName": "Russia",
+        "symbol": "\u0440\u0443\u0431",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 190,
+        "code": "XCD",
+        "name": "East Caribbean dollar",
+        "countryName": "Saint Vincent and the Grenadines",
+        "symbol": "$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 191,
+        "code": "XOF",
+        "name": "West African CFA franc",
+        "countryName": "Senegal",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 192,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Slovakia",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 193,
+        "code": "SDG",
+        "name": "Sudanese pound",
+        "countryName": "South Sudan",
+        "symbol": "\u00a3",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 194,
+        "code": "SZL",
+        "name": "Swazi lilangeni",
+        "countryName": "Swaziland",
+        "symbol": "L",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 195,
+        "code": "TJS",
+        "name": "Tajikistani somoni",
+        "countryName": "Tajikistan",
+        "symbol": "\u0405\u041c",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 196,
+        "code": "TTD",
+        "name": "Trinidad and Tobago dollar",
+        "countryName": "Trinidad and Tobago",
+        "symbol": "TT$",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 197,
+        "code": "UGX",
+        "name": "Ugandan shilling",
+        "countryName": "Uganda",
+        "symbol": "USh",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 198,
+        "code": "UYU",
+        "name": "Uruguayan peso",
+        "countryName": "Uruguay",
+        "symbol": "$U",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 199,
+        "code": "XPF",
+        "name": "CFP franc",
+        "countryName": "Wallis and Futuna Islands",
+        "symbol": "Fr",
+        "imageUrl": ""
+    },
+    {
+        "paperId": 200,
+        "code": "EUR",
+        "name": "European euro",
+        "countryName": "Lithuania",
+        "symbol": "\u20ac",
+        "imageUrl": ""
+    }
+]

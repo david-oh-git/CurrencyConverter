@@ -145,6 +145,7 @@ class HomeActivity : AppCompatActivity() {
             .apply {
                 setTheme(this ?: "0")
             }
+
     }
 
     private fun setTheme(value: String) {
