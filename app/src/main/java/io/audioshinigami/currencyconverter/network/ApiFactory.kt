@@ -2,10 +2,11 @@ package io.audioshinigami.currencyconverter.network
 
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import io.audioshinigami.currencyconverter.BuildConfig
 import io.audioshinigami.currencyconverter.models.RateResponseParser
 import io.audioshinigami.currencyconverter.models.RateResponse
+import io.audioshinigami.currencyconverter.utils.BASE_URL
 import io.audioshinigami.currencyconverter.utils.api_key
-import io.audioshinigami.currencyconverter.utils.base_url
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,29 +29,40 @@ object ApiFactory {
 
         chain.proceed(newRequest)
     }
-
-    private val logginingInterceptor = HttpLoggingInterceptor()
-        .apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-
 //    client for http request url
-    private val httpClient = OkHttpClient().newBuilder()
-    .addInterceptor(authInterceptor)
-    .addInterceptor(logginingInterceptor)
-    .build()
+    private val httpClient: OkHttpClient by lazy {
+        addHttpClient()
+    }
 
     private val gsonBuilder = GsonBuilder()
 
+    private fun addHttpClient(): OkHttpClient =
+
+        if( BuildConfig.DEBUG){
+            val loggingInterceptor = HttpLoggingInterceptor()
+                .apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }
+
+            OkHttpClient().newBuilder()
+                .addInterceptor(authInterceptor)
+                .addInterceptor(loggingInterceptor)
+                .build()
+
+        }else{
+            OkHttpClient().newBuilder()
+                .addInterceptor(authInterceptor)
+                .build()
+        }
 
     private fun retrofit(): Retrofit {
 
-//        gsonBuilder.registerTypeAdapter(RateResponse::class.java, RateResponseParser())
+        gsonBuilder.registerTypeAdapter(RateResponse::class.java, RateResponseParser())
 
         return Retrofit.Builder()
             .client(httpClient)
-            .baseUrl(base_url)
-            .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create( gsonBuilder.create()))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }

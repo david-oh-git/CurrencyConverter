@@ -1,6 +1,5 @@
 package io.audioshinigami.currencyconverter.selectcurrency
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,7 @@ class CurrencyItemAdaptor(private val onCurrencyItemClicked: (String) -> Unit): 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyItemViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.currency_item_rview, parent ,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_paper, parent ,false)
         return CurrencyItemViewHolder(view)
 
     }

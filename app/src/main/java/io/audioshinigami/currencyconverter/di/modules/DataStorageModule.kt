@@ -3,6 +3,10 @@ package io.audioshinigami.currencyconverter.di.modules
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import dagger.Module
 import dagger.Provides
 import io.audioshinigami.currencyconverter.data.AppRepository
@@ -16,6 +20,7 @@ import io.audioshinigami.currencyconverter.utils.APP_DB_FILENAME
 import io.audioshinigami.currencyconverter.utils.DATASOURCE_LOCAL
 import io.audioshinigami.currencyconverter.utils.DATASOURCE_REMOTE
 import io.audioshinigami.currencyconverter.utils.SETTINGS_PREF_NAME
+import io.audioshinigami.currencyconverter.workers.PopulateDatabaseWorker
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -43,7 +48,13 @@ open class DataStorageModule {
         Room.databaseBuilder(
             context.applicationContext,
             ExchangeDatabase::class.java, APP_DB_FILENAME
-        ).build()
+        ).addCallback( object: RoomDatabase.Callback(){
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
+                val request = OneTimeWorkRequestBuilder<PopulateDatabaseWorker>().build()
+                WorkManager.getInstance(context).enqueue(request)
+            }
+        }).build()
 
     @Provides
     @Singleton

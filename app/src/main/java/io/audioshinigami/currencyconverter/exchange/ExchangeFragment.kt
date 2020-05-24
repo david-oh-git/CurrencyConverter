@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import io.audioshinigami.currencyconverter.App
-import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.data.DatabaseSource
 import io.audioshinigami.currencyconverter.databinding.ExchangeFragmentBinding
 import io.audioshinigami.currencyconverter.utils.DATASOURCE_REMOTE

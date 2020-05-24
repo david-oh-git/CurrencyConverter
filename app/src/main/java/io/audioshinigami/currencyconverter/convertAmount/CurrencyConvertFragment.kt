@@ -11,11 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import io.audioshinigami.currencyconverter.HomeActivity
 import io.audioshinigami.currencyconverter.R
-import io.audioshinigami.currencyconverter.adaptors.SpinnerAdaptor
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
-import io.audioshinigami.currencyconverter.listeners.SpinnerItemListener
+import io.audioshinigami.currencyconverter.home.HomeActivity
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
@@ -24,7 +22,6 @@ import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewMo
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.extentions.isNetworkAvailable
-import kotlinx.android.synthetic.main.currency_convert_fragment.*
 
 /**
 *  Main UI to covert amount . user enters value , selects currency codes and convert
@@ -40,20 +37,22 @@ class CurrencyConvertFragment : Fragment() {
         )
     }
 
+    private lateinit var binding: CurrencyConvertFragmentBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         viewModel.networkAvailable = { isNetworkAvailable() }
-        val binding = CurrencyConvertFragmentBinding.inflate(inflater, container, false)
+        binding = CurrencyConvertFragmentBinding.inflate(inflater, container, false)
             .apply {
                 vm = viewModel
                 lifecycleOwner = this@CurrencyConvertFragment.viewLifecycleOwner
 
             }
 
-        subscribeData(binding)
+        subscribeData()
 
         return binding.root
     }
@@ -63,13 +62,13 @@ class CurrencyConvertFragment : Fragment() {
         initTextViewClicks()
     }
 
-    private fun subscribeData( binding: CurrencyConvertFragmentBinding){
+    private fun subscribeData(){
 
         binding.lifecycleOwner
             ?.run {
                 viewModel.snackMessage.observe(this, Observer {
-                    hideKeyboard(edittxt_currency_from)
-                    ( activity as HomeActivity ).sendSnackBar(it.message)
+                    hideKeyboard(binding.edittxtCurrencyFrom)
+                    ( activity as HomeActivity).sendSnackBar(it.message)
                 })
             }
 
@@ -79,29 +78,16 @@ class CurrencyConvertFragment : Fragment() {
 //        })
     }
 
-    private fun initSpinner(){
-        val adaptor = SpinnerAdaptor(FlagDataRepository().getAllCurrency())
-
-        id_spinner_from.adapter = adaptor
-        id_spinner_to.adapter = adaptor
-
-        id_spinner_to.onItemSelectedListener = SpinnerItemListener(txtvw_currency_to){
-                position -> FlagDataRepository().getCodes()[position]
-        }
-        id_spinner_from.onItemSelectedListener = SpinnerItemListener(txtvw_currency_from){
-                position -> FlagDataRepository().getCodes()[position]
-        }
-    }/*end initSpinner*/
-
     private fun initTextViewClicks(){
 
-        txtvw_currency_from.setOnClickListener {
+        binding.txtvwCurrencyFrom.setOnClickListener {
             startSelectCurrencyFragment(FROM_CODE_KEY)
         }
 
-        txtvw_currency_to.setOnClickListener {
+        binding.txtvwCurrencyTo.setOnClickListener {
             startSelectCurrencyFragment(TO_CODE_KEY)
         }
+
     }
 
     private fun startSelectCurrencyFragment(code: String){

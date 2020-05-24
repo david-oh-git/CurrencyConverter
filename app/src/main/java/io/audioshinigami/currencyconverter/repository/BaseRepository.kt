@@ -13,6 +13,7 @@ open class BaseRepository {
 
         when(result){
             is Result.Success -> data = result.data
+
             is Result.Error -> {
                 Timber.d("Error !!! : $errorMsg")
             }

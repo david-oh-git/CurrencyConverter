@@ -6,30 +6,25 @@
         android:id="@+id/navgation_graph"
         app:startDestination="@id/currencyConvertFragment">
 
-    <fragment
-            android:id="@+id/currencyConvertFragment"
-            android:name="io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertFragment"
-            android:label="      " >
-        <action
-                android:id="@+id/action_currencyConvertFragment_to_currencySelectFragment"
-                app:destination="@id/currencySelectFragment"
-                app:enterAnim="@anim/fragment_open_enter" />
-    </fragment>
     <dialog
             android:id="@+id/currencySelectFragment"
             android:name="io.audioshinigami.currencyconverter.selectcurrency.CurrencySelectFragment"
             android:label="currency_select_fragment"
             tools:layout="@layout/currency_select_fragment" />
     <fragment
-            android:id="@+id/exchangeFragment"
-            android:name="io.audioshinigami.currencyconverter.exchange.ExchangeFragment"
-            tools:layout="@layout/exchange_fragment">
+            android:id="@+id/currencyConvertFragment"
+            android:name="io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertFragment"
+            android:label="CurrencyConvertFragment" >
         <action
-                android:id="@+id/action_exchangeFragment_to_currencyConvertFragment"
-                app:destination="@id/currencyConvertFragment" />
+                android:id="@+id/action_currencyConvertFragment_to_currencySelectFragment"
+                app:destination="@id/currencySelectFragment" />
     </fragment>
     <fragment
             android:id="@+id/settingsFragment"
             android:name="io.audioshinigami.currencyconverter.settings.SettingsFragment"
             android:label="SettingsFragment" />
+    <fragment
+            android:id="@+id/exchangeFragment"
+            android:name="io.audioshinigami.currencyconverter.exchange.ExchangeFragment"
+            android:label="ExchangeFragment" />
 </navigation>
