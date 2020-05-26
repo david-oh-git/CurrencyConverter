@@ -48,7 +48,7 @@ class CurrencyConvertFragment : Fragment() {
         binding = CurrencyConvertFragmentBinding.inflate(inflater, container, false)
             .apply {
                 vm = viewModel
-                lifecycleOwner = this@CurrencyConvertFragment.viewLifecycleOwner
+                lifecycleOwner = viewLifecycleOwner
 
             }
 
@@ -64,18 +64,10 @@ class CurrencyConvertFragment : Fragment() {
 
     private fun subscribeData(){
 
-        binding.lifecycleOwner
-            ?.run {
-                viewModel.snackMessage.observe(this, Observer {
-                    hideKeyboard(binding.edittxtCurrencyFrom)
-                    ( activity as HomeActivity).sendSnackBar(it.message)
-                })
-            }
-
-//        viewModel.snackMessage.observe(binding.lifecycleOwner!!, Observer {
-//            hideKeyboard(edittxt_currency_from)
-//            ( activity as HomeActivity ).sendSnackBar(it.message)
-//        })
+        viewModel.snackMessage.observe(viewLifecycleOwner, Observer {
+            hideKeyboard(binding.edittxtCurrencyFrom)
+            ( activity as HomeActivity).sendSnackBar(it.message)
+        })
     }
 
     private fun initTextViewClicks(){
