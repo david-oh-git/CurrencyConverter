@@ -1,12 +1,13 @@
 package io.audioshinigami.currencyconverter.data
 
+import com.google.common.truth.Truth.assertThat
 import io.audioshinigami.currencyconverter.data.source.local.FakePaperSource
 import io.audioshinigami.currencyconverter.utils.PaperFactory
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
-import com.google.common.truth.Truth.assertThat
 
 @ExperimentalCoroutinesApi
 class PaperRepoImplTest {
@@ -19,15 +20,16 @@ class PaperRepoImplTest {
     @Before
     fun init(){
         paperDatabaseSource = FakePaperSource(paperDb)
-        paperRepository = PaperRepoImpl(paperDatabaseSource)
+        paperRepository = PaperRepoImpl(
+            paperDatabaseSource,
+            Dispatchers.Unconfined
+        )
     }
 
     @Test
     fun deleteAllPaper_DeleteAllPaperFromLocalDataSource() = runBlockingTest {
         // Arrange : create multiple paper variables & save
-        PaperFactory.getPaperEntries().map {
-            paperRepository.save(it)
-        }
+        paperRepository.save( PaperFactory.getPaperEntries() )
 
         // Act: delete all
         paperRepository.deleteAll()
