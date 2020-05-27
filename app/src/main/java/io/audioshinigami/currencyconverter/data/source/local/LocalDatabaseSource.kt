@@ -37,13 +37,7 @@ class LocalDatabaseSource(
         }
     }
 
-    override fun observePapers(): LiveData<List<Paper>> = paperDao.observeAllPaper()
-
     override fun observeRates(): LiveData<List<Rate>> = rateDao.observeRates()
-
-    override suspend fun getAllPapers(): List<Paper> = withContext(ioDispatcher){
-        return@withContext paperDao.getAllPaper()
-    }
 
     override suspend fun getAllRates(): List<Rate> = withContext(ioDispatcher){
         return@withContext rateDao.getRates()
@@ -58,7 +52,4 @@ class LocalDatabaseSource(
         rateDao.deleteAllRates()
     }
 
-    override suspend fun deleteAllPaper() = withContext(ioDispatcher){
-        paperDao.deleteAllPaper()
-    }
 }

@@ -28,7 +28,7 @@ class ExchangeFragment : Fragment() {
 
         val binding = ExchangeFragmentBinding.inflate( inflater, container, false)
             .apply {
-                lifecycleOwner = this@ExchangeFragment.viewLifecycleOwner
+                lifecycleOwner = viewLifecycleOwner
                 vm = viewModel
             }
 

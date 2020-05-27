@@ -8,34 +8,24 @@ import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.network.Result
 
 class FakeDatabaseSource(
-    var paperStorage: MutableList<Paper> = mutableListOf(),
     var rateStorage: MutableList<Rate> = mutableListOf()
 ): DatabaseSource {
 
     override suspend fun <T> save(obj: T) {
+
         when(obj){
-            is Paper -> paperStorage.add(obj)
             is Rate -> rateStorage.add(obj)
         }
     }
 
     override suspend fun <T> delete(obj: T) {
         when(obj){
-            is Paper -> paperStorage.remove(obj)
             is Rate -> rateStorage.remove(obj)
         }
     }
 
-    override fun observePapers(): LiveData<List<Paper>> {
-        return MutableLiveData(paperStorage)
-    }
-
     override fun observeRates(): LiveData<List<Rate>> {
         return MutableLiveData(rateStorage)
-    }
-
-    override suspend fun getAllPapers(): List<Paper> {
-        return paperStorage
     }
 
     override suspend fun getAllRates(): List<Rate> {
@@ -44,7 +34,6 @@ class FakeDatabaseSource(
 
     override suspend fun <T> deleteAll(type: Class<T>) {
         when{
-            type.isAssignableFrom(Paper::class.java) -> paperStorage.clear()
             type.isAssignableFrom(Rate::class.java) -> rateStorage.clear()
         }
     }
@@ -55,9 +44,5 @@ class FakeDatabaseSource(
 
     override suspend fun deleteAllRates() {
         rateStorage.clear()
-    }
-
-    override suspend fun deleteAllPaper() {
-        paperStorage.clear()
     }
 }

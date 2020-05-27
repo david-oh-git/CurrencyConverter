@@ -9,11 +9,7 @@ interface DatabaseSource {
 
     suspend fun <T> delete( obj: T)
 
-    fun observePapers(): LiveData<List<Paper>>
-
     fun observeRates(): LiveData<List<Rate>>
-
-    suspend fun getAllPapers(): List<Paper>
 
     suspend fun getAllRates(): List<Rate>
 
@@ -23,5 +19,4 @@ interface DatabaseSource {
 
     suspend fun deleteAllRates()
 
-    suspend fun deleteAllPaper()
 }

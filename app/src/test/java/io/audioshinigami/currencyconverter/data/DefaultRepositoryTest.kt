@@ -5,8 +5,6 @@ import io.audioshinigami.currencyconverter.data.source.local.FakeDatabaseSource
 import io.audioshinigami.currencyconverter.data.source.local.FakePreferenceSource
 import io.audioshinigami.currencyconverter.data.source.remote.FakeRemoteDataSource
 import io.audioshinigami.currencyconverter.network.Result
-import io.audioshinigami.currencyconverter.utils.DEFAULT_PREF_INT_VALUE
-import io.audioshinigami.currencyconverter.utils.PaperFactory
 import io.audioshinigami.currencyconverter.utils.RateFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,7 +21,6 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 class DefaultRepositoryTest {
 
-    private val paperDb: MutableList<Paper> = PaperFactory.getPaperEntries().toMutableList()
     private val rateDb: MutableList<Rate> = RateFactory.rates.toMutableList()
     private val sharedPreferences: MutableMap<String, Any> = mutableMapOf()
 
@@ -35,7 +32,7 @@ class DefaultRepositoryTest {
     @Before
     fun init(){
 
-        databaseSource = FakeDatabaseSource(paperDb,rateDb)
+        databaseSource = FakeDatabaseSource(rateDb)
         sharedPreferenceSource = FakePreferenceSource(sharedPreferences)
         remoteDataSource = FakeRemoteDataSource( mutableListOf() )
 
@@ -77,21 +74,6 @@ class DefaultRepositoryTest {
     }
 
     @Test
-    fun deleteAllPaper_DeleteAllPaperFromLocalDataSource() = runBlockingTest {
-        // Arrange : create multiple paper variables & save
-        PaperFactory.getPaperEntries().map {
-            repository.save(it)
-        }
-
-        // Act: delete all
-        repository.deleteAll(Paper::class.java)
-
-        // Assert :
-        val result = repository.getAllPapers()
-        assertThat(result.isEmpty())
-    }
-
-    @Test
     fun saveRate_confirmRateIsSaved() = runBlockingTest {
         // Arrange : create Rate Variable
         val saveRate = RateFactory.rate
@@ -102,19 +84,6 @@ class DefaultRepositoryTest {
         // Assert
         val result = repository.getAllRates()
         assertThat(result).contains(saveRate)
-    }
-
-    @Test
-    fun savePaper_confirmPaperIsSaved() = runBlockingTest {
-        // Arrange : create Paper Variable
-        val savePaper = PaperFactory.getPaper()
-
-        // Act: save rate
-        repository.save(savePaper)
-
-        // Assert
-        val result = repository.getAllPapers()
-        assertThat(result).contains(savePaper)
     }
 
     @Test
@@ -132,17 +101,4 @@ class DefaultRepositoryTest {
         assertThat(result).doesNotContain(saveRate)
     }
 
-    @Test
-    fun deletePaper_confirmPaperIsDeleted() = runBlockingTest {
-        // Arrange : create Rate Variable & save it
-        val paper = PaperFactory.getPaper()
-        repository.save(paper)
-
-        // Act: delete rate
-        repository.delete(paper)
-
-        // Assert
-        val result = repository.getAllPapers()
-        assertThat(result).doesNotContain(paper)
-    }
 }

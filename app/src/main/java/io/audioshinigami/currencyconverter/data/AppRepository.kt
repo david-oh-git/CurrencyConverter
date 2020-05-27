@@ -1,19 +1,20 @@
 package io.audioshinigami.currencyconverter.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import io.audioshinigami.currencyconverter.network.Result
 
 interface AppRepository {
+
+    val fromCode: MutableLiveData<String>
+
+    val toCode: MutableLiveData<String>
 
     suspend fun <T> save(obj: T)
 
     suspend fun <T> delete( obj: T)
 
-    fun observePapers(): LiveData<List<Paper>>
-
     fun observeRates(): LiveData<List<Rate>>
-
-    suspend fun getAllPapers(): List<Paper>
 
     suspend fun getAllRates(): List<Rate>
 

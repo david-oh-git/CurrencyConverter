@@ -17,7 +17,7 @@ object PaperFactory {
         "US Dollars" to "USD"
     )
 
-    fun getPaperEntries() = codes.map { Paper( randomId(), it.key, it.value) }
+    fun getPaperEntries() = codes.map { Paper( randomId(), it.key, it.value, "","", "") }
 
     fun getPaper() = getPaperEntries().shuffled()[0]
 

@@ -1,6 +1,7 @@
 package io.audioshinigami.currencyconverter.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import io.audioshinigami.currencyconverter.network.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -12,6 +13,11 @@ class DefaultRepository(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): AppRepository {
 
+    override val fromCode: MutableLiveData<String>
+        get() = MutableLiveData("NGN")
+    override val toCode: MutableLiveData<String>
+        get() = MutableLiveData("USD")
+
     override suspend fun <T> save(obj: T) = withContext(ioDispatcher){
         databaseSource.save(obj)
     }
@@ -20,15 +26,9 @@ class DefaultRepository(
         databaseSource.delete(obj)
     }
 
-    override suspend fun getAllPapers(): List<Paper> = withContext(ioDispatcher){
-        return@withContext databaseSource.getAllPapers()
-    }
-
     override suspend fun getAllRates(): List<Rate> = withContext(ioDispatcher) {
         return@withContext databaseSource.getAllRates()
     }
-
-    override fun observePapers(): LiveData<List<Paper>> = databaseSource.observePapers()
 
     override fun observeRates(): LiveData<List<Rate>> = databaseSource.observeRates()
 

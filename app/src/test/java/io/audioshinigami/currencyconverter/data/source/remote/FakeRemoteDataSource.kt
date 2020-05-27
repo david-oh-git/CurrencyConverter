@@ -2,7 +2,6 @@ package io.audioshinigami.currencyconverter.data.source.remote
 
 import androidx.lifecycle.LiveData
 import io.audioshinigami.currencyconverter.data.DatabaseSource
-import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.network.Result
 
@@ -27,15 +26,7 @@ class FakeRemoteDataSource(
         TODO("Not yet implemented")
     }
 
-    override fun observePapers(): LiveData<List<Paper>> {
-        TODO("Not yet implemented")
-    }
-
     override fun observeRates(): LiveData<List<Rate>> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getAllPapers(): List<Paper> {
         TODO("Not yet implemented")
     }
 
@@ -48,10 +39,6 @@ class FakeRemoteDataSource(
     }
 
     override suspend fun deleteAllRates() {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun deleteAllPaper() {
         TODO("Not yet implemented")
     }
 }

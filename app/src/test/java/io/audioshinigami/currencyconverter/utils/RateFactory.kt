@@ -18,7 +18,7 @@ object RateFactory {
     )
 
     val rate: Rate
-        get() = rates.shuffled()[0]
+        get() = Rate(randomId(), "AUD_NGN", randomRate(), Date.currentDate)
 
     private fun randomRate() = Random.nextDouble(0.0, 1.0)
 
