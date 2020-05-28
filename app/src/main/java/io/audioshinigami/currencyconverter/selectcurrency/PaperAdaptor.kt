@@ -20,6 +20,8 @@ class PaperAdaptor: ListAdapter<Paper, PaperAdaptor.ViewHolder>(
         holder.bind( getItem(position))
     }
 
+
+
     class ViewHolder(
         private val binding: ListItemPaperBinding
     ): RecyclerView.ViewHolder(binding.root) {
