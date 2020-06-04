@@ -25,8 +25,6 @@ class HomeActivity : AppCompatActivity() {
     private val viewModel by lazy { ViewModelProviders.of(this).get(CurrencyViewModel::class.java) }
     private lateinit var navigationController: NavController
 
-    @Inject lateinit var sharedPreferenceSource: SharedPreferenceSource
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding : ActivityHomeBinding = DataBindingUtil.setContentView(
@@ -34,7 +32,6 @@ class HomeActivity : AppCompatActivity() {
         )
 
         navigationController = findNavController(R.id.nav_host_fragment_container)
-        ( application as App).appComponent.inject(this)
 
         setupViews(binding)
     }

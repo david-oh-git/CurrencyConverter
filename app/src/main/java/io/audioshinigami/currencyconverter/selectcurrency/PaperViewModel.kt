@@ -6,14 +6,16 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.PaperRepository
+import java.util.*
+import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
-class PaperViewModel(
+class PaperViewModel @Inject constructor(
     private val repository: PaperRepository
 ): ViewModel() {
 
-    private val _searchQuery = MutableLiveData<String>()
-    val searchQuery: LiveData<String> = _searchQuery
+    val searchQuery = MutableLiveData<String>()
     val papers: LiveData<List<Paper>> = Transformations.switchMap(searchQuery) { searchQuery ->
 
         Transformations.switchMap( repository.observePapers()) {papers ->
@@ -21,9 +23,11 @@ class PaperViewModel(
         }
     }
 
+    val items = repository.observePapers()
+
     // for testing
     fun setQuery(query: String){
-        _searchQuery.value = query
+        searchQuery.value = query
     }
 
     private fun searchPapers(query: String, papers: List<Paper>): LiveData<List<Paper>> {
@@ -34,9 +38,12 @@ class PaperViewModel(
             return result
         }
 
+        val queryLowerCase = query.toLowerCase(Locale.ROOT)
+
         val searchPapers = ArrayList<Paper>()
         for (paper in papers){
-            if( paper.name.contains(query)){
+            if( paper.name.toLowerCase(Locale.ROOT).contains(queryLowerCase)
+                || paper.code.toLowerCase(Locale.ROOT).contains(queryLowerCase)){
                 searchPapers.add(paper)
             }
         }

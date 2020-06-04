@@ -3,23 +3,23 @@ package io.audioshinigami.currencyconverter.data.source.local
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.PaperDatabaseSource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 /**
  * Implementation of PaperDatabaseSource, mainly to provide a list of all currencies from the DB.
  */
 
-class PaperSource(
+class PaperSource @Inject constructor(
     private val paperDao: PaperDao,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher
 ): PaperDatabaseSource {
     override suspend fun save(paper: Paper) = withContext(ioDispatcher){
         paperDao.add(paper)
     }
 
     override suspend fun save(papers: List<Paper>) = withContext(ioDispatcher){
-        paperDao.addAll(papers)
+        paperDao.add(papers)
     }
 
     override fun observePapers() = paperDao.observeAllPaper()

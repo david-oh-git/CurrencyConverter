@@ -91,6 +91,8 @@ android {
         enabled = true
         enabledForTests = true
     }
+
+
 }
 
 dependencies {
@@ -143,10 +145,13 @@ dependencies {
 
     // Local Unit tests dependencies #####
     testImplementation "junit:junit:$junit_version"
+    testImplementation "androidx.test.ext:junit:1.1.1"
+    testImplementation "androidx.test:runner:$test_runner_version"
     //Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:$arch_core_test"
     // Robolectric
-    testImplementation "org.robolectric:robolectric:$robolectric_version"
+    testImplementation "androidx.test:core:$robolectric_version"
+    testImplementation 'org.robolectric:robolectric:4.3.1'
     // Mockito
     testImplementation "org.mockito:mockito-android:$mockito_version"
     // Espresso

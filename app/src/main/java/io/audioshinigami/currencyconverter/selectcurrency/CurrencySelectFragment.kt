@@ -1,99 +1,123 @@
 package io.audioshinigami.currencyconverter.selectcurrency
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import io.audioshinigami.currencyconverter.R
-import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
-import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
+import io.audioshinigami.currencyconverter.App
+import io.audioshinigami.currencyconverter.data.source.local.PaperDao
+import io.audioshinigami.currencyconverter.databinding.CurrencySelectFragmentBinding
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
+import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
+import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
+import io.audioshinigami.currencyconverter.utils.FRAGMENT_CODE
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
-import io.audioshinigami.currencyconverter.utils.obtainViewModel
-import kotlinx.android.synthetic.main.currency_select_fragment.*
+import timber.log.Timber
+import javax.inject.Inject
 
 class CurrencySelectFragment : DialogFragment() {
 
-    private lateinit var viewModel: CurrencySelectViewModel
-    private val adaptor: CurrencyItemAdaptor by lazy{ CurrencyItemAdaptor{
-            code ->
-            onItemClicked(code)
-        }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<PaperViewModel> { viewModelFactory }
+    private lateinit var binding: CurrencySelectFragmentBinding
+    private val adaptor: PaperAdaptor by lazy {
+        PaperAdaptor(::setCode)
+    }
+
+    // code value , if fragment is to select a FROM code or TO code
+    private var callingFragmentCode: String = ""
+
+    @Inject
+    lateinit var paperDao: PaperDao
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity().application as App).appComponent.paperComponent().create()
+            .inject(this)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.currency_select_fragment, container, false)
-        viewModel = obtainViewModel(CurrencySelectViewModel::class.java)
-        //load currency items wit coroutines
-        viewModel.loadCurrencyItems()
+        binding = CurrencySelectFragmentBinding.inflate(inflater, container, false)
+            .apply {
+                lifecycleOwner = viewLifecycleOwner
+                viewmodel = viewModel
+            }
 
-        return view
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // init recylerView
+        // init recyclerView adaptor
         setupRecyclerView()
-        // assign currencyItems to recyclerView adaptor
 
-        viewModel.currencyItems.observe(viewLifecycleOwner, Observer {
-            adaptor.addCurrencyItems(it)
-        })
+        arguments?.also { it ->
+            val fragmentCode = it.getString(FRAGMENT_CODE)
+            fragmentCode?.let {code ->
+                callingFragmentCode = code
+                Timber.d("fragment calling code is $callingFragmentCode")
+            }
 
-        arguments?.also {
-            val key = it.getString(FROM_CODE_KEY)
+
         }
+        binding.viewmodel?.items?.observe(viewLifecycleOwner, Observer {
+            Timber.d("Paper data size is ${it.size}")
+            adaptor.submitList(it)
+        })
 
 
     }
 
     private fun setupRecyclerView(){
 
-        // TODO save state abi remember position
-        currencyItem_recyclerview.adapter = adaptor
-        currencyItem_recyclerview.layoutManager = GridLayoutManager(activity, 3)
-        currencyItem_recyclerview.hasFixedSize()
-    }
-
-    private fun onItemClicked(code: String){
-        // Restarts navigation start fragment with args
-        val callerCode: String
-        arguments?.apply {
-            callerCode = getString("key") ?: "0"
-            setCode(callerCode, code)
+        val viewModel = binding.viewmodel
+        viewModel?.let {
+            binding.currencyItemRecyclerview.adapter = adaptor
         }
 
-        findNavController().popBackStack()
-    } //END onItemClick
+        // TODO save state abi remember position
+//        currencyItem_recyclerview.adapter = adaptor
+//        currencyItem_recyclerview.layoutManager = GridLayoutManager(activity, 3)
+//        currencyItem_recyclerview.hasFixedSize()
+    }
 
-    private fun setCode(callerCode: String,code: String){
+    private fun setCode(code: String){
+        // TODO replace this hack
         // init ShareViewModel to assign the currency Code to [CurrencyConvertFragment]
-        val testFactoryShared : SharedCurrencyVMFactory by lazy {
+        val factoryShared : SharedCurrencyVMFactory by lazy {
             SharedCurrencyVMFactory(
                 FlagDataRepository(), RateRepository(
                     ApiFactory.rateApi
                 )
             )
         }
-        val viewModelShared: SharedCurrencyViewModel by activityViewModels { testFactoryShared }
+        val viewModelShared: SharedCurrencyViewModel by activityViewModels { factoryShared }
 
-        if( callerCode == FROM_CODE_KEY)
+        if( callingFragmentCode == FROM_CODE_KEY)
             viewModelShared.setFromCode(code)
 
-        if( callerCode == TO_CODE_KEY)
+        if( callingFragmentCode == TO_CODE_KEY)
             viewModelShared.setToCode(code)
+
+        findNavController().popBackStack()
     }
 
 }

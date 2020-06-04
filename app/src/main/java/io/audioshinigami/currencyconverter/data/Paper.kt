@@ -4,23 +4,22 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import io.audioshinigami.currencyconverter.utils.PAPER_TABLE_NAME
 
 /**
  * Class represents a currency unit
  *
- * @param id id of the individual paper class
+ * @param paperId id of the individual paper class
  * @param name currency nam e.g Nigerian Naira
  * @param code currency code used by the API eg NGN
  */
 
-@Entity(tableName = PAPER_TABLE_NAME, indices = [ Index( value = ["code"], unique = true)])
+@Entity(tableName = PAPER_TABLE_NAME, indices = [ Index( value = ["paperId"], unique = true)])
 data class Paper(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo val paperId: Int = 0,
-    @ColumnInfo @SerializedName("currencyName") val name: String = "",
-    @ColumnInfo @SerializedName("currencyId") val code: String = "",
-    @ColumnInfo(name = "country_name") @SerializedName("name") val countryName: String = "",
-    @ColumnInfo @SerializedName("currencySymbol") val symbol: String = "",
-    @ColumnInfo val imageUrl: String
+    @PrimaryKey @ColumnInfo val paperId: Int,
+    @ColumnInfo val name: String,
+    @ColumnInfo val code: String,
+    @ColumnInfo(name = "country_name") val countryName: String,
+    @ColumnInfo val symbol: String,
+    @ColumnInfo val imageUrl: String?
 )

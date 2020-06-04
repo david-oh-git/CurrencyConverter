@@ -2,82 +2,68 @@ package io.audioshinigami.currencyconverter.di.modules
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import dagger.Module
 import dagger.Provides
 import io.audioshinigami.currencyconverter.data.AppRepository
 import io.audioshinigami.currencyconverter.data.DatabaseSource
 import io.audioshinigami.currencyconverter.data.DefaultRepository
 import io.audioshinigami.currencyconverter.data.SharedPreferenceSource
-import io.audioshinigami.currencyconverter.data.source.local.*
+import io.audioshinigami.currencyconverter.data.source.local.ExchangeDatabase
+import io.audioshinigami.currencyconverter.data.source.local.LocalDatabaseSource
+import io.audioshinigami.currencyconverter.data.source.local.LocalPreferenceSource
+import io.audioshinigami.currencyconverter.data.source.local.RateDao
 import io.audioshinigami.currencyconverter.data.source.remote.RemoteDataSource
+import io.audioshinigami.currencyconverter.di.ApplicationScope
 import io.audioshinigami.currencyconverter.network.ConverterApi
-import io.audioshinigami.currencyconverter.utils.APP_DB_FILENAME
 import io.audioshinigami.currencyconverter.utils.DATASOURCE_LOCAL
 import io.audioshinigami.currencyconverter.utils.DATASOURCE_REMOTE
 import io.audioshinigami.currencyconverter.utils.SETTINGS_PREF_NAME
-import io.audioshinigami.currencyconverter.workers.PopulateDatabaseWorker
 import javax.inject.Named
-import javax.inject.Singleton
 
 
 @Module
-open class DataStorageModule {
+object DataStorageModule {
 
     @Provides
+    @JvmStatic
+    @ApplicationScope
     @Named(SETTINGS_PREF_NAME)
     fun provideSharedPreferenceName(): String = SETTINGS_PREF_NAME
 
     @Provides
-    @Singleton
+    @JvmStatic
+    @ApplicationScope
     fun provideSharedPreference(@Named(SETTINGS_PREF_NAME) name: String , context: Context): SharedPreferences =
         context.getSharedPreferences( name, 0)
 
     @Provides
-    @Singleton
+    @JvmStatic
+    @ApplicationScope
     fun provideSharedPreferenceSource(sharedPreferences: SharedPreferences): SharedPreferenceSource =
         LocalPreferenceSource(sharedPreferences)
 
     @Provides
-    @Singleton
-    fun provideExchangeDatabase(context: Context): ExchangeDatabase =
-        Room.databaseBuilder(
-            context.applicationContext,
-            ExchangeDatabase::class.java, APP_DB_FILENAME
-        ).addCallback( object: RoomDatabase.Callback(){
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-                val request = OneTimeWorkRequestBuilder<PopulateDatabaseWorker>().build()
-                WorkManager.getInstance(context).enqueue(request)
-            }
-        }).build()
-
-    @Provides
-    @Singleton
-    fun providePaperDao(db: ExchangeDatabase): PaperDao = db.paperDao()
-
-    @Provides
-    @Singleton
+    @JvmStatic
+    @ApplicationScope
     fun provideRateDao(db: ExchangeDatabase): RateDao = db.rateDao()
 
     @Provides
-    @Singleton
+    @JvmStatic
+    @ApplicationScope
     @Named(DATASOURCE_LOCAL)
-    fun provideLocalDatabaseSource(paperDao: PaperDao, rateDao: RateDao): DatabaseSource =
-        LocalDatabaseSource(paperDao,rateDao)
+    fun provideLocalDatabaseSource(rateDao: RateDao): DatabaseSource =
+        LocalDatabaseSource(rateDao)
 
     @Provides
-    @Singleton
+    @JvmStatic
+    @ApplicationScope
     @Named(DATASOURCE_REMOTE)
     fun provideRemoteDataSource(api: ConverterApi): DatabaseSource =
         RemoteDataSource(api)
 
     @Provides
-    @Singleton
+    @JvmStatic
+    @ApplicationScope
     fun provideDefaultRepository(@Named(DATASOURCE_LOCAL) databaseSource: DatabaseSource,
                                  @Named(DATASOURCE_REMOTE) remoteDataSource: DatabaseSource
     ): AppRepository =

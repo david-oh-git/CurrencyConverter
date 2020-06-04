@@ -19,6 +19,7 @@ import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
 import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
 import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
+import io.audioshinigami.currencyconverter.utils.FRAGMENT_CODE
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.extentions.isNetworkAvailable
@@ -83,7 +84,7 @@ class CurrencyConvertFragment : Fragment() {
     }
 
     private fun startSelectCurrencyFragment(code: String){
-        val bundle = bundleOf( "key" to code)
+        val bundle = bundleOf( FRAGMENT_CODE to code)
         findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment, bundle)
     }
 
