@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
@@ -24,8 +24,10 @@ class HomeActivity : AppCompatActivity() {
             this, R.layout.activity_home
         )
 
-        navigationController = findNavController(R.id.nav_host_fragment_container)
+//        navigationController = findNavController(R.id.nav_host_fragment_container)
 
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        navigationController = navHostFragment.navController
         setupViews(binding)
     }
 

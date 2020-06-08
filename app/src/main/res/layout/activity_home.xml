@@ -11,7 +11,7 @@
             android:background="@color/background_color"
             tools:context=".home.HomeActivity">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/nav_host_fragment_container"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 app:defaultNavHost="true"
