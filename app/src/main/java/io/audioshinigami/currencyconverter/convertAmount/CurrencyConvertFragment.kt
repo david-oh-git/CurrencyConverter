@@ -15,7 +15,6 @@ import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
 import io.audioshinigami.currencyconverter.home.HomeActivity
 import io.audioshinigami.currencyconverter.network.ApiFactory
-import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
 import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
 import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
@@ -31,8 +30,7 @@ import io.audioshinigami.currencyconverter.utils.extentions.isNetworkAvailable
 class CurrencyConvertFragment : Fragment() {
 
     private val viewModel: SharedCurrencyViewModel by activityViewModels {
-        SharedCurrencyVMFactory(
-            FlagDataRepository(), RateRepository(
+        SharedCurrencyVMFactory( RateRepository(
                 ApiFactory.rateApi
             )
         )

@@ -3,26 +3,19 @@ package io.audioshinigami.currencyconverter.home
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
-import io.audioshinigami.currencyconverter.App
 import io.audioshinigami.currencyconverter.R
-import io.audioshinigami.currencyconverter.data.SharedPreferenceSource
 import io.audioshinigami.currencyconverter.databinding.ActivityHomeBinding
-import io.audioshinigami.currencyconverter.viewmodels.CurrencyViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import timber.log.Timber
-import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(CurrencyViewModel::class.java) }
     private lateinit var navigationController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +59,7 @@ class HomeActivity : AppCompatActivity() {
 
         when(value){
             "0" -> {
-                AppCompatDelegate.setDefaultNightMode( MODE_NIGHT_FOLLOW_SYSTEM )
+                AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM )
 
             }
             "1" -> {

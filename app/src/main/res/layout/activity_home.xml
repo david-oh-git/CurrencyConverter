@@ -11,22 +11,6 @@
             android:background="@color/background_color"
             tools:context=".home.HomeActivity">
 
-        <!--    <com.google.android.material.appbar.AppBarLayout-->
-        <!--            android:id="@+id/appbar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="?attr/actionBarSize"-->
-        <!--            app:elevation="0dp">-->
-
-        <!--        <androidx.appcompat.widget.Toolbar-->
-        <!--                android:id="@+id/toolbar"-->
-        <!--                android:theme="@style/AppToolbar"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent">-->
-
-        <!--        </androidx.appcompat.widget.Toolbar>-->
-
-        <!--    </com.google.android.material.appbar.AppBarLayout>-->
-
         <fragment
                 android:id="@+id/nav_host_fragment_container"
                 android:name="androidx.navigation.fragment.NavHostFragment"
@@ -41,12 +25,10 @@
                 android:background="@color/background_color"
                 app:itemBackground="@android:color/transparent"
                 app:labelVisibilityMode="selected"
-
                 android:layout_gravity="bottom"
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -2,19 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-
-            android:icon="@drawable/ic_money"
+            android:icon="@drawable/ic_home"
             android:id="@+id/currencyConvertFragment"
-            android:title="@string/currencies" />
-
-    <item
-            android:id="@+id/exchangeFragment"
-            android:icon="@drawable/ic_exchange"
-            android:title="@string/exchange_title" />
+            android:title="@string/home_title" />
 
     <item
             android:id="@+id/settingsFragment"
-        android:title="More"
-        android:icon="@drawable/ic_more"
-        />
+            android:title="More"
+            android:icon="@drawable/ic_settings" />
 </menu>

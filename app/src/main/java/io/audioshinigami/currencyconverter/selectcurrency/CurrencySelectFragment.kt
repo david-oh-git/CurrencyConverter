@@ -15,7 +15,6 @@ import io.audioshinigami.currencyconverter.App
 import io.audioshinigami.currencyconverter.data.source.local.PaperDao
 import io.audioshinigami.currencyconverter.databinding.CurrencySelectFragmentBinding
 import io.audioshinigami.currencyconverter.network.ApiFactory
-import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
 import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
 import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
@@ -103,8 +102,7 @@ class CurrencySelectFragment : DialogFragment() {
         // TODO replace this hack
         // init ShareViewModel to assign the currency Code to [CurrencyConvertFragment]
         val factoryShared : SharedCurrencyVMFactory by lazy {
-            SharedCurrencyVMFactory(
-                FlagDataRepository(), RateRepository(
+            SharedCurrencyVMFactory(RateRepository(
                     ApiFactory.rateApi
                 )
             )

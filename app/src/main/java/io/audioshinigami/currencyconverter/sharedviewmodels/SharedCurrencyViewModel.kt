@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.audioshinigami.currencyconverter.models.CurrencyItem
-import io.audioshinigami.currencyconverter.repository.FlagDataRepository
 import io.audioshinigami.currencyconverter.repository.RateRepository
 import io.audioshinigami.currencyconverter.utils.OneTimeLiveData
 import io.audioshinigami.currencyconverter.utils.currencyFormat
@@ -17,7 +16,6 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 class SharedCurrencyViewModel(
-    val flagDataRepository: FlagDataRepository? = null,
     val rateRepository: RateRepository? = null
 ) : ViewModel() {
 
