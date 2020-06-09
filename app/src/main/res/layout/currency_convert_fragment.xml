@@ -88,6 +88,7 @@
                     style="@style/currencyInputStyle"
                     android:text="@{vm.fromCode}"
                     android:id="@+id/txtvw_currency_from"
+                    android:textColor="@color/text_color"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -120,10 +121,11 @@
                     android:inputType="text"
                     android:textSize="@dimen/dimen_edittxt_size" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                     style="@style/currencyInputStyle"
                     android:id="@+id/txtvw_currency_to"
                     android:text="@{vm.toCode}"
+                    android:textColor="@color/text_color"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />

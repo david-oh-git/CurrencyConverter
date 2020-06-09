@@ -13,7 +13,7 @@
     <color name="background_color">@color/md_white_1000</color>
     <color name="editxt_bg_color">@color/md_green_100</color>
 <!--    <color name="design_snackbar_background_color" tools:override="true">@color/background_color</color>-->
-    <color name="text_color">@color/md_black_1000</color>
+    <color name="text_color">@color/project_blue</color>
 
     <!--    ExchangeView colours-->
     <color name="exchange_view_background">@android:color/white</color>
@@ -23,7 +23,8 @@
 
 <!--    Bottom nav bar-->
     <color name="bottom_nav">@color/background_color</color>
-    <color name="bottom_icon">@color/md_grey_600</color>
+    <color name="bottom_icon_active">@color/project_blue</color>
+    <color name="bottom_icon_inactive">#990067E0</color>
     <!--    Exchange Fragment-->
     <color name="divider">@color/md_white_1000</color>
 

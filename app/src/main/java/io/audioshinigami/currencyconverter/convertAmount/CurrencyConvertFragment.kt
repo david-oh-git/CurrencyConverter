@@ -63,6 +63,7 @@ class CurrencyConvertFragment : Fragment() {
 
     private fun subscribeData(){
 
+
         viewModel.snackMessage.observe(viewLifecycleOwner, Observer {
             hideKeyboard(binding.edittxtCurrencyFrom)
             ( activity as HomeActivity).sendSnackBar(it.message)

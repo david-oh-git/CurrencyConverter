@@ -111,6 +111,8 @@ class SharedCurrencyViewModel(
             fetchRate(code)
         else
             snackMessage.sendData( SnackMessage("Internet required .."))
+
+
     }
 
     fun setConvertedAmount(rate: Double){

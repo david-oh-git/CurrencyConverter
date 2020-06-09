@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!--    to support dark theme-->
     <color name="background_color">#000080</color>
@@ -19,7 +19,8 @@
 
     <!--    Bottom nav bar-->
     <color name="bottom_nav">@color/background_color</color>
-    <color name="bottom_icon">@color/md_grey_900</color>
+    <color name="bottom_icon_active">@android:color/white</color>
+    <color name="bottom_icon_inactive">#99FFFFFF</color>
     <!--    Exchange Fragment-->
     <color name="divider">#3C2F73</color>
 
