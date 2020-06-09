@@ -3,7 +3,9 @@ package io.audioshinigami.currencyconverter.settings
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import io.audioshinigami.currencyconverter.BuildConfig
 import io.audioshinigami.currencyconverter.R
 
 class SettingsFragment :
@@ -29,6 +31,9 @@ class SettingsFragment :
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
+
+        val versionPreference: Preference? = findPreference( getString(R.string.pref_version_key) )
+        versionPreference?.summary = BuildConfig.VERSION_NAME
     }
 
     override fun onStart() {
