@@ -108,6 +108,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittxt_currency_to"
+                    android:textColor="@{ !vm.convertedAmount.empty ? @color/text_color : null }"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/editxt_padding"
