@@ -26,8 +26,10 @@
             app:title="App Details">
 
         <Preference
+                app:useSimpleSummaryProvider="true"
+                android:summary="Source code on Github"
                 app:key="open_github"
-                app:title="Source on Github">
+                app:title="Currency Converter">
 
             <intent
                     android:action="android.intent.action.VIEW"
