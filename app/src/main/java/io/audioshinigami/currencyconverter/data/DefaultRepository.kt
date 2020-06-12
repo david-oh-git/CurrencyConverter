@@ -26,7 +26,6 @@ package io.audioshinigami.currencyconverter.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.audioshinigami.currencyconverter.network.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -60,9 +59,9 @@ class DefaultRepository(
         databaseSource.deleteAll(type)
     }
 
-    override suspend fun getResult(code: String): Result<List<Rate>> = withContext(ioDispatcher){
+    override suspend fun getResult(code: String): List<Rate> = withContext(ioDispatcher){
         // TODO implement
-        return@withContext Result.Error(Exception("Not implemented"))
+        return@withContext mutableListOf<Rate>()
     }
 
     override suspend fun setNetworkConnection(enabled: Boolean) = withContext(ioDispatcher) {

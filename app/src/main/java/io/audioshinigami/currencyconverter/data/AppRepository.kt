@@ -26,7 +26,6 @@ package io.audioshinigami.currencyconverter.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.audioshinigami.currencyconverter.network.Result
 
 interface AppRepository {
 
@@ -47,7 +46,7 @@ interface AppRepository {
 
     suspend fun <T> deleteAll( type: Class<T> )
 
-    suspend fun getResult(code: String): Result<List<Rate>>
+    suspend fun getResult(code: String): List<Rate>
 
     suspend fun setNetworkConnection(enabled: Boolean)
 
