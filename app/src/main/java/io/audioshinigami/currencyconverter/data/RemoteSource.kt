@@ -22,10 +22,13 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.convertAmount.events
+package io.audioshinigami.currencyconverter.data
 
-sealed class Event(val message: String){
+/**
+ * for making API calls and returning a list of [Rate]
+ */
 
-    class SnackBarEvent(val _message: String): Event(_message)
-    class ToastEvent(val _message: String): Event(_message)
+interface RemoteSource {
+
+    suspend fun getRate(code: String): List<Rate>
 }
