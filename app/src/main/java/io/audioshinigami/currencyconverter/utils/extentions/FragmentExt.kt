@@ -3,6 +3,7 @@ package io.audioshinigami.currencyconverter.utils.extentions
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.NetworkInfo
 import android.os.Build
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 // check if network is available
 fun Fragment.isNetworkAvailable(): Boolean {
 
-    val connManager =  this.context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val connManager =  context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     return when{
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
             connManager.getNetworkCapabilities(connManager.activeNetwork).let {
@@ -22,6 +23,8 @@ fun Fragment.isNetworkAvailable(): Boolean {
             }
         }
         Build.VERSION.SDK_INT < Build.VERSION_CODES.M -> {
+
+            val networkInfo: NetworkInfo? = connManager.activeNetworkInfo
 
             connManager.activeNetworkInfo?.let {
                 val networkType = it.type

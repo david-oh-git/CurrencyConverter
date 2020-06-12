@@ -37,6 +37,19 @@ class DefaultRepository(
     }
 
     override suspend fun getResult(code: String): Result<List<Rate>> = withContext(ioDispatcher){
+        // TODO implement
         return@withContext Result.Error(Exception("Not implemented"))
+    }
+
+    override suspend fun setNetworkConnection(enabled: Boolean) = withContext(ioDispatcher) {
+        hasNetworkConnection.postValue(enabled)
+    }
+
+    override suspend fun setFromCode(code: String) = withContext(ioDispatcher) {
+        fromCode.postValue(code)
+    }
+
+    override suspend fun setToCode(code: String) = withContext(ioDispatcher) {
+        toCode.postValue(code)
     }
 }
