@@ -29,17 +29,17 @@ import io.audioshinigami.currencyconverter.network.Result
 
 interface DatabaseSource {
 
-    suspend fun <T> save(obj: T)
+    suspend fun save(rate: Rate)
 
-    suspend fun <T> delete( obj: T)
+    suspend fun save(rates: List<Rate>)
+
+    suspend fun delete( rate: Rate)
 
     fun observeRates(): LiveData<List<Rate>>
 
     suspend fun getAllRates(): List<Rate>
 
-    suspend fun <T> deleteAll( type: Class<T> )
-
-    suspend fun getResult(code: String): Result<List<Rate>>
+    suspend fun deleteAll()
 
     suspend fun deleteAllRates()
 

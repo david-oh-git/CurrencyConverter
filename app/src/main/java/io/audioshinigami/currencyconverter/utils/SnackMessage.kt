@@ -22,10 +22,6 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.network
+package io.audioshinigami.currencyconverter.utils
 
-import com.google.gson.annotations.JsonAdapter
-import io.audioshinigami.currencyconverter.data.Paper
-
-@JsonAdapter(PaperDeserializer::class)
-data class PaperResponse(val data: List<Paper>)
+data class SnackMessage(val message: String )

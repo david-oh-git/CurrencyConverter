@@ -36,17 +36,19 @@ interface AppRepository {
     val hasNetworkConnection: MutableLiveData<Boolean>
         get() = MutableLiveData(false)
 
-    suspend fun <T> save(obj: T)
+    suspend fun save(rate: Rate)
 
-    suspend fun <T> delete( obj: T)
+    suspend fun save(rates: List<Rate>)
+
+    suspend fun delete( rate: Rate)
 
     fun observeRates(): LiveData<List<Rate>>
 
     suspend fun getAllRates(): List<Rate>
 
-    suspend fun <T> deleteAll( type: Class<T> )
+    suspend fun deleteAll()
 
-    suspend fun getResult(code: String): List<Rate>
+    suspend fun getResult(code: String): Rate?
 
     suspend fun setNetworkConnection(enabled: Boolean)
 

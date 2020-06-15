@@ -41,12 +41,16 @@ class DefaultRepository(
     override val toCode: MutableLiveData<String>
         get() = MutableLiveData("USD")
 
-    override suspend fun <T> save(obj: T) = withContext(ioDispatcher){
-        databaseSource.save(obj)
+    override suspend fun save(rate: Rate) = withContext(ioDispatcher){
+        databaseSource.save(rate)
     }
 
-    override suspend fun <T> delete(obj: T) = withContext(ioDispatcher){
-        databaseSource.delete(obj)
+    override suspend fun save(rates: List<Rate>) = withContext(ioDispatcher){
+        databaseSource.save(rates)
+    }
+
+    override suspend fun delete(rate: Rate) = withContext(ioDispatcher){
+        databaseSource.delete(rate)
     }
 
     override suspend fun getAllRates(): List<Rate> = withContext(ioDispatcher) {
@@ -55,13 +59,14 @@ class DefaultRepository(
 
     override fun observeRates(): LiveData<List<Rate>> = databaseSource.observeRates()
 
-    override suspend fun <T> deleteAll(type: Class<T>) = withContext(ioDispatcher){
-        databaseSource.deleteAll(type)
+    override suspend fun deleteAll() = withContext(ioDispatcher){
+        databaseSource.deleteAll()
     }
 
-    override suspend fun getResult(code: String): List<Rate> = withContext(ioDispatcher){
-        // TODO implement
-        return@withContext mutableListOf<Rate>()
+    override suspend fun getResult(code: String): Rate? = withContext(ioDispatcher){
+        val rates = remoteDataSource.getRate(code)
+        databaseSource.save(rates)
+        return@withContext rates.find { it.code == code }
     }
 
     override suspend fun setNetworkConnection(enabled: Boolean) = withContext(ioDispatcher) {
