@@ -46,6 +46,7 @@ import io.audioshinigami.currencyconverter.utils.FRAGMENT_CODE
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.extentions.isNetworkAvailable
+import io.audioshinigami.currencyconverter.utils.network.InternetCallback
 
 /**
 *  Main UI to covert amount . user enters value , selects currency codes and convert
@@ -59,6 +60,8 @@ class CurrencyConvertFragment : Fragment() {
             )
         )
     }
+
+    private val callback: InternetCallback? = null
 
     private lateinit var binding: CurrencyConvertFragmentBinding
 

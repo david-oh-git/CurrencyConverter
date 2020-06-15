@@ -27,7 +27,6 @@ package io.audioshinigami.currencyconverter.utils.extentions
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Build
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
@@ -48,7 +47,7 @@ fun Fragment.isNetworkAvailable(): Boolean {
         }
         Build.VERSION.SDK_INT < Build.VERSION_CODES.M -> {
 
-            val networkInfo: NetworkInfo? = connManager.activeNetworkInfo
+            val networkInfo = connManager.activeNetworkInfo?.isConnected
 
             connManager.activeNetworkInfo?.let {
                 val networkType = it.type
