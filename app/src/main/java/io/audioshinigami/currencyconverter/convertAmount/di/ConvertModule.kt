@@ -22,48 +22,21 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.di.components
+package io.audioshinigami.currencyconverter.convertAmount.di
 
-import android.content.Context
-import dagger.BindsInstance
-import dagger.Component
+import androidx.lifecycle.ViewModel
+import dagger.Binds
 import dagger.Module
-import io.audioshinigami.currencyconverter.convertAmount.di.ConvertComponent
-import io.audioshinigami.currencyconverter.data.AppRepository
-import io.audioshinigami.currencyconverter.di.ApplicationScope
-import io.audioshinigami.currencyconverter.di.modules.*
-import io.audioshinigami.currencyconverter.selectcurrency.di.PaperComponent
+import dagger.multibindings.IntoMap
+import io.audioshinigami.currencyconverter.convertAmount.ConvertViewModel
+import io.audioshinigami.currencyconverter.di.ViewModelKey
 
-@ApplicationScope
-@Component(
-    modules = [
-        AppModule::class,
-        DataStorageModule::class,
-        RetrofitModule::class,
-        ViewModelBuilderModule::class,
-        AppModuleBinds::class,
-        SubComponentsModule::class
-    ]
-)
-interface AppComponent {
+@Module
+abstract class ConvertModule {
 
-    @Component.Factory
-    interface Factory {
-        fun create(@BindsInstance applicationContext: Context): AppComponent
-    }
-
-    fun paperComponent(): PaperComponent.Factory
-
-    fun convertComponent(): ConvertComponent.Factory
-
-    val repository: AppRepository
-
+    @ConvertScope
+    @Binds
+    @IntoMap
+    @ViewModelKey(ConvertViewModel::class)
+    abstract fun bindViewModel(viewModel: ConvertViewModel): ViewModel
 }
-
-@Module(
-    subcomponents = [
-        PaperComponent::class,
-        ConvertComponent::class
-    ]
-)
-object SubComponentsModule

@@ -27,13 +27,13 @@ package io.audioshinigami.currencyconverter.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class DefaultRepository(
+class DefaultRepository @Inject constructor(
     private val databaseSource: DatabaseSource,
     private val remoteDataSource: RemoteSource,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher
 ): AppRepository {
 
     override val fromCode: MutableLiveData<String>

@@ -22,48 +22,18 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.di.components
+package io.audioshinigami.currencyconverter.di.modules
 
-import android.content.Context
-import dagger.BindsInstance
-import dagger.Component
+import dagger.Binds
 import dagger.Module
-import io.audioshinigami.currencyconverter.convertAmount.di.ConvertComponent
 import io.audioshinigami.currencyconverter.data.AppRepository
+import io.audioshinigami.currencyconverter.data.DefaultRepository
 import io.audioshinigami.currencyconverter.di.ApplicationScope
-import io.audioshinigami.currencyconverter.di.modules.*
-import io.audioshinigami.currencyconverter.selectcurrency.di.PaperComponent
 
-@ApplicationScope
-@Component(
-    modules = [
-        AppModule::class,
-        DataStorageModule::class,
-        RetrofitModule::class,
-        ViewModelBuilderModule::class,
-        AppModuleBinds::class,
-        SubComponentsModule::class
-    ]
-)
-interface AppComponent {
+@Module
+abstract class AppModuleBinds {
 
-    @Component.Factory
-    interface Factory {
-        fun create(@BindsInstance applicationContext: Context): AppComponent
-    }
-
-    fun paperComponent(): PaperComponent.Factory
-
-    fun convertComponent(): ConvertComponent.Factory
-
-    val repository: AppRepository
-
+    @ApplicationScope
+    @Binds
+    abstract fun bindRepository(repository: DefaultRepository): AppRepository
 }
-
-@Module(
-    subcomponents = [
-        PaperComponent::class,
-        ConvertComponent::class
-    ]
-)
-object SubComponentsModule

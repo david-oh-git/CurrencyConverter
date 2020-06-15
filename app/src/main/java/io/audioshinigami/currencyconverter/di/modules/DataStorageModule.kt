@@ -28,7 +28,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
-import io.audioshinigami.currencyconverter.data.*
+import io.audioshinigami.currencyconverter.data.DatabaseSource
+import io.audioshinigami.currencyconverter.data.RemoteSource
+import io.audioshinigami.currencyconverter.data.SharedPreferenceSource
 import io.audioshinigami.currencyconverter.data.source.local.ExchangeDatabase
 import io.audioshinigami.currencyconverter.data.source.local.LocalDatabaseSource
 import io.audioshinigami.currencyconverter.data.source.local.LocalPreferenceSource
@@ -37,7 +39,6 @@ import io.audioshinigami.currencyconverter.data.source.remote.RemoteDataSource
 import io.audioshinigami.currencyconverter.di.ApplicationScope
 import io.audioshinigami.currencyconverter.network.ConverterApi
 import io.audioshinigami.currencyconverter.utils.DATASOURCE_LOCAL
-import io.audioshinigami.currencyconverter.utils.DATASOURCE_REMOTE
 import io.audioshinigami.currencyconverter.utils.SETTINGS_PREF_NAME
 import javax.inject.Named
 
@@ -71,7 +72,6 @@ object DataStorageModule {
     @Provides
     @JvmStatic
     @ApplicationScope
-    @Named(DATASOURCE_LOCAL)
     fun provideLocalDatabaseSource(rateDao: RateDao): DatabaseSource =
         LocalDatabaseSource(rateDao)
 
@@ -81,13 +81,4 @@ object DataStorageModule {
     fun provideRemoteDataSource(api: ConverterApi): RemoteSource =
         RemoteDataSource(api)
 
-    @Provides
-    @JvmStatic
-    @ApplicationScope
-    fun provideDefaultRepository(@Named(DATASOURCE_LOCAL) databaseSource: DatabaseSource,
-                                  remoteDataSource: RemoteSource
-    ): AppRepository =
-        DefaultRepository(
-            databaseSource, remoteDataSource
-        )
 }

@@ -39,8 +39,9 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import javax.inject.Inject
 
-class ConvertViewModel(
+class ConvertViewModel @Inject constructor(
     private val repository: AppRepository
 ): ViewModel() {
 
