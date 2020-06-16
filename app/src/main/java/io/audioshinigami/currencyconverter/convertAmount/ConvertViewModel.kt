@@ -24,10 +24,15 @@
 
 package io.audioshinigami.currencyconverter.convertAmount
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.os.Build
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.audioshinigami.currencyconverter.App
+import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.data.AppRepository
 import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.utils.OneTimeLiveData
@@ -42,8 +47,9 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class ConvertViewModel @Inject constructor(
+    app: App,
     private val repository: AppRepository
-): ViewModel() {
+): AndroidViewModel(app) {
 
     private val _convertedAmount = MutableLiveData<String>()
     val convertedAmount: LiveData<String> = _convertedAmount
@@ -68,19 +74,19 @@ class ConvertViewModel @Inject constructor(
             setConvertedAmount()
             return@launch
         }
-
         // check if rate is in DB
         val rate = checkDbForRate()
         if( rate != null){
             setConvertedAmount(rate.rate)
             return@launch
         }
+        updateNetworkStatus() // check for network LOLLIPOP API & below
         
         // make api call for rate
         if( repository.hasNetworkConnection.value == true){
             fetchRateFromApi()
         }else{
-            snackMessage.sendData( SnackMessage("Internet required"))
+            snackMessage.sendData( SnackMessage(getApplication<App>().getString(R.string.internet_required)))
         }
     }
 
@@ -91,11 +97,13 @@ class ConvertViewModel @Inject constructor(
     private fun fetchRateFromApi() = viewModelScope.launch {
 
         try{
-            repository.getResult(apiCallCode)
-                ?.rate?.let {
-                    setConvertedAmount(it)
-                }
-
+            launch(Dispatchers.IO) {
+                
+                repository.getResult(apiCallCode)
+                    ?.rate?.let {
+                        setConvertedAmount(it)
+                    }
+            }
 
 
         }catch (e : UnknownHostException){
@@ -111,17 +119,30 @@ class ConvertViewModel @Inject constructor(
     }
     
     private fun checkDbForRate(): Rate? {
-        
+
         var rate: Rate? = null
         viewModelScope.launch { 
             rate = withContext(Dispatchers.IO) { repository.getAllRates() }
                 .find { it.code == apiCallCode }
         }
-        
+
         return rate
     }
 
     private fun setConvertedAmount(rate: Double = 1.0) = viewModelScope.launch {
         _convertedAmount.postValue( inputAmount.value?.times(rate)?.currencyFormat )
+    }
+
+    private fun updateNetworkStatus() = viewModelScope.launch {
+        // check if network is available & update
+        if( Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+            val context = getApplication<App>().applicationContext
+            val connManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+            val networkInfo = connManager.activeNetworkInfo
+            val connected = networkInfo != null && networkInfo.isAvailable && networkInfo.isConnectedOrConnecting
+
+            setHasNetworkConnection(connected)
+        }
     }
 }

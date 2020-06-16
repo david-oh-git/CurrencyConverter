@@ -48,6 +48,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_currency_hint">Search</string>
     <string name="pref_version_key">version</string>
+    <string name="internet_required">Internet required</string>
 
 
 </resources>
