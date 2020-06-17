@@ -33,6 +33,10 @@ interface AppRepository {
 
     val toCode: MutableLiveData<String>
 
+    val convertedAmount: MutableLiveData<String>
+
+    val inputAmount: MutableLiveData<String>
+
     val hasNetworkConnection: MutableLiveData<Boolean>
 
     suspend fun save(rate: Rate)

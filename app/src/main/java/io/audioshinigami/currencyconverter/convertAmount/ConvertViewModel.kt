@@ -29,7 +29,6 @@ import android.net.ConnectivityManager
 import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import io.audioshinigami.currencyconverter.App
 import io.audioshinigami.currencyconverter.R
@@ -51,16 +50,21 @@ class ConvertViewModel @Inject constructor(
     private val repository: AppRepository
 ): AndroidViewModel(app) {
 
-    private val _convertedAmount = MutableLiveData<String>()
+    private val _convertedAmount = repository.convertedAmount
     val convertedAmount: LiveData<String> = _convertedAmount
 
-    val inputAmount = MutableLiveData<String>()
+    private val _inputAmount = repository.inputAmount
+    val inputAmount = _inputAmount
 
     private val _fromCode = repository.fromCode
     val fromCode: LiveData<String> = _fromCode
 
     private val _toCode = repository.toCode
     val toCode: LiveData<String> = _toCode
+
+    init {
+        Timber.d("init View")
+    }
 
 
     private val apiCallCode: String
@@ -137,7 +141,7 @@ class ConvertViewModel @Inject constructor(
     private fun setConvertedAmount(rate: Double = 1.0) = viewModelScope.launch {
 
         inputAmount.value?.toDouble()?.times(rate)?.let {
-            _convertedAmount.postValue( it.currencyFormat )
+            repository.convertedAmount.postValue(it.currencyFormat)
         }
 
     }

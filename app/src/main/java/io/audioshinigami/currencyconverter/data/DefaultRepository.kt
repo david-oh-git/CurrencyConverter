@@ -42,6 +42,10 @@ class DefaultRepository @Inject constructor(
 
     override val hasNetworkConnection: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    override val convertedAmount: MutableLiveData<String> = MutableLiveData()
+
+    override val inputAmount: MutableLiveData<String> = MutableLiveData()
+
     override suspend fun save(rate: Rate) = withContext(ioDispatcher){
         databaseSource.save(rate)
     }
