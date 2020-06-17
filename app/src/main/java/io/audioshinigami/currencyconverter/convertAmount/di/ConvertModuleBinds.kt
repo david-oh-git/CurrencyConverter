@@ -24,16 +24,19 @@
 
 package io.audioshinigami.currencyconverter.convertAmount.di
 
-import android.content.Context
+import androidx.lifecycle.ViewModel
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import io.audioshinigami.currencyconverter.App
+import dagger.multibindings.IntoMap
+import io.audioshinigami.currencyconverter.convertAmount.ConvertViewModel
+import io.audioshinigami.currencyconverter.di.ViewModelKey
 
 @Module
-object ConvertModule {
+abstract class ConvertModuleBinds {
 
-    @JvmStatic
     @ConvertScope
-    @Provides
-    fun provideApp(context: Context) = (context.applicationContext as App)
+    @Binds
+    @IntoMap
+    @ViewModelKey(ConvertViewModel::class)
+    abstract fun bindViewModel(viewModel: ConvertViewModel): ViewModel
 }

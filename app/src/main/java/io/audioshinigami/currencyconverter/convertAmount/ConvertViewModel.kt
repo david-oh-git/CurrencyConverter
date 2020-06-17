@@ -54,7 +54,7 @@ class ConvertViewModel @Inject constructor(
     private val _convertedAmount = MutableLiveData<String>()
     val convertedAmount: LiveData<String> = _convertedAmount
 
-    val inputAmount = MutableLiveData<Double>()
+    val inputAmount = MutableLiveData<String>()
 
     private val _fromCode = repository.fromCode
     val fromCode: LiveData<String> = _fromCode
@@ -64,7 +64,7 @@ class ConvertViewModel @Inject constructor(
 
 
     private val apiCallCode: String
-        get() = "${fromCode}_${toCode}"
+        get() = "${fromCode.value}_${toCode.value}"
 
     val snackMessage = OneTimeLiveData<SnackMessage>()
 
@@ -96,26 +96,27 @@ class ConvertViewModel @Inject constructor(
 
     private fun fetchRateFromApi() = viewModelScope.launch {
 
-        try{
-            launch(Dispatchers.IO) {
-                
+        launch(Dispatchers.IO) {
+            try{
+
                 repository.getResult(apiCallCode)
                     ?.rate?.let {
+                        Timber.d("rate is $it")
                         setConvertedAmount(it)
                     }
+
+            }catch (e : UnknownHostException){
+                Timber.d( " error message is : ${e.message}")
             }
+            catch (e : SocketTimeoutException){
+                Timber.d( " error message is : ${e.message}")
 
+            }
+            catch (e : Exception){
+                Timber.d( " error message is : ${e.message}")
+            }
+        }
 
-        }catch (e : UnknownHostException){
-            Timber.d( " error message is : ${e.message}")
-        }
-        catch (e : SocketTimeoutException){
-            Timber.d( " error message is : ${e.message}")
-
-        }
-        catch (e : Exception){
-            Timber.d( " error message is : ${e.message}")
-        }
     }
     
     private fun checkDbForRate(): Rate? {
@@ -130,7 +131,11 @@ class ConvertViewModel @Inject constructor(
     }
 
     private fun setConvertedAmount(rate: Double = 1.0) = viewModelScope.launch {
-        _convertedAmount.postValue( inputAmount.value?.times(rate)?.currencyFormat )
+
+        inputAmount.value?.toDouble()?.times(rate)?.let {
+            _convertedAmount.postValue( it.currencyFormat )
+        }
+
     }
 
     private fun updateNetworkStatus() = viewModelScope.launch {

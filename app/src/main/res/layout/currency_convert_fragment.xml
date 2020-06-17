@@ -32,8 +32,12 @@
         <import type="android.view.View"/>
 
         <variable
+                name="launchSelectFrag"
+                type="kotlin.jvm.functions.Function1" />
+
+        <variable
                 name="vm"
-                type="io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel" />
+                type="io.audioshinigami.currencyconverter.convertAmount.ConvertViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -110,6 +114,7 @@
 
             <TextView
                     style="@style/currencyInputStyle"
+                    android:onClick="@{ () -> launchSelectFrag.invoke(@string/FROM_CODE)}"
                     android:text="@{vm.fromCode}"
                     android:id="@+id/txtvw_currency_from"
                     android:textColor="@color/text_color"
@@ -148,6 +153,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                     style="@style/currencyInputStyle"
+                    android:onClick="@{ () -> launchSelectFrag.invoke(@string/TO_CODE_KEY)}"
                     android:id="@+id/txtvw_currency_to"
                     android:text="@{vm.toCode}"
                     android:textColor="@color/text_color"
@@ -168,7 +174,7 @@
                 android:textColor="@color/button_text"
                 android:textAllCaps="false"
                 android:textSize="22sp"
-                android:onClick="@{ () -> vm.start()}"
+                android:onClick="@{ () -> vm.initConversion() }"
                 app:elevation="4dp"
                 app:backgroundTint="@color/button_background"
                 app:layout_constraintTop_toBottomOf="@id/id_layout_to"

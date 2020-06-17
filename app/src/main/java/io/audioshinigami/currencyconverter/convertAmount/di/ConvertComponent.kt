@@ -28,7 +28,11 @@ import dagger.Subcomponent
 import io.audioshinigami.currencyconverter.convertAmount.CurrencyConvertFragment
 
 @ConvertScope
-@Subcomponent(modules = [ConvertModule::class])
+@Subcomponent(modules = [
+    ConvertModuleBinds::class,
+    ConvertModule::class
+]
+)
 interface ConvertComponent {
 
     @Subcomponent.Factory

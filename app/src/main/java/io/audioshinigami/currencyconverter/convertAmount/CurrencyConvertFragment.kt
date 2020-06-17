@@ -25,6 +25,8 @@
 package io.audioshinigami.currencyconverter.convertAmount
 
 import android.app.Activity
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,21 +34,19 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import io.audioshinigami.currencyconverter.App
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
 import io.audioshinigami.currencyconverter.home.HomeActivity
-import io.audioshinigami.currencyconverter.network.ApiFactory
-import io.audioshinigami.currencyconverter.repository.RateRepository
-import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
-import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
 import io.audioshinigami.currencyconverter.utils.FRAGMENT_CODE
-import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
-import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
-import io.audioshinigami.currencyconverter.utils.extentions.isNetworkAvailable
 import io.audioshinigami.currencyconverter.utils.network.InternetCallback
+import io.audioshinigami.currencyconverter.utils.network.NetworkChecker
+import timber.log.Timber
+import javax.inject.Inject
 
 /**
 *  Main UI to covert amount . user enters value , selects currency codes and convert
@@ -54,26 +54,38 @@ import io.audioshinigami.currencyconverter.utils.network.InternetCallback
 
 class CurrencyConvertFragment : Fragment() {
 
-    private val viewModel: SharedCurrencyViewModel by activityViewModels {
-        SharedCurrencyVMFactory( RateRepository(
-                ApiFactory.rateApi
-            )
-        )
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<ConvertViewModel> { viewModelFactory }
 
-    private val callback: InternetCallback? = null
+    private var callback: InternetCallback? = null
 
     private lateinit var binding: CurrencyConvertFragmentBinding
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        ( requireActivity().application as App).appComponent.convertComponent().create()
+            .inject(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            initInternetCallback()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel.networkAvailable = { isNetworkAvailable() }
         binding = CurrencyConvertFragmentBinding.inflate(inflater, container, false)
             .apply {
                 vm = viewModel
+                launchSelectFrag = ::startSelectCurrencyFragment
                 lifecycleOwner = viewLifecycleOwner
 
             }
@@ -83,9 +95,40 @@ class CurrencyConvertFragment : Fragment() {
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        initTextViewClicks()
+    override fun onResume() {
+        super.onResume()
+
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            callback?.let {
+                NetworkChecker.registerInternetAvailabilityCallback(requireContext(), it)
+                Timber.d("Network registered")
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            callback?.let {
+                NetworkChecker.unRegisterInternetAvailabilityCallback(requireContext(), it)
+            }
+        }
+    }
+
+    private fun initInternetCallback(){
+
+        callback = object: InternetCallback() {
+            override fun onNetworkInActive() {
+                Timber.d("No Internet")
+                viewModel.setHasNetworkConnection(false)
+            }
+
+            override fun onNetworkActive() {
+                Timber.d("Yes Internet")
+                viewModel.setHasNetworkConnection(true)
+            }
+        }
     }
 
     private fun subscribeData(){
@@ -95,18 +138,6 @@ class CurrencyConvertFragment : Fragment() {
             hideKeyboard(binding.edittxtCurrencyFrom)
             ( activity as HomeActivity).sendSnackBar(it.message)
         })
-    }
-
-    private fun initTextViewClicks(){
-
-        binding.txtvwCurrencyFrom.setOnClickListener {
-            startSelectCurrencyFragment(FROM_CODE_KEY)
-        }
-
-        binding.txtvwCurrencyTo.setOnClickListener {
-            startSelectCurrencyFragment(TO_CODE_KEY)
-        }
-
     }
 
     private fun startSelectCurrencyFragment(code: String){

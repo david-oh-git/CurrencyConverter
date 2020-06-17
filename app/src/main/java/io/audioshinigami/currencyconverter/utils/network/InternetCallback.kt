@@ -42,7 +42,6 @@ abstract class InternetCallback: ConnectivityManager.NetworkCallback() {
 
     override fun onAvailable(network: Network) {
         super.onAvailable(network)
-
         onNetworkActive()
     }
 

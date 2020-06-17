@@ -27,8 +27,8 @@ package io.audioshinigami.currencyconverter.network
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.audioshinigami.currencyconverter.BuildConfig
-import io.audioshinigami.currencyconverter.models.RateResponseParser
 import io.audioshinigami.currencyconverter.models.RateResponse
+import io.audioshinigami.currencyconverter.models.RateResponseParser
 import io.audioshinigami.currencyconverter.utils.BASE_URL
 import io.audioshinigami.currencyconverter.utils.api_key
 import okhttp3.Interceptor

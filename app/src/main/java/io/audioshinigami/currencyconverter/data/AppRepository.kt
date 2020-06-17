@@ -34,7 +34,6 @@ interface AppRepository {
     val toCode: MutableLiveData<String>
 
     val hasNetworkConnection: MutableLiveData<Boolean>
-        get() = MutableLiveData(false)
 
     suspend fun save(rate: Rate)
 

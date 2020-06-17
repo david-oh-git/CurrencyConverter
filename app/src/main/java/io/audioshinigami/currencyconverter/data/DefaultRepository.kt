@@ -28,6 +28,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class DefaultRepository @Inject constructor(
@@ -36,10 +37,10 @@ class DefaultRepository @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ): AppRepository {
 
-    override val fromCode: MutableLiveData<String>
-        get() = MutableLiveData("NGN")
-    override val toCode: MutableLiveData<String>
-        get() = MutableLiveData("USD")
+    override val fromCode: MutableLiveData<String> = MutableLiveData("NGN")
+    override val toCode: MutableLiveData<String> = MutableLiveData("USD")
+
+    override val hasNetworkConnection: MutableLiveData<Boolean> = MutableLiveData(false)
 
     override suspend fun save(rate: Rate) = withContext(ioDispatcher){
         databaseSource.save(rate)
@@ -65,6 +66,7 @@ class DefaultRepository @Inject constructor(
 
     override suspend fun getResult(code: String): Rate? = withContext(ioDispatcher){
         val rates = remoteDataSource.getRate(code)
+        Timber.d("Number of rates received ? ${rates.size}")
         databaseSource.save(rates)
         return@withContext rates.find { it.code == code }
     }
