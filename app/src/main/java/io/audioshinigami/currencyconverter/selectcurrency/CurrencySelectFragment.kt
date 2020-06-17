@@ -30,7 +30,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -38,10 +37,6 @@ import androidx.navigation.fragment.findNavController
 import io.audioshinigami.currencyconverter.App
 import io.audioshinigami.currencyconverter.data.source.local.PaperDao
 import io.audioshinigami.currencyconverter.databinding.CurrencySelectFragmentBinding
-import io.audioshinigami.currencyconverter.network.ApiFactory
-import io.audioshinigami.currencyconverter.repository.RateRepository
-import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyVMFactory
-import io.audioshinigami.currencyconverter.sharedviewmodels.SharedCurrencyViewModel
 import io.audioshinigami.currencyconverter.utils.FRAGMENT_CODE
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
@@ -123,21 +118,12 @@ class CurrencySelectFragment : DialogFragment() {
     }
 
     private fun setCode(code: String){
-        // TODO replace this hack
-        // init ShareViewModel to assign the currency Code to [CurrencyConvertFragment]
-        val factoryShared : SharedCurrencyVMFactory by lazy {
-            SharedCurrencyVMFactory(RateRepository(
-                    ApiFactory.rateApi
-                )
-            )
-        }
-        val viewModelShared: SharedCurrencyViewModel by activityViewModels { factoryShared }
 
         if( callingFragmentCode == FROM_CODE_KEY)
-            viewModelShared.setFromCode(code)
+            viewModel.setFromCode(code)
 
         if( callingFragmentCode == TO_CODE_KEY)
-            viewModelShared.setToCode(code)
+            viewModel.setToCode(code)
 
         findNavController().popBackStack()
     }
