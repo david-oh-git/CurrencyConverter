@@ -51,6 +51,7 @@
     <string name="internet_required">Internet required</string>
     <string name="FROM_CODE">from_code_key</string>
     <string name="TO_CODE_KEY">to_code_key</string>
+    <string name="no_internet_error">Error connecting to service</string>
 
 
 </resources>

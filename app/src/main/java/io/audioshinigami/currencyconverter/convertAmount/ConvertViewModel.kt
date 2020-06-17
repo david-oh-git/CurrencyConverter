@@ -106,13 +106,18 @@ class ConvertViewModel @Inject constructor(
 
             }catch (e : UnknownHostException){
                 Timber.d( " error message is : ${e.message}")
+                val context = getApplication<App>().applicationContext
+                snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
             }
             catch (e : SocketTimeoutException){
                 Timber.d( " error message is : ${e.message}")
-
+                val context = getApplication<App>().applicationContext
+                snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
             }
             catch (e : Exception){
                 Timber.d( " error message is : ${e.message}")
+                val context = getApplication<App>().applicationContext
+                snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
             }
         }
 
