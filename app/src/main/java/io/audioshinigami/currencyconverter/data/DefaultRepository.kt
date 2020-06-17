@@ -54,6 +54,10 @@ class DefaultRepository @Inject constructor(
         databaseSource.save(rates)
     }
 
+    override suspend fun find(code: String): Rate? = withContext(ioDispatcher){
+        return@withContext databaseSource.find(code)
+    }
+
     override suspend fun delete(rate: Rate) = withContext(ioDispatcher){
         databaseSource.delete(rate)
     }

@@ -41,4 +41,7 @@ abstract class RateDao: BaseDao<Rate> {
 
     @Query("DELETE FROM $RATES_TABLE_NAME")
     abstract suspend fun deleteAllRates()
+
+    @Query("SELECT * FROM $RATES_TABLE_NAME WHERE code = :code")
+    abstract fun find(code: String): Rate?
 }

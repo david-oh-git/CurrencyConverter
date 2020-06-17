@@ -33,13 +33,11 @@ import androidx.lifecycle.viewModelScope
 import io.audioshinigami.currencyconverter.App
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.data.AppRepository
-import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.utils.OneTimeLiveData
 import io.audioshinigami.currencyconverter.utils.SnackMessage
 import io.audioshinigami.currencyconverter.utils.extentions.currencyFormat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -62,28 +60,24 @@ class ConvertViewModel @Inject constructor(
     private val _toCode = repository.toCode
     val toCode: LiveData<String> = _toCode
 
-    init {
-        Timber.d("init View")
-    }
-
-
     private val apiCallCode: String
         get() = "${fromCode.value}_${toCode.value}"
 
     val snackMessage = OneTimeLiveData<SnackMessage>()
 
-    fun initConversion() = viewModelScope.launch {
+    fun initConversion() = viewModelScope.launch(Dispatchers.IO) {
         // check if to & from code is d same
         if( _toCode.value == _fromCode.value ){
             setConvertedAmount()
             return@launch
         }
         // check if rate is in DB
-        val rate = checkDbForRate()
-        if( rate != null){
-            setConvertedAmount(rate.rate)
-            return@launch
-        }
+        repository.find(apiCallCode)
+            ?.let {
+                setConvertedAmount(it.rate)
+                return@launch
+            }
+
         updateNetworkStatus() // check for network LOLLIPOP API & below
         
         // make api call for rate
@@ -125,17 +119,6 @@ class ConvertViewModel @Inject constructor(
             }
         }
 
-    }
-    
-    private fun checkDbForRate(): Rate? {
-
-        var rate: Rate? = null
-        viewModelScope.launch { 
-            rate = withContext(Dispatchers.IO) { repository.getAllRates() }
-                .find { it.code == apiCallCode }
-        }
-
-        return rate
     }
 
     private fun setConvertedAmount(rate: Double = 1.0) = viewModelScope.launch {

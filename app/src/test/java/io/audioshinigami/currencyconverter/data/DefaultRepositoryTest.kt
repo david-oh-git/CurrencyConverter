@@ -26,15 +26,11 @@ package io.audioshinigami.currencyconverter.data
 
 import com.google.common.truth.Truth.assertThat
 import io.audioshinigami.currencyconverter.data.source.local.FakeDatabaseSource
-import io.audioshinigami.currencyconverter.data.source.local.FakePreferenceSource
 import io.audioshinigami.currencyconverter.data.source.remote.FakeRemoteDataSource
-import io.audioshinigami.currencyconverter.network.Result
 import io.audioshinigami.currencyconverter.utils.RateFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 
@@ -46,10 +42,7 @@ import org.junit.Test
 class DefaultRepositoryTest {
 
     private val rateDb: MutableList<Rate> = RateFactory.rates.toMutableList()
-    private val sharedPreferences: MutableMap<String, Any> = mutableMapOf()
-
     private lateinit var databaseSource: DatabaseSource
-    private lateinit var sharedPreferenceSource: SharedPreferenceSource
     private lateinit var repository: AppRepository
     private lateinit var remoteDataSource: RemoteSource
 
@@ -57,7 +50,6 @@ class DefaultRepositoryTest {
     fun init(){
 
         databaseSource = FakeDatabaseSource(rateDb)
-        sharedPreferenceSource = FakePreferenceSource(sharedPreferences)
         remoteDataSource = FakeRemoteDataSource( mutableListOf() )
 
         repository = DefaultRepository(
@@ -89,7 +81,7 @@ class DefaultRepositoryTest {
         }
 
         // Act : delete all rates
-        repository.deleteAll(Rate::class.java)
+        repository.deleteAll()
 
         // Assert: confirm empty rate DB
         val result = repository.getAllRates()

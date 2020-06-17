@@ -35,6 +35,8 @@ interface DatabaseSource {
 
     suspend fun delete( rate: Rate)
 
+    suspend fun find(code: String): Rate?
+
     fun observeRates(): LiveData<List<Rate>>
 
     suspend fun getAllRates(): List<Rate>

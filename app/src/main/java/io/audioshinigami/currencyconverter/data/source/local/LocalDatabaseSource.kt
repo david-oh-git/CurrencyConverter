@@ -44,6 +44,10 @@ class LocalDatabaseSource(
         rateDao.addAll(rates)
     }
 
+    override suspend fun find(code: String): Rate? {
+        return rateDao.find(code)
+    }
+
     override suspend fun  delete(rate: Rate) = withContext(ioDispatcher){
         rateDao.delete(rate)
     }

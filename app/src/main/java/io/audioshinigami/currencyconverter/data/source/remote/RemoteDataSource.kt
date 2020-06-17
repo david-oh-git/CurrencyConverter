@@ -31,6 +31,7 @@ import io.audioshinigami.currencyconverter.utils.Date
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class RemoteDataSource(
     private val api: ConverterApi,
@@ -50,6 +51,7 @@ class RemoteDataSource(
     override suspend fun getRate(code: String): List<Rate> = withContext(ioDispatcher){
 
         return@withContext fetchRateFromApi(code)?.rate?.map {
+            Timber.d("Key is ${it.key} Value is ${it.value}")
             Rate(0, it.key, it.value.toDouble(), currentDate)
         } ?: mutableListOf()
 

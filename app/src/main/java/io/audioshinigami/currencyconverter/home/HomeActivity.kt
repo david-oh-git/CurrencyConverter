@@ -36,7 +36,6 @@ import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.databinding.ActivityHomeBinding
 import kotlinx.android.synthetic.main.activity_home.*
-import timber.log.Timber
 
 class HomeActivity : AppCompatActivity() {
 
@@ -61,7 +60,6 @@ class HomeActivity : AppCompatActivity() {
                 anchorView = bottom_navigation
                 show()
             }
-        Timber.d("msg : $message")
     }
 
     private fun setupViews(binding: ActivityHomeBinding) {

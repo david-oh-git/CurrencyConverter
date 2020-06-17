@@ -49,6 +49,8 @@ interface AppRepository {
 
     suspend fun getAllRates(): List<Rate>
 
+    suspend fun find(code: String): Rate?
+
     suspend fun deleteAll()
 
     suspend fun getResult(code: String): Rate?
