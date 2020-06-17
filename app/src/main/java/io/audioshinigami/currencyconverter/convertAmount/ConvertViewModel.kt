@@ -37,7 +37,7 @@ import io.audioshinigami.currencyconverter.data.AppRepository
 import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.utils.OneTimeLiveData
 import io.audioshinigami.currencyconverter.utils.SnackMessage
-import io.audioshinigami.currencyconverter.utils.currencyFormat
+import io.audioshinigami.currencyconverter.utils.extentions.currencyFormat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -101,7 +101,6 @@ class ConvertViewModel @Inject constructor(
 
                 repository.getResult(apiCallCode)
                     ?.rate?.let {
-                        Timber.d("rate is $it")
                         setConvertedAmount(it)
                     }
 

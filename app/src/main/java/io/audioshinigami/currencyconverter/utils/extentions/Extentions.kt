@@ -22,22 +22,21 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.sharedviewmodels
+package io.audioshinigami.currencyconverter.utils.extentions
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import io.audioshinigami.currencyconverter.repository.RateRepository
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
-class SharedCurrencyVMFactory(
-    private val rateRepository: RateRepository
-): ViewModelProvider.Factory {
+fun Map<String, String>.toApiString(): String {
+    var result = ""
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(SharedCurrencyViewModel::class.java)){
-            return SharedCurrencyViewModel(
-                rateRepository
-            ) as T
-        }
-        throw IllegalArgumentException("Unknow ViewModel Class")
-    }
-}
+    for( (key,value) in this ){
+        result += "&$key=$value"
+    } /*end FOR*/
+
+    return result.removePrefix("&")
+
+} /*end toApiString*/
+
+val Double.currencyFormat: String
+    get() = DecimalFormat("#,###.##").apply { roundingMode = RoundingMode.CEILING }.format(this)
