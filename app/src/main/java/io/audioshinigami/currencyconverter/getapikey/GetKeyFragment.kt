@@ -22,20 +22,22 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.utils
+package io.audioshinigami.currencyconverter.getapikey
 
-import io.audioshinigami.currencyconverter.BuildConfig
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import io.audioshinigami.currencyconverter.R
 
-const val api_key = BuildConfig.API_KEY
-const val BASE_URL = "https://free.currconv.com"
-const val FROM_CODE_KEY = "from_code_key"
-const val TO_CODE_KEY = "to_code_key"
-const val FRAGMENT_CODE = "unknow_code"
-const val PAPER_TABLE_NAME = "currency_db"
-const val RATES_TABLE_NAME = "rates_db"
-const val THEME_PREF_KEY = "io.audioshinigami.currencyconverter.utils.theme_key"
-const val SETTINGS_PREF_NAME = "io.audioshinigami.currencyconverter.utils.settings_name"
-const val DEFAULT_PREF_INT_VALUE = -999
-const val APP_DB_FILENAME = "io.audioshinigami.currencyconverter.utils.app_db.db"
-const val PAPER_DATA_FILENAME = "currencies.json"
+class GetKeyFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_get_key, container, false)
+    }
+}

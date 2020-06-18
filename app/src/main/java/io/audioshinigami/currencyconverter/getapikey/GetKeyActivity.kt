@@ -22,20 +22,18 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.utils
+package io.audioshinigami.currencyconverter.getapikey
 
-import io.audioshinigami.currencyconverter.BuildConfig
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import io.audioshinigami.currencyconverter.R
+import io.audioshinigami.currencyconverter.databinding.ActivityGetKeyBinding
 
-const val api_key = BuildConfig.API_KEY
-const val BASE_URL = "https://free.currconv.com"
-const val FROM_CODE_KEY = "from_code_key"
-const val TO_CODE_KEY = "to_code_key"
-const val FRAGMENT_CODE = "unknow_code"
-const val PAPER_TABLE_NAME = "currency_db"
-const val RATES_TABLE_NAME = "rates_db"
-const val THEME_PREF_KEY = "io.audioshinigami.currencyconverter.utils.theme_key"
-const val SETTINGS_PREF_NAME = "io.audioshinigami.currencyconverter.utils.settings_name"
-const val DEFAULT_PREF_INT_VALUE = -999
-const val APP_DB_FILENAME = "io.audioshinigami.currencyconverter.utils.app_db.db"
-const val PAPER_DATA_FILENAME = "currencies.json"
+class GetKeyActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding: ActivityGetKeyBinding = DataBindingUtil.setContentView(this , R.layout.activity_get_key)
+    }
+}

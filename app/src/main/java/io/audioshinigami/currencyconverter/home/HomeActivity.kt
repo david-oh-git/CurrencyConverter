@@ -26,12 +26,10 @@ package io.audioshinigami.currencyconverter.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.databinding.ActivityHomeBinding
@@ -64,37 +62,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupViews(binding: ActivityHomeBinding) {
         NavigationUI.setupWithNavController(binding.bottomNavigation, navigationController)
-        initTheme()
     }
 
     // Handles Fragments back stack & performs back or Up
     override fun onSupportNavigateUp() = navigationController.navigateUp()
-
-    private fun initTheme(){
-        PreferenceManager.getDefaultSharedPreferences(this@HomeActivity).getString( getString(
-            R.string.theme_key
-        ), "0")
-            .apply {
-                setTheme(this ?: "0")
-            }
-    }
-
-    private fun setTheme(value: String) {
-
-        when(value){
-            "0" -> {
-                AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM )
-
-            }
-            "1" -> {
-                AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_YES )
-
-            }
-            "2" -> {
-                AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_NO )
-            }
-
-        }
-    } //END setTheme
 
 } /*end END*/
