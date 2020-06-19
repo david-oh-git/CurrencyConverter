@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ MIT License
   ~
@@ -23,15 +22,13 @@
   ~ SOFTWARE.
   -->
 
-<resources>
-
-    <dimen name="title_text_size">48sp</dimen>
-    <dimen name="dimen_edittxt_size">22sp</dimen>
-    <dimen name="dimen_flag_icon">30dp</dimen>
-    <dimen name="dimen_spinner_txt_size">21sp</dimen>
-    <dimen name="editxt_padding">10dp</dimen>
-    <dimen name="editxt_margin">4dp</dimen>
-    <dimen name="dimen_btnconvert_padd">20dp</dimen>
-    <dimen name="title_top_margin">64dp</dimen>
-    <dimen name="guideline_spacing">16dp</dimen>
-</resources>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M17,3L5,3c-1.11,0 -2,0.9 -2,2v14c0,1.1 0.89,2 2,2h14c1.1,0 2,-0.9 2,-2L21,7l-4,-4zM12,19c-1.66,0 -3,-1.34 -3,-3s1.34,-3 3,-3 3,1.34 3,3 -1.34,3 -3,3zM15,9L5,9L5,5h10v4z"/>
+</vector>

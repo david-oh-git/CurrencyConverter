@@ -24,20 +24,61 @@
 
 package io.audioshinigami.currencyconverter.getapikey
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
+import com.google.android.material.snackbar.Snackbar
 import io.audioshinigami.currencyconverter.R
+import io.audioshinigami.currencyconverter.databinding.FragmentGetKeyBinding
 
-class GetKeyFragment : Fragment() {
+class GetKeyFragment : Fragment(), GetKeyClickListener {
 
+    private lateinit var binding: FragmentGetKeyBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_get_key, container, false)
+        binding =  FragmentGetKeyBinding.inflate(inflater, container, false)
+            .apply {
+                lifecycleOwner = viewLifecycleOwner
+                listener = this@GetKeyFragment
+            }
+        return binding.root
+    }
+
+    override fun launchRegisterPage() {
+        startActivity( Intent( Intent.ACTION_VIEW, Uri.parse(getString(R.string.get_api_key_url))))
+    }
+
+    override fun saveKey(view: View, apiKey: String) {
+        hideKeyboard(view)
+        if( apiKey.isNotEmpty() ){
+            PreferenceManager.getDefaultSharedPreferences(context).edit {
+                putString(getString(R.string.API_KEY), apiKey)
+                putBoolean(getString(R.string.HAS_API_KEY), true)
+            }
+            (activity as GetKeyActivity).navigateHome()
+        }else{
+            Snackbar.make(binding.parentLayout, "Please enter API key", Snackbar.LENGTH_LONG ).show()
+        }
+
+
+    }
+
+    private fun hideKeyboard(view: View){
+        (context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .apply {
+                hideSoftInputFromWindow(view.windowToken, 0)
+            }
+
     }
 }

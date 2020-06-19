@@ -24,23 +24,18 @@
 
 package io.audioshinigami.currencyconverter.getapikey
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import io.audioshinigami.currencyconverter.R
-import io.audioshinigami.currencyconverter.databinding.ActivityGetKeyBinding
-import io.audioshinigami.currencyconverter.home.HomeActivity
+import androidx.databinding.BindingAdapter
+import com.google.android.material.button.MaterialButton
 
-class GetKeyActivity : AppCompatActivity() {
+object MaterialButtonBinding {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding: ActivityGetKeyBinding = DataBindingUtil.setContentView(this , R.layout.activity_get_key)
-    }
+    @BindingAdapter("app:api_key","app:listener")
+    @JvmStatic fun setBindings(button: MaterialButton, apiKey: String, listener: GetKeyClickListener){
+        with(button){
+            setOnClickListener {
+                listener.saveKey(this,apiKey)
+            }
+        }
 
-    fun navigateHome(){
-        startActivity( Intent(this, HomeActivity::class.java))
-        finish()
     }
 }

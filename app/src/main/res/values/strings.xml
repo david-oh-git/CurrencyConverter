@@ -24,14 +24,14 @@
 
 <resources>
 
-    <string name="app_name">xchange</string>
+    <string name="app_name" translatable="false">xchange</string>
     <string name="str_calculator">Calculator</string>
     <string name="str_currency">Currency</string>
     <string name="str_period">.</string>
     <string name="str_flag_con">flag icon</string>
     <string name="str_btn_convert">Convert</string>
     <string name="str_sign_up">Sign Up</string>
-    <string name="_0_0">0.0</string>
+    <string name="_0_0" translatable="false">0.0</string>
     <string name="exchange_title">Exchange</string>
     <string name="home_title">Home</string>
 
@@ -44,15 +44,18 @@
     <string name="api_category_title_pref">API</string>
     <string name="select_theme_pref">Select Theme</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="HAS_API_KEY">io.audioshinigami.currencyconverter.utils.API_KEY</string>
+    <string name="HAS_API_KEY" translatable="false">io.audioshinigami.currencyconverter.utils.HAS_API_KEY</string>
+    <string name="API_KEY" translatable="false">io.audioshinigami.currencyconverter.utils.API_KEY</string>
     <string name="search_currency_hint">Search</string>
     <string name="pref_version_key">version</string>
     <string name="internet_required">Internet required</string>
     <string name="FROM_CODE">from_code_key</string>
     <string name="TO_CODE_KEY">to_code_key</string>
     <string name="no_internet_error">Error connecting to service</string>
+    <string name="paste_key">Paste your key here</string>
+    <string name="save">Save</string>
+    <string name="get_api_key_url">http://free.currencyconverterapi.com/free-api-key</string>
+    <string name="get_api_message">This Application requires an API key from free.currencyconverterapi.com. \nYou can register for one below and yes it is free</string>
 
 
 </resources>
