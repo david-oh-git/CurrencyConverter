@@ -24,6 +24,7 @@
 
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools" >
 
     <data>
@@ -38,92 +39,148 @@
             android:id="@+id/parent_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:background="@color/background_color"
             tools:context="io.audioshinigami.currencyconverter.getapikey.GetKeyFragment">
 
-        <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/register_txtvw"
-                android:text="@string/get_api_message"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@id/top_guideline"
-                app:layout_constraintStart_toStartOf="@id/start_guideline"
-                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_view"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp"
+                android:background="@color/card_background"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintVertical_weight="4"
+                app:layout_constraintBottom_toTopOf="@id/register_btn"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/top_guideline">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_constraint_layout"
+                    android:background="@color/card_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:text="Welcome"
+                        android:background="@color/card_background"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        app:layout_constraintVertical_weight="0.75"
+                        app:layout_constraintBottom_toTopOf="@id/register_txtvw"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/register_txtvw"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:text="@string/get_api_message"
+                        android:background="@color/card_background"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical|center_horizontal"
+                        app:layout_constraintVertical_weight="2"
+                        app:layout_constraintBottom_toTopOf="@id/enter_key_layout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/enter_key_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/card_background"
+                        app:endIconMode="clear_text"
+                        android:hint="@string/paste_key"
+                        app:layout_constraintVertical_weight="0.5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/register_txtvw">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/enter_key_edittxt"
+                            android:background="@color/card_background"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/register_btn"
-                android:text="get your API"
-                android:textStyle="bold"
-                android:onClick="@{ () -> listener.launchRegisterPage() }"
-                app:layout_constraintTop_toBottomOf="@id/register_txtvw"
-                app:icon="@drawable/ic_connect"
-                app:iconGravity="end"
-                app:layout_constraintStart_toStartOf="@id/start_guideline"
-                app:layout_constraintEnd_toEndOf="@id/end_guideline"
-                app:elevation="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/enter_key_layout"
-                app:layout_constraintTop_toBottomOf="@id/register_btn"
-                app:layout_constraintStart_toStartOf="@id/start_guideline"
-                app:layout_constraintEnd_toEndOf="@id/end_guideline"
-                android:hint="@string/paste_key"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enter_key_edittxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="0dp"
+                android:onClick="@{ () -> listener.launchRegisterPage() }"
+                android:text="@string/get_your_api"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/get_key_text_color"
+                app:backgroundTint="@color/get_key_btn_background"
+                app:elevation="4dp"
+                app:icon="@drawable/ic_www"
+                app:iconGravity="end"
+                app:layout_constraintVertical_weight="1"
+                app:layout_constraintBottom_toTopOf="@id/submit_btn"
+                app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/card_view" />
 
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:text="@string/save"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                app:listener="@{ listener }"
+                app:elevation="4dp"
                 app:api_key="@{ enterKeyEdittxt.text.toString() }"
-                app:layout_constraintTop_toBottomOf="@id/enter_key_layout"
-                app:layout_constraintStart_toStartOf="@id/start_guideline"
-                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                android:textColor="@color/get_key_text_color"
+                app:backgroundTint="@color/get_key_btn_background"
                 app:icon="@drawable/ic_save"
                 app:iconGravity="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                app:layout_constraintVertical_weight="1"
+                app:layout_constraintEnd_toEndOf="@id/register_btn"
+                app:layout_constraintStart_toStartOf="@id/register_btn"
+                app:layout_constraintTop_toBottomOf="@id/register_btn"
+                app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+                app:listener="@{ listener }" />
 
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/top_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="32dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                app:layout_constraintGuide_begin="32dp" />
 
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/bottom_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_end="@dimen/guideline_spacing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                app:layout_constraintGuide_end="200dp" />
 
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="@dimen/guideline_spacing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                app:layout_constraintGuide_end="@dimen/guideline_spacing" />
 
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/guideline_spacing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                app:layout_constraintGuide_begin="@dimen/guideline_spacing" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

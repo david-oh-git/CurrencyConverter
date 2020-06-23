@@ -56,6 +56,7 @@
     <string name="save">Save</string>
     <string name="get_api_key_url">http://free.currencyconverterapi.com/free-api-key</string>
     <string name="get_api_message">This Application requires an API key from free.currencyconverterapi.com. \nYou can register for one below and yes it is free</string>
+    <string name="get_your_api">get your API</string>
 
 
 </resources>

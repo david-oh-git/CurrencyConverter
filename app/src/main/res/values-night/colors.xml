@@ -52,4 +52,9 @@
     <color name="button_background">#02D99A</color>
     <color name="button_text">@android:color/white</color>
 
+<!--    get key-->
+    <color name="card_background">#80000080</color>
+    <color name="get_key_btn_background">@android:color/white</color>
+    <color name="get_key_text_color">@android:color/black</color>
+
 </resources>

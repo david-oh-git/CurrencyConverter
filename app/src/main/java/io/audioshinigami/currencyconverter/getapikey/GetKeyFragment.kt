@@ -61,7 +61,7 @@ class GetKeyFragment : Fragment(), GetKeyClickListener {
 
     override fun saveKey(view: View, apiKey: String) {
         hideKeyboard(view)
-        if( apiKey.isNotEmpty() ){
+        if( apiKey.isNotEmpty() && apiKey.isNotBlank() ){
             PreferenceManager.getDefaultSharedPreferences(context).edit {
                 putString(getString(R.string.API_KEY), apiKey)
                 putBoolean(getString(R.string.HAS_API_KEY), true)

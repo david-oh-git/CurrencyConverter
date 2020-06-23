@@ -40,7 +40,7 @@
     <PreferenceCategory app:title="@string/api_category_title_pref">
 
         <EditTextPreference
-            app:key="@string/api_key_pref"
+            app:key="@string/API_KEY"
             app:title="@string/api_title_pref"
             app:useSimpleSummaryProvider="true" />
 

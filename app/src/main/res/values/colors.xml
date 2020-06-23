@@ -55,4 +55,10 @@
 <!--    currency convert -->
     <color name="button_background">#02D99A</color>
     <color name="button_text">@android:color/black</color>
+
+<!--    get key-->
+    <color name="card_background">#80FFFFFF</color>
+    <color name="get_key_btn_background">@android:color/black</color>
+    <color name="get_key_text_color">@android:color/white</color>
+
 </resources>
