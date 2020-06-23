@@ -24,18 +24,32 @@
 
 package io.audioshinigami.currencyconverter.di.modules
 
+import android.content.Context
+import androidx.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
+import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.di.ApplicationScope
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.network.ConverterApi
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 object RetrofitModule {
 
+    private const val KEY = "api_key"
+
     @Provides
     @JvmStatic
     @ApplicationScope
-    fun providesRetrofitApi(): ConverterApi = ApiFactory.rateApi
+    @Named(KEY)
+    fun provideKey(context: Context): String = PreferenceManager
+        .getDefaultSharedPreferences(context.applicationContext)
+        .getString( context.applicationContext.getString(R.string.API_KEY),"" ) ?: ""
+
+    @Provides
+    @JvmStatic
+    @ApplicationScope
+    fun providesRetrofitApi(@Named(KEY) key: String): ConverterApi = ApiFactory.provideConverterApi(key)
 }

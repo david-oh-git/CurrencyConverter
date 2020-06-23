@@ -39,6 +39,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiFactory {
 
+    private fun provideInterceptor(key: String) = Interceptor { chain ->
+        val newUrl = chain.request().url()
+            .newBuilder()
+            .addQueryParameter("apiKey", key)
+            .build()
+
+        val newRequest = chain.request()
+            .newBuilder()
+            .url(newUrl)
+            .build()
+
+        chain.proceed(newRequest)
+    }
+
+
+
     //Creating Auth Interceptor to add api_key query in front of all the requests.
     private val authInterceptor = Interceptor { chain ->
         val newUrl = chain.request().url()
@@ -53,14 +69,10 @@ object ApiFactory {
 
         chain.proceed(newRequest)
     }
-//    client for http request url
-    private val httpClient: OkHttpClient by lazy {
-        addHttpClient()
-    }
 
     private val gsonBuilder = GsonBuilder()
 
-    private fun addHttpClient(): OkHttpClient =
+    private fun addHttpClient(key: String): OkHttpClient =
 
         if( BuildConfig.DEBUG){
             val loggingInterceptor = HttpLoggingInterceptor()
@@ -69,7 +81,7 @@ object ApiFactory {
                 }
 
             OkHttpClient().newBuilder()
-                .addInterceptor(authInterceptor)
+                .addInterceptor( provideInterceptor(key))
                 .addInterceptor(loggingInterceptor)
                 .build()
 
@@ -79,18 +91,18 @@ object ApiFactory {
                 .build()
         }
 
-    private fun retrofit(): Retrofit {
+    private fun retrofit(key: String): Retrofit {
 
         gsonBuilder.registerTypeAdapter(RateResponse::class.java, RateResponseParser())
 
         return Retrofit.Builder()
-            .client(httpClient)
+            .client( addHttpClient(key) )
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create( gsonBuilder.create()))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
 
-    val rateApi : ConverterApi = retrofit().create(ConverterApi::class.java)
+    fun provideConverterApi(key: String) = retrofit(key).create(ConverterApi::class.java)
 
 } /*END*/

@@ -84,7 +84,9 @@ class ConvertViewModel @Inject constructor(
         if( repository.hasNetworkConnection.value == true){
             fetchRateFromApi()
         }else{
-            snackMessage.sendData( SnackMessage(getApplication<App>().getString(R.string.internet_required)))
+            launch(Dispatchers.Main) {
+                snackMessage.sendData( SnackMessage(getApplication<App>().getString(R.string.internet_required)))
+            }
         }
     }
 
@@ -104,18 +106,24 @@ class ConvertViewModel @Inject constructor(
 
             }catch (e : UnknownHostException){
                 Timber.d( " error message is : ${e.message}")
-                val context = getApplication<App>().applicationContext
-                snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
+                launch(Dispatchers.Main) {
+                    val context = getApplication<App>().applicationContext
+                    snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
+                }
             }
             catch (e : SocketTimeoutException){
                 Timber.d( " error message is : ${e.message}")
-                val context = getApplication<App>().applicationContext
-                snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
+                launch(Dispatchers.Main) {
+                    val context = getApplication<App>().applicationContext
+                    snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
+                }
             }
             catch (e : Exception){
                 Timber.d( " error message is : ${e.message}")
-                val context = getApplication<App>().applicationContext
-                snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
+                launch(Dispatchers.Main) {
+                    val context = getApplication<App>().applicationContext
+                    snackMessage.sendData( SnackMessage(context.getString(R.string.no_internet_error)))
+                }
             }
         }
 
