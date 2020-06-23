@@ -42,7 +42,7 @@
         <EditTextPreference
             app:key="@string/API_KEY"
             app:title="@string/api_title_pref"
-            app:useSimpleSummaryProvider="true" />
+                android:summary="************" />
 
     </PreferenceCategory>
 
