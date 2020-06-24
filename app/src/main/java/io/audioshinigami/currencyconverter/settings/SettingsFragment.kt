@@ -41,7 +41,7 @@ class SettingsFragment :
                 sharedPreferences, key ->
 
             when(key){
-                getString(R.string.theme_key) -> {
+                getString(R.string.preference_theme_key) -> {
 
                     sharedPreferences?.run {
                         setTheme( getString(key, "0") ?: "0" )

@@ -63,8 +63,8 @@ class GetKeyFragment : Fragment(), GetKeyClickListener {
         hideKeyboard(view)
         if( apiKey.isNotEmpty() && apiKey.isNotBlank() ){
             PreferenceManager.getDefaultSharedPreferences(context).edit {
-                putString(getString(R.string.API_KEY), apiKey)
-                putBoolean(getString(R.string.HAS_API_KEY), true)
+                putString(getString(R.string.preference_api_key), apiKey)
+                putBoolean(getString(R.string.preference_has_api_key), true)
             }
             (activity as GetKeyActivity).navigateHome()
         }else{

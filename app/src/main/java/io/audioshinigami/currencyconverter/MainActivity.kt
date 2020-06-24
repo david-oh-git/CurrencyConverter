@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkForApiKey(): Boolean =
-        PreferenceManager.getDefaultSharedPreferences(this).getBoolean( getString(R.string.HAS_API_KEY), false)
+        PreferenceManager.getDefaultSharedPreferences(this).getBoolean( getString(R.string.preference_has_api_key), false)
 
     private fun <T> launchActivity(activity: Class<T>){
         startActivity( Intent(this, activity))
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initTheme(){
         PreferenceManager.getDefaultSharedPreferences(this).getString( getString(
-            R.string.theme_key
+            R.string.preference_theme_key
         ), "0")
             .apply {
                 setTheme(this ?: "0")

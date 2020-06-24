@@ -33,7 +33,6 @@ import io.audioshinigami.currencyconverter.di.ApplicationScope
 import io.audioshinigami.currencyconverter.network.ApiFactory
 import io.audioshinigami.currencyconverter.network.ConverterApi
 import javax.inject.Named
-import javax.inject.Singleton
 
 @Module
 object RetrofitModule {
@@ -46,7 +45,7 @@ object RetrofitModule {
     @Named(KEY)
     fun provideKey(context: Context): String = PreferenceManager
         .getDefaultSharedPreferences(context.applicationContext)
-        .getString( context.applicationContext.getString(R.string.API_KEY),"" ) ?: ""
+        .getString( context.applicationContext.getString(R.string.preference_api_key),"" ) ?: ""
 
     @Provides
     @JvmStatic

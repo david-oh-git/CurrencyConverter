@@ -31,7 +31,7 @@
             app:defaultValue="System default"
             app:entries="@array/theme_entries"
                 app:entryValues="@array/theme_values"
-            app:key="@string/theme_key"
+            app:key="@string/preference_theme_key"
             app:title="@string/select_theme_pref"
             app:useSimpleSummaryProvider="true" />
 
@@ -40,7 +40,7 @@
     <PreferenceCategory app:title="@string/api_category_title_pref">
 
         <EditTextPreference
-            app:key="@string/API_KEY"
+            app:key="@string/preference_api_key"
             app:title="@string/api_title_pref"
                 android:summary="************" />
 
