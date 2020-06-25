@@ -30,8 +30,9 @@ import io.audioshinigami.currencyconverter.data.Rate
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LocalDatabaseSource(
+class LocalDatabaseSource @Inject constructor(
     private val rateDao: RateDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): DatabaseSource {

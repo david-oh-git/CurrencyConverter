@@ -27,7 +27,11 @@ package io.audioshinigami.currencyconverter.di.modules
 import dagger.Binds
 import dagger.Module
 import io.audioshinigami.currencyconverter.data.AppRepository
+import io.audioshinigami.currencyconverter.data.DatabaseSource
 import io.audioshinigami.currencyconverter.data.DefaultRepository
+import io.audioshinigami.currencyconverter.data.RemoteSource
+import io.audioshinigami.currencyconverter.data.source.local.LocalDatabaseSource
+import io.audioshinigami.currencyconverter.data.source.remote.RemoteDataSource
 import io.audioshinigami.currencyconverter.di.ApplicationScope
 
 @Module
@@ -36,4 +40,12 @@ abstract class AppModuleBinds {
     @ApplicationScope
     @Binds
     abstract fun bindRepository(repository: DefaultRepository): AppRepository
+
+    @ApplicationScope
+    @Binds
+    abstract fun bindDatabaseSource(localDatabaseSource: LocalDatabaseSource): DatabaseSource
+
+    @ApplicationScope
+    @Binds
+    abstract fun bindRemoteSource(remoteDataSource: RemoteDataSource): RemoteSource
 }

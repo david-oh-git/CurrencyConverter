@@ -31,10 +31,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
 import io.audioshinigami.currencyconverter.data.source.local.ExchangeDatabase
+import io.audioshinigami.currencyconverter.data.source.local.RateDao
 import io.audioshinigami.currencyconverter.di.ApplicationScope
 import io.audioshinigami.currencyconverter.utils.APP_DB_FILENAME
+import io.audioshinigami.currencyconverter.utils.DATE_NAME
+import io.audioshinigami.currencyconverter.utils.Date
 import io.audioshinigami.currencyconverter.workers.PopulateDbRunnable
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Named
 
 @Module
 object AppModule {
@@ -58,4 +62,15 @@ object AppModule {
                 thread.start()
             }
         }).build()
+
+    @Provides
+    @JvmStatic
+    @ApplicationScope
+    fun provideRateDao(db: ExchangeDatabase): RateDao = db.rateDao()
+
+    @Provides
+    @JvmStatic
+    @ApplicationScope
+    @Named(DATE_NAME)
+    fun provideDate() = Date.currentDate
 }

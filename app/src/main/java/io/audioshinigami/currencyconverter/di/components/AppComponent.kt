@@ -31,14 +31,16 @@ import dagger.Module
 import io.audioshinigami.currencyconverter.convertAmount.di.ConvertComponent
 import io.audioshinigami.currencyconverter.data.AppRepository
 import io.audioshinigami.currencyconverter.di.ApplicationScope
-import io.audioshinigami.currencyconverter.di.modules.*
+import io.audioshinigami.currencyconverter.di.modules.AppModule
+import io.audioshinigami.currencyconverter.di.modules.AppModuleBinds
+import io.audioshinigami.currencyconverter.di.modules.RetrofitModule
+import io.audioshinigami.currencyconverter.di.modules.ViewModelBuilderModule
 import io.audioshinigami.currencyconverter.selectcurrency.di.PaperComponent
 
 @ApplicationScope
 @Component(
     modules = [
         AppModule::class,
-        DataStorageModule::class,
         RetrofitModule::class,
         ViewModelBuilderModule::class,
         AppModuleBinds::class,

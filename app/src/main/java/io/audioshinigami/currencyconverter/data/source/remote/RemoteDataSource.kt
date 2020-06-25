@@ -27,22 +27,26 @@ package io.audioshinigami.currencyconverter.data.source.remote
 import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.data.RemoteSource
 import io.audioshinigami.currencyconverter.network.ConverterApi
+import io.audioshinigami.currencyconverter.utils.DATE_NAME
 import io.audioshinigami.currencyconverter.utils.Date
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Named
 
-class RemoteDataSource(
+class RemoteDataSource @Inject constructor(
     private val api: ConverterApi,
-    private val currentDate: String = Date.currentDate,
+    @Named(DATE_NAME) private val currentDate: String,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): BaseRemoteDataSource() , RemoteSource {
 
+//    currency code format to get both 'USD_AED,AED_USD'
     private suspend fun fetchRateFromApi(currencyCode: String) = withContext(ioDispatcher) {
 
         safeApiCall(
-            call = { api.getRate(currencyCode = currencyCode).await() },
+            call = { api.getRate(currencyCode = "$currencyCode,${reverseCode(currencyCode)}").await() },
             errorMsg = "Error fetching currency rate"
         )
 
@@ -56,5 +60,7 @@ class RemoteDataSource(
         } ?: mutableListOf()
 
     }
+
+    private fun reverseCode(callingCode: String) = callingCode.split("_").reversed().joinToString("_")
 
 }

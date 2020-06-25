@@ -39,3 +39,4 @@ const val SETTINGS_PREF_NAME = "io.audioshinigami.currencyconverter.utils.settin
 const val DEFAULT_PREF_INT_VALUE = -999
 const val APP_DB_FILENAME = "io.audioshinigami.currencyconverter.utils.app_db.db"
 const val PAPER_DATA_FILENAME = "currencies.json"
+const val DATE_NAME = "io.audioshinigami.currencyconverter.utils.DATE_NAME"
