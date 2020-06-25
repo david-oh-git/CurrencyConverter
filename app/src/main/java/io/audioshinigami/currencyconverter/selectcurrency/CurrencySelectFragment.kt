@@ -31,7 +31,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import io.audioshinigami.currencyconverter.App
@@ -87,34 +86,21 @@ class CurrencySelectFragment : DialogFragment() {
         // init recyclerView adaptor
         setupRecyclerView()
 
+        // to determine if it is to set from or to currency code value
         arguments?.also { it ->
             val fragmentCode = it.getString(FRAGMENT_CODE)
+
             fragmentCode?.let {code ->
                 callingFragmentCode = code
                 Timber.d("fragment calling code is $callingFragmentCode")
             }
 
-
         }
-        binding.viewmodel?.items?.observe(viewLifecycleOwner, Observer {
-            Timber.d("Paper data size is ${it.size}")
-            adaptor.submitList(it)
-        })
-
 
     }
 
     private fun setupRecyclerView(){
-
-        val viewModel = binding.viewmodel
-        viewModel?.let {
-            binding.currencyItemRecyclerview.adapter = adaptor
-        }
-
-        // TODO save state abi remember position
-//        currencyItem_recyclerview.adapter = adaptor
-//        currencyItem_recyclerview.layoutManager = GridLayoutManager(activity, 3)
-//        currencyItem_recyclerview.hasFixedSize()
+        binding.currencyItemRecyclerview.adapter = adaptor
     }
 
     private fun setCode(code: String){

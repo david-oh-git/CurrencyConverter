@@ -36,6 +36,10 @@ import io.audioshinigami.currencyconverter.utils.APP_DB_FILENAME
 import io.audioshinigami.currencyconverter.utils.PAPER_DATA_FILENAME
 import timber.log.Timber
 
+/**
+ * Runnable that pre populates the [PaperDao] DB on 1st app launch only
+ */
+
 class PopulateDbRunnable(
     private val applicationContext: Context
 ): Runnable {

@@ -35,7 +35,9 @@ import io.audioshinigami.currencyconverter.data.Paper
 
 @BindingAdapter("app:items")
 fun setItems(listView: RecyclerView, items: List<Paper>?){
-    items?.let {
-        (listView.adapter as PaperAdaptor).submitList(it)
+    with(listView.adapter as PaperAdaptor){
+        items?.let {papers ->
+            submitList(papers)
+        }
     }
 }

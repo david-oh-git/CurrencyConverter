@@ -39,15 +39,18 @@ class PaperViewModel @Inject constructor(
     private val appRepository: AppRepository
 ): ViewModel() {
 
-    val searchQuery = MutableLiveData<String>()
-    val papers: LiveData<List<Paper>> = Transformations.switchMap(searchQuery) { searchQuery ->
+    val searchQuery = MutableLiveData<String>().apply { value = "" }
 
-        Transformations.switchMap( repository.observePapers()) {papers ->
-            searchPapers(searchQuery, papers)
+    private val _papers
+        get() = Transformations.switchMap(searchQuery) { query ->
+
+            Transformations.switchMap( repository.observePapers()) { papers ->
+                papers?.let {
+                    searchPapers(query, papers)
+                }
+            }
         }
-    }
-
-    val items = repository.observePapers()
+    val papers: LiveData<List<Paper>> = _papers
 
     // for testing
     fun setQuery(query: String){
@@ -63,13 +66,12 @@ class PaperViewModel @Inject constructor(
     }
 
     private fun searchPapers(query: String, papers: List<Paper>): LiveData<List<Paper>> {
-        val result = MutableLiveData<List<Paper>>()
 
-        if(query.isEmpty() || query.isBlank()){
-            result.value = papers
-            return result
+        if( query.isEmpty() || query.isBlank()){
+            return repository.observePapers()
         }
 
+        val result = MutableLiveData<List<Paper>>()
         val queryLowerCase = query.toLowerCase(Locale.ROOT)
 
         val searchPapers = ArrayList<Paper>()
