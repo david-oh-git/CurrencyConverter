@@ -39,7 +39,6 @@ import io.audioshinigami.currencyconverter.databinding.CurrencySelectFragmentBin
 import io.audioshinigami.currencyconverter.utils.FRAGMENT_CODE
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
-import timber.log.Timber
 import javax.inject.Inject
 
 class CurrencySelectFragment : DialogFragment() {
@@ -92,7 +91,6 @@ class CurrencySelectFragment : DialogFragment() {
 
             fragmentCode?.let {code ->
                 callingFragmentCode = code
-                Timber.d("fragment calling code is $callingFragmentCode")
             }
 
         }

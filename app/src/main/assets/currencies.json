@@ -400,14 +400,6 @@
         "imageUrl": ""
     },
     {
-        "paperId": 50,
-        "code": "USD",
-        "name": "U.S. Dollar",
-        "countryName": "Ecuador",
-        "symbol": "$",
-        "imageUrl": ""
-    },
-    {
         "paperId": 51,
         "code": "EUR",
         "name": "European euro",
@@ -501,14 +493,6 @@
         "name": "West African CFA franc",
         "countryName": "Mali",
         "symbol": "Fr",
-        "imageUrl": ""
-    },
-    {
-        "paperId": 63,
-        "code": "USD",
-        "name": "U.S. Dollar",
-        "countryName": "Micronesia",
-        "symbol": "$",
         "imageUrl": ""
     },
     {
@@ -856,14 +840,6 @@
         "imageUrl": ""
     },
     {
-        "paperId": 107,
-        "code": "USD",
-        "name": "U.S. Dollar",
-        "countryName": "Palau",
-        "symbol": "$",
-        "imageUrl": ""
-    },
-    {
         "paperId": 108,
         "code": "PHP",
         "name": "Philippine peso",
@@ -1192,14 +1168,6 @@
         "imageUrl": ""
     },
     {
-        "paperId": 149,
-        "code": "USD",
-        "name": "U.S. Dollar",
-        "countryName": "Puerto Rico",
-        "symbol": "$",
-        "imageUrl": ""
-    },
-    {
         "paperId": 150,
         "code": "SHP",
         "name": "Saint Helena pound",
@@ -1368,14 +1336,6 @@
         "imageUrl": ""
     },
     {
-        "paperId": 171,
-        "code": "USD",
-        "name": "U.S. Dollar",
-        "countryName": "El Salvador",
-        "symbol": "$",
-        "imageUrl": ""
-    },
-    {
         "paperId": 172,
         "code": "FJD",
         "name": "Fijian dollar",
@@ -1517,14 +1477,6 @@
         "name": "Russian ruble",
         "countryName": "Russia",
         "symbol": "\u0440\u0443\u0431",
-        "imageUrl": ""
-    },
-    {
-        "paperId": 190,
-        "code": "XCD",
-        "name": "East Caribbean dollar",
-        "countryName": "Saint Vincent and the Grenadines",
-        "symbol": "$",
         "imageUrl": ""
     },
     {

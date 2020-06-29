@@ -52,7 +52,7 @@
     <string name="api_category_title_pref">API</string>
     <string name="select_theme_pref">Select Theme</string>
 
-    <string name="search_currency_hint">Search</string>
+    <string name="search_currency_hint">Search here</string>
     <string name="pref_version_key">version</string>
     <string name="internet_required">Internet required</string>
     <string name="FROM_CODE">from_code_key</string>
@@ -63,5 +63,6 @@
     <string name="get_api_key_url">http://free.currencyconverterapi.com/free-api-key</string>
     <string name="get_api_message">This Application requires an API key from free.currencyconverterapi.com. \nYou can register for one below and yes it is free</string>
     <string name="get_your_api">get your API</string>
+    <string name="list_of_a_currencies">List of a currencies</string>
 
 </resources>

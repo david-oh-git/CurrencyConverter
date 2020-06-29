@@ -25,7 +25,9 @@
 package io.audioshinigami.currencyconverter.selectcurrency
 
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import io.audioshinigami.currencyconverter.data.Paper
 
 /**
@@ -35,9 +37,11 @@ import io.audioshinigami.currencyconverter.data.Paper
 
 @BindingAdapter("app:items")
 fun setItems(listView: RecyclerView, items: List<Paper>?){
-    with(listView.adapter as PaperAdaptor){
+
+    with(listView){
+        layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         items?.let {papers ->
-            submitList(papers)
+            (adapter as PaperAdaptor).submitList(papers)
         }
     }
 }

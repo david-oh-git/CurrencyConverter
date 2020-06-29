@@ -23,9 +23,9 @@
   ~ SOFTWARE.
   -->
 
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -37,37 +37,94 @@
                 name="clickListener"
                 type="kotlin.jvm.functions.Function1" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="8dp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:onClick="@{() -> clickListener.invoke(paper.code)}"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/card_background"
+            android:onClick="@{() -> clickListener.invoke(paper.code)}"
+            android:padding="4dp">
 
         <ImageView
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/str_flag_con"
+                android:id="@+id/currency_flag"
                 android:layout_width="@dimen/dimen_flag_icon"
                 android:layout_height="@dimen/dimen_flag_icon"
-                app:srcCompat="@mipmap/ic_launcher"
-                android:id="@+id/currency_flag"
-                android:layout_margin="4dp"
-                />
+                android:contentDescription="@string/str_flag_con"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="@id/currency_name"
+                app:layout_constraintTop_toTopOf="@id/top_guideline"
+                tools:src="@mipmap/ic_launcher" />
 
         <com.google.android.material.textview.MaterialTextView
-                app:layout_constraintStart_toEndOf="@id/currency_flag"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@{ paper.code }"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:textSize="@dimen/dimen_spinner_txt_size"
+                android:id="@+id/currency_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/currency_code"
-                />
+                android:maxLines="1"
+                android:padding="4dp"
+                android:text="@{ paper.code }"
+                android:textAlignment="center"
+                android:textSize="@dimen/dimen_spinner_txt_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toEndOf="@id/currency_flag"
+                app:layout_constraintTop_toTopOf="@id/top_guideline"
+                tools:text="BAM" />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/currency_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constrainedWidth="true"
+                android:text="@{ paper.name }"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/currency_code"
+                tools:text="Bosnia and Herzegovina konvertibilna marka" />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{ paper.countryName }"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
+                android:ellipsize="none"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/currency_name"
+                app:layout_constraintStart_toStartOf="@id/currency_name"
+                app:layout_constraintTop_toBottomOf="@id/currency_name"
+                tools:text="Bosnia-Herzegovina" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/top_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/paper_guideline_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/bottom_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="@dimen/paper_guideline_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/paper_guideline_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/paper_guideline_margin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

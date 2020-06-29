@@ -34,4 +34,5 @@
     <dimen name="dimen_btnconvert_padd">20dp</dimen>
     <dimen name="title_top_margin">64dp</dimen>
     <dimen name="guideline_spacing">16dp</dimen>
+    <dimen name="paper_guideline_margin">2dp</dimen>
 </resources>
