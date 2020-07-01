@@ -69,6 +69,7 @@
                 android:layout_gravity="center"
                 android:id="@+id/currencyItem_recyclerview"
                 android:contentDescription="@string/list_of_a_currencies"
+                android:background="@color/background_color"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:scrollbars="vertical"

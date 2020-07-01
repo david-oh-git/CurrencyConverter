@@ -77,7 +77,7 @@ class PaperViewModel @Inject constructor(
         val searchPapers = ArrayList<Paper>()
         for (paper in papers){
             if( paper.name.toLowerCase(Locale.ROOT).contains(queryLowerCase)
-                || paper.code.toLowerCase(Locale.ROOT).contains(queryLowerCase)){
+                || paper.code.toLowerCase(Locale.ROOT).contains(queryLowerCase) || paper.countryName.toLowerCase(Locale.ROOT).contains(queryLowerCase)){
                 searchPapers.add(paper)
             }
         }
