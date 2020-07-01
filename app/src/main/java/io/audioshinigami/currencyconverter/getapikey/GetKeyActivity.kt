@@ -28,16 +28,26 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.preference.PreferenceManager
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.databinding.ActivityGetKeyBinding
 import io.audioshinigami.currencyconverter.home.HomeActivity
+import io.audioshinigami.currencyconverter.workers.PopulateDbRunnable
 
 class GetKeyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityGetKeyBinding = DataBindingUtil.setContentView(this , R.layout.activity_get_key)
+
+        PreferenceManager.getDefaultSharedPreferences(this).getBoolean( getString(R.string.preference_first_time), false).apply {
+            if (!this)
+                initPaperDbFromJson()
+        }
     }
+
+//    populates the [Paper] Db when app is launched for the 1st time
+    private fun initPaperDbFromJson() = Thread( PopulateDbRunnable(this) ).apply { start() }
 
     fun navigateHome(){
         startActivity( Intent(this, HomeActivity::class.java))

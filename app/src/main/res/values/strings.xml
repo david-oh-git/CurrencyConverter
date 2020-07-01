@@ -34,6 +34,7 @@
     <string name="preference_theme_key" >
         <xliff:g id="preference" >preference_theme_key</xliff:g>
     </string>
+    <string name="preference_first_time">preference_first_time</string>
 
     <string name="app_name" translatable="false">xchange</string>
     <string name="str_calculator">Calculator</string>

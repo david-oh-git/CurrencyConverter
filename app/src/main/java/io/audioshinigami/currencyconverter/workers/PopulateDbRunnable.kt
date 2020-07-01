@@ -25,10 +25,13 @@
 package io.audioshinigami.currencyconverter.workers
 
 import android.content.Context
+import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
+import io.audioshinigami.currencyconverter.R.string.preference_first_time
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.source.local.ExchangeDatabase
 import io.audioshinigami.currencyconverter.data.source.local.PaperDao
@@ -59,6 +62,10 @@ class PopulateDbRunnable(
                     val paperDao: PaperDao = buildDatabase().paperDao()
 
                     paperDao.add(paperList)
+
+                    PreferenceManager.getDefaultSharedPreferences(applicationContext).edit {
+                        putBoolean( applicationContext.getString(preference_first_time), true)
+                    }
                 }
             }
 
