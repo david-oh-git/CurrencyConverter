@@ -24,16 +24,21 @@
 
 package io.audioshinigami.currencyconverter.selectcurrency
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.audioshinigami.currencyconverter.data.AppRepository
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.PaperRepository
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
-
+/**
+ * Provides a list of all currencies represented as [Paper] , include search functionality
+ * with Transformations
+ */
 class PaperViewModel @Inject constructor(
     private val repository: PaperRepository,
     private val appRepository: AppRepository
@@ -72,12 +77,11 @@ class PaperViewModel @Inject constructor(
         }
 
         val result = MutableLiveData<List<Paper>>()
-        val queryLowerCase = query.toLowerCase(Locale.ROOT)
 
         val searchPapers = ArrayList<Paper>()
         for (paper in papers){
-            if( paper.name.toLowerCase(Locale.ROOT).contains(queryLowerCase)
-                || paper.code.toLowerCase(Locale.ROOT).contains(queryLowerCase) || paper.countryName.toLowerCase(Locale.ROOT).contains(queryLowerCase)){
+            if( paper.name.contains(query, ignoreCase = true)
+                || paper.code.contains(query, ignoreCase = true) || paper.countryName.contains(query, ignoreCase = true) ){
                 searchPapers.add(paper)
             }
         }
