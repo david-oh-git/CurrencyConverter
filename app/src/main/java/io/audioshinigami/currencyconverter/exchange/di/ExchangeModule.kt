@@ -22,44 +22,20 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.data.source.local
+package io.audioshinigami.currencyconverter.exchange.di
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import io.audioshinigami.currencyconverter.data.DatabaseSource
-import io.audioshinigami.currencyconverter.data.Rate
+import androidx.lifecycle.ViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.multibindings.IntoMap
+import io.audioshinigami.currencyconverter.di.ViewModelKey
+import io.audioshinigami.currencyconverter.exchange.ExchangeViewModel
 
-class FakeDatabaseSource(
-    var rateStorage: MutableList<Rate> = mutableListOf()
-): DatabaseSource {
+@Module
+abstract class ExchangeModule {
 
-    override suspend fun save(rate: Rate) {
-        rateStorage.add(rate)
-    }
-
-    override suspend fun save(rates: List<Rate>) {
-        rateStorage.addAll(rates)
-    }
-
-    override suspend fun find(code: String): Rate? = rateStorage.find { it.code == code }
-
-    override suspend fun delete(rate: Rate) {
-        rateStorage.remove(rate)
-    }
-
-    override fun observeRates(): LiveData<List<Rate>> {
-        return MutableLiveData(rateStorage)
-    }
-
-    override suspend fun getAllRates(): List<Rate> {
-        return rateStorage
-    }
-
-    override suspend fun deleteAll() {
-        rateStorage.clear()
-    }
-
-    override suspend fun deleteAllRates() {
-        rateStorage.clear()
-    }
+    @Binds
+    @IntoMap
+    @ViewModelKey(ExchangeViewModel::class)
+    abstract fun bindViewModel(viewModel: ExchangeViewModel): ViewModel
 }

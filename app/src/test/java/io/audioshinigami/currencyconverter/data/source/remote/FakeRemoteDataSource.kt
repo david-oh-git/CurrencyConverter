@@ -28,7 +28,7 @@ import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.data.RemoteSource
 
 class FakeRemoteDataSource(
-    var rates: MutableList<Rate>? = mutableListOf()
+    var rateApiService: (String) -> Double
 ): RemoteSource {
 
     override suspend fun getRate(code: String): List<Rate> {

@@ -22,44 +22,20 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.data.source.local
+package io.audioshinigami.currencyconverter
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import io.audioshinigami.currencyconverter.data.DatabaseSource
-import io.audioshinigami.currencyconverter.data.Rate
+import org.junit.Test
 
-class FakeDatabaseSource(
-    var rateStorage: MutableList<Rate> = mutableListOf()
-): DatabaseSource {
+import org.junit.Assert.*
 
-    override suspend fun save(rate: Rate) {
-        rateStorage.add(rate)
-    }
-
-    override suspend fun save(rates: List<Rate>) {
-        rateStorage.addAll(rates)
-    }
-
-    override suspend fun find(code: String): Rate? = rateStorage.find { it.code == code }
-
-    override suspend fun delete(rate: Rate) {
-        rateStorage.remove(rate)
-    }
-
-    override fun observeRates(): LiveData<List<Rate>> {
-        return MutableLiveData(rateStorage)
-    }
-
-    override suspend fun getAllRates(): List<Rate> {
-        return rateStorage
-    }
-
-    override suspend fun deleteAll() {
-        rateStorage.clear()
-    }
-
-    override suspend fun deleteAllRates() {
-        rateStorage.clear()
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
     }
 }

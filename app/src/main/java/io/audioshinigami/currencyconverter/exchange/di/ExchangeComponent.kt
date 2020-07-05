@@ -22,44 +22,19 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.data.source.local
+package io.audioshinigami.currencyconverter.exchange.di
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import io.audioshinigami.currencyconverter.data.DatabaseSource
-import io.audioshinigami.currencyconverter.data.Rate
+import dagger.Subcomponent
+import io.audioshinigami.currencyconverter.exchange.ExchangeFragment
 
-class FakeDatabaseSource(
-    var rateStorage: MutableList<Rate> = mutableListOf()
-): DatabaseSource {
 
-    override suspend fun save(rate: Rate) {
-        rateStorage.add(rate)
+@Subcomponent(modules = [ExchangeModule::class])
+interface ExchangeComponent {
+
+    @Subcomponent.Factory
+    interface Factory {
+        fun create(): ExchangeComponent
     }
 
-    override suspend fun save(rates: List<Rate>) {
-        rateStorage.addAll(rates)
-    }
-
-    override suspend fun find(code: String): Rate? = rateStorage.find { it.code == code }
-
-    override suspend fun delete(rate: Rate) {
-        rateStorage.remove(rate)
-    }
-
-    override fun observeRates(): LiveData<List<Rate>> {
-        return MutableLiveData(rateStorage)
-    }
-
-    override suspend fun getAllRates(): List<Rate> {
-        return rateStorage
-    }
-
-    override suspend fun deleteAll() {
-        rateStorage.clear()
-    }
-
-    override suspend fun deleteAllRates() {
-        rateStorage.clear()
-    }
+    fun inject(target: ExchangeFragment)
 }
