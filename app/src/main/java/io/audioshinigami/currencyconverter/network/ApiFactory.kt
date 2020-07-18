@@ -53,8 +53,6 @@ object ApiFactory {
         chain.proceed(newRequest)
     }
 
-    private val gsonBuilder = GsonBuilder()
-
     private fun addHttpClient(key: String): OkHttpClient =
 
         if( BuildConfig.DEBUG){
@@ -76,6 +74,7 @@ object ApiFactory {
 
     private fun retrofit(key: String): Retrofit {
 
+        val gsonBuilder = GsonBuilder()
         gsonBuilder.registerTypeAdapter(RateResponse::class.java, RateResponseParser())
 
         return Retrofit.Builder()
