@@ -24,15 +24,33 @@
 
 package io.audioshinigami.currencyconverter.data
 
+import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.lifecycle.LiveData
+import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
+import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class PaperRepoImpl @Inject constructor(
     private val paperDatabaseSource: PaperDatabaseSource,
+    private val sharedPreferences: SharedPreferences,
     private val ioDispatcher: CoroutineDispatcher
 ): PaperRepository {
+
+    override suspend fun setFromCode(code: String) = withContext(ioDispatcher){
+        sharedPreferences.edit {
+            putString(FROM_CODE_KEY, code)
+        }
+    }
+
+    override suspend fun setToCode(code: String) = withContext(ioDispatcher) {
+        sharedPreferences.edit {
+            putString(TO_CODE_KEY, code)
+        }
+    }
+
     override suspend fun getPapers(): List<Paper> = withContext(ioDispatcher){
         paperDatabaseSource.getAllPapers()
     }

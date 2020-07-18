@@ -24,8 +24,12 @@
 
 package io.audioshinigami.currencyconverter.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.content.SharedPreferences
+import androidx.core.content.edit
+import io.audioshinigami.currencyconverter.utils.CONVERTED_AMOUNT_KEY
+import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
+import io.audioshinigami.currencyconverter.utils.INPUT_AMOUNT_KEY
+import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -34,17 +38,21 @@ import javax.inject.Inject
 class DefaultRepository @Inject constructor(
     private val databaseSource: DatabaseSource,
     private val remoteDataSource: RemoteSource,
+    private val sharedPreferences: SharedPreferences,
     private val ioDispatcher: CoroutineDispatcher
 ): AppRepository {
 
-    override val fromCode: MutableLiveData<String> = MutableLiveData("NGN")
-    override val toCode: MutableLiveData<String> = MutableLiveData("USD")
+    override val fromCode: String
+            get() = sharedPreferences.getString(FROM_CODE_KEY, "NGN") ?: "NGN"
+    
+    override val toCode: String
+        get() = sharedPreferences.getString(TO_CODE_KEY, "USD") ?: "USD"
 
-    override val hasNetworkConnection: MutableLiveData<Boolean> = MutableLiveData(false)
+    override val convertedAmount: String
+        get() = sharedPreferences.getString(CONVERTED_AMOUNT_KEY, "0.0") ?: "0.0"
 
-    override val convertedAmount: MutableLiveData<String> = MutableLiveData()
-
-    override val inputAmount: MutableLiveData<String> = MutableLiveData()
+    override val inputAmount: String
+        get() = sharedPreferences.getString(INPUT_AMOUNT_KEY, "0.0") ?: "0.0"
 
     override suspend fun save(rate: Rate) = withContext(ioDispatcher){
         databaseSource.save(rate)
@@ -66,8 +74,6 @@ class DefaultRepository @Inject constructor(
         return@withContext databaseSource.getAllRates()
     }
 
-    override fun observeRates(): LiveData<List<Rate>> = databaseSource.observeRates()
-
     override suspend fun deleteAll() = withContext(ioDispatcher){
         databaseSource.deleteAll()
     }
@@ -79,15 +85,35 @@ class DefaultRepository @Inject constructor(
         return@withContext rates.find { it.code == code }
     }
 
-    override suspend fun setNetworkConnection(enabled: Boolean) = withContext(ioDispatcher) {
-        hasNetworkConnection.postValue(enabled)
-    }
-
     override suspend fun setFromCode(code: String) = withContext(ioDispatcher) {
-        fromCode.postValue(code)
+        sharedPreferences.edit {
+            putString(FROM_CODE_KEY, code)
+        }
     }
 
     override suspend fun setToCode(code: String) = withContext(ioDispatcher) {
-        toCode.postValue(code)
+        sharedPreferences.edit {
+            putString(TO_CODE_KEY, code)
+        }
+    }
+
+    override suspend fun setConvertedAmount(amount: String) = withContext(ioDispatcher){
+        sharedPreferences.edit {
+            putString(CONVERTED_AMOUNT_KEY, amount)
+        }
+    }
+
+    override suspend fun setInputAmount(amount: String) = withContext(ioDispatcher){
+        sharedPreferences.edit {
+            putString(INPUT_AMOUNT_KEY, amount)
+        }
+    }
+
+    override fun setSharedPreferenceListener(listener: SharedPreferences.OnSharedPreferenceChangeListener){
+        sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
+    }
+
+    override fun removeSharedPreferenceListener(listener: SharedPreferences.OnSharedPreferenceChangeListener){
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(listener)
     }
 }

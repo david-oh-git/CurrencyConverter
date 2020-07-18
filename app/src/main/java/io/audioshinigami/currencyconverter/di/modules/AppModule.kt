@@ -25,6 +25,8 @@
 package io.audioshinigami.currencyconverter.di.modules
 
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -64,4 +66,9 @@ object AppModule {
     @ApplicationScope
     @Named(DATE_NAME)
     fun provideDate() = Date.currentDate
+
+    @Provides
+    @JvmStatic
+    @ApplicationScope
+    fun provideSharedPrefences(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 }

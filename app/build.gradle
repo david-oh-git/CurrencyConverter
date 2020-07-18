@@ -85,16 +85,6 @@ android {
 
     }
 
-    sourceSets {
-        String sharedTestDir = 'src/sharedTest/java'
-        test {
-            java.srcDir sharedTestDir
-        }
-        androidTest {
-            java.srcDir sharedTestDir
-        }
-    }
-
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -154,6 +144,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    //  LiveData builder
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     // Timber
     implementation "com.jakewharton.timber:timber:$timber_version"
     // Room DB
@@ -187,6 +179,8 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest:$hamcrest_version"
     testImplementation "org.hamcrest:hamcrest-library:$hamcrest_version"
     testImplementation "com.google.truth:truth:$truth_version"
+    // MockWebServer
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mock_web_server"
 
 
     // Android unit dependencies ###

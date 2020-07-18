@@ -22,44 +22,9 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.data
+package io.audioshinigami.currencyconverter.network
 
-import android.content.SharedPreferences
+class ApiFactoryTest {
 
-interface AppRepository {
-
-    val fromCode: String
-
-    val toCode: String
-
-    fun setSharedPreferenceListener(listener: SharedPreferences.OnSharedPreferenceChangeListener)
-
-    fun removeSharedPreferenceListener(listener: SharedPreferences.OnSharedPreferenceChangeListener)
-
-    val convertedAmount: String
-
-    val inputAmount: String
-
-    suspend fun save(rate: Rate)
-
-    suspend fun save(rates: List<Rate>)
-
-    suspend fun delete( rate: Rate)
-
-    suspend fun getAllRates(): List<Rate>
-
-    suspend fun find(code: String): Rate?
-
-    suspend fun deleteAll()
-
-    suspend fun getResult(code: String): Rate?
-
-    suspend fun setFromCode(code: String)
-
-    suspend fun setToCode(code: String)
-
-    suspend fun setConvertedAmount(amount: String)
-
-    suspend fun setInputAmount(amount: String)
-
+    private val BASE_URL = "https://free.currconv.com"
 }

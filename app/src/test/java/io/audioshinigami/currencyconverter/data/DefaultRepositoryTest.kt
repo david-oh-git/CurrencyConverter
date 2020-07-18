@@ -45,12 +45,13 @@ class DefaultRepositoryTest {
     private lateinit var databaseSource: DatabaseSource
     private lateinit var repository: AppRepository
     private lateinit var remoteDataSource: RemoteSource
+    private val fackApiService: (String) -> Double =  { _ -> 0.25}
 
     @Before
     fun init(){
 
         databaseSource = FakeDatabaseSource(rateDb)
-        remoteDataSource = FakeRemoteDataSource( mutableListOf() )
+        remoteDataSource = FakeRemoteDataSource( fackApiService )
 
         repository = DefaultRepository(
             databaseSource,

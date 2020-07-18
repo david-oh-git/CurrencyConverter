@@ -25,22 +25,25 @@
 package io.audioshinigami.currencyconverter.convertAmount
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import io.audioshinigami.currencyconverter.App
 import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.data.AppRepository
 import io.audioshinigami.currencyconverter.utils.OneTimeLiveData
 import io.audioshinigami.currencyconverter.utils.SnackMessage
-import io.audioshinigami.currencyconverter.utils.extentions.currencyFormat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.math.RoundingMode
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 class ConvertViewModel @Inject constructor(
@@ -48,26 +51,31 @@ class ConvertViewModel @Inject constructor(
     private val repository: AppRepository
 ): AndroidViewModel(app) {
 
-    private val _convertedAmount = repository.convertedAmount
+    private val _convertedAmount = MutableLiveData<String>().apply { value = repository.convertedAmount }
     val convertedAmount: LiveData<String> = _convertedAmount
 
-    private val _inputAmount = repository.inputAmount
+    private val _inputAmount = MutableLiveData<String>().apply { value = repository.inputAmount }
     val inputAmount = _inputAmount
 
-    private val _fromCode = repository.fromCode
+    private val _fromCode = MutableLiveData<String>().apply { value = repository.fromCode }
     val fromCode: LiveData<String> = _fromCode
 
-    private val _toCode = repository.toCode
+    private val _toCode = MutableLiveData<String>().apply { value = repository.toCode }
     val toCode: LiveData<String> = _toCode
 
     private val apiCallCode: String
         get() = "${fromCode.value}_${toCode.value}"
 
+    private val Double.currencyFormat: String
+        get() = DecimalFormat("#,###.##").apply { roundingMode = RoundingMode.CEILING }.format(this)
+
+    private val hasNetworkConnection: MutableLiveData<Boolean> = MutableLiveData(false)
+
     val snackMessage = OneTimeLiveData<SnackMessage>()
 
     fun initConversion() = viewModelScope.launch(Dispatchers.IO) {
         // check if to & from code is d same
-        if( _toCode.value == _fromCode.value ){
+        if( toCode.value == fromCode.value ){
             setConvertedAmount()
             return@launch
         }
@@ -81,7 +89,7 @@ class ConvertViewModel @Inject constructor(
         updateNetworkStatus() // check for network LOLLIPOP API & below
         
         // make api call for rate
-        if( repository.hasNetworkConnection.value == true){
+        if( hasNetworkConnection.value == true ){
             fetchRateFromApi()
         }else{
             launch(Dispatchers.Main) {
@@ -91,7 +99,23 @@ class ConvertViewModel @Inject constructor(
     }
 
     fun setHasNetworkConnection(value: Boolean) = viewModelScope.launch {
-        repository.setNetworkConnection(value)
+        hasNetworkConnection.postValue(value)
+    }
+
+    fun setFromCode(code: String) = viewModelScope.launch {
+        _fromCode.postValue(code)
+    }
+
+    fun setToCode(code: String) = viewModelScope.launch {
+        _toCode.postValue(code)
+    }
+
+    fun setSharedPreferenceListener(listener: SharedPreferences.OnSharedPreferenceChangeListener){
+        repository.setSharedPreferenceListener(listener)
+    }
+
+    fun removeSharedPreferenceListener(listener: SharedPreferences.OnSharedPreferenceChangeListener){
+        repository.removeSharedPreferenceListener(listener)
     }
 
     private fun fetchRateFromApi() = viewModelScope.launch {
@@ -129,10 +153,12 @@ class ConvertViewModel @Inject constructor(
 
     }
 
-    private fun setConvertedAmount(rate: Double = 1.0) = viewModelScope.launch {
+    fun setConvertedAmount(rate: Double = 1.0) = viewModelScope.launch {
 
         inputAmount.value?.toDouble()?.times(rate)?.let {
-            repository.convertedAmount.postValue(it.currencyFormat)
+            _convertedAmount.postValue(it.currencyFormat)
+            repository.setConvertedAmount(it.currencyFormat)
+            repository.setInputAmount(_inputAmount.toString())
         }
 
     }

@@ -24,9 +24,6 @@
 
 package io.audioshinigami.currencyconverter.utils.extentions
 
-import java.math.RoundingMode
-import java.text.DecimalFormat
-
 fun Map<String, String>.toApiString(): String {
     var result = ""
 
@@ -37,6 +34,3 @@ fun Map<String, String>.toApiString(): String {
     return result.removePrefix("&")
 
 } /*end toApiString*/
-
-val Double.currencyFormat: String
-    get() = DecimalFormat("#,###.##").apply { roundingMode = RoundingMode.CEILING }.format(this)

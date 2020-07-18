@@ -44,7 +44,7 @@ import org.robolectric.annotation.Config
 
 @ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
-@Config(maxSdk = Build.VERSION_CODES.P)
+@Config(sdk = [Build.VERSION_CODES.P])
 class ExchangeDatabaseTest {
 
     private lateinit var paperDao: PaperDao

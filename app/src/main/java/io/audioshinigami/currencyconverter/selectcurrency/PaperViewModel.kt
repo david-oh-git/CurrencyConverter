@@ -29,7 +29,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.audioshinigami.currencyconverter.data.AppRepository
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.PaperRepository
 import kotlinx.coroutines.launch
@@ -40,8 +39,7 @@ import javax.inject.Inject
  * with Transformations
  */
 class PaperViewModel @Inject constructor(
-    private val repository: PaperRepository,
-    private val appRepository: AppRepository
+    private val repository: PaperRepository
 ): ViewModel() {
 
     val searchQuery = MutableLiveData<String>().apply { value = "" }
@@ -63,11 +61,11 @@ class PaperViewModel @Inject constructor(
     }
 
     fun setFromCode(code: String) = viewModelScope.launch {
-        appRepository.setFromCode(code)
+        repository.setFromCode(code)
     }
 
     fun setToCode(code: String) = viewModelScope.launch {
-        appRepository.setToCode(code)
+        repository.setToCode(code)
     }
 
     private fun searchPapers(query: String, papers: List<Paper>): LiveData<List<Paper>> {

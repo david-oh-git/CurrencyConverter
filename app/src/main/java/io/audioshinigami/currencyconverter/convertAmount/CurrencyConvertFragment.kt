@@ -26,6 +26,7 @@ package io.audioshinigami.currencyconverter.convertAmount
 
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -43,6 +44,8 @@ import io.audioshinigami.currencyconverter.R
 import io.audioshinigami.currencyconverter.databinding.CurrencyConvertFragmentBinding
 import io.audioshinigami.currencyconverter.home.HomeActivity
 import io.audioshinigami.currencyconverter.utils.FRAGMENT_CODE
+import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
+import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.network.InternetCallback
 import io.audioshinigami.currencyconverter.utils.network.NetworkChecker
 import timber.log.Timber
@@ -61,6 +64,26 @@ class CurrencyConvertFragment : Fragment() {
     private var callback: InternetCallback? = null
 
     private lateinit var binding: CurrencyConvertFragmentBinding
+
+    private val preferenceListener by lazy {
+
+        SharedPreferences.OnSharedPreferenceChangeListener {
+                preference, key ->
+
+            when(key){
+                FROM_CODE_KEY -> {
+                    viewModel.setFromCode( preference.getString(key, "") ?: "")
+                }
+
+                TO_CODE_KEY -> {
+                    viewModel.setToCode( preference.getString(key, "") ?: "")
+                }
+
+            }
+
+
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -95,6 +118,12 @@ class CurrencyConvertFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.setSharedPreferenceListener(preferenceListener)
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -116,6 +145,12 @@ class CurrencyConvertFragment : Fragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModel.removeSharedPreferenceListener(preferenceListener)
+    }
+
     private fun initInternetCallback(){
 
         callback = object: InternetCallback() {
@@ -133,16 +168,16 @@ class CurrencyConvertFragment : Fragment() {
 
     private fun subscribeData(){
 
-
         viewModel.snackMessage.observe(viewLifecycleOwner, Observer {
             hideKeyboard(binding.edittxtCurrencyFrom)
-            ( activity as HomeActivity).sendSnackBar(it.message)
+            ( activity as HomeActivity ).sendSnackBar(it.message)
         })
     }
 
     private fun startSelectCurrencyFragment(code: String){
         val bundle = bundleOf( FRAGMENT_CODE to code)
         findNavController().navigate(R.id.action_currencyConvertFragment_to_currencySelectFragment, bundle)
+        Timber.d("launched SelectFragment")
     }
 
     private fun hideKeyboard(view: View){

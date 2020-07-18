@@ -28,6 +28,10 @@ import androidx.lifecycle.LiveData
 
 interface PaperRepository {
 
+    suspend fun setFromCode(code: String)
+
+    suspend fun setToCode(code: String)
+
     suspend fun getPapers(): List<Paper>
 
     fun observePapers(): LiveData<List<Paper>>

@@ -30,7 +30,6 @@ import io.audioshinigami.currencyconverter.BuildConfig
 import io.audioshinigami.currencyconverter.models.RateResponse
 import io.audioshinigami.currencyconverter.models.RateResponseParser
 import io.audioshinigami.currencyconverter.utils.BASE_URL
-import io.audioshinigami.currencyconverter.utils.api_key
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -39,27 +38,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiFactory {
 
+    //Creating Auth Interceptor to add api_key query in front of all the requests.
     private fun provideInterceptor(key: String) = Interceptor { chain ->
         val newUrl = chain.request().url()
             .newBuilder()
             .addQueryParameter("apiKey", key)
-            .build()
-
-        val newRequest = chain.request()
-            .newBuilder()
-            .url(newUrl)
-            .build()
-
-        chain.proceed(newRequest)
-    }
-
-
-
-    //Creating Auth Interceptor to add api_key query in front of all the requests.
-    private val authInterceptor = Interceptor { chain ->
-        val newUrl = chain.request().url()
-            .newBuilder()
-            .addQueryParameter("apiKey", api_key)
             .build()
 
         val newRequest = chain.request()
@@ -87,7 +70,7 @@ object ApiFactory {
 
         }else{
             OkHttpClient().newBuilder()
-                .addInterceptor(authInterceptor)
+                .addInterceptor( provideInterceptor(key) )
                 .build()
         }
 
@@ -103,6 +86,6 @@ object ApiFactory {
             .build()
     }
 
-    fun provideConverterApi(key: String) = retrofit(key).create(ConverterApi::class.java)
+    fun provideConverterApi(key: String): ConverterApi = retrofit(key).create(ConverterApi::class.java)
 
 } /*END*/
