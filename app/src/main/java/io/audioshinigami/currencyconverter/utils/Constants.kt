@@ -24,10 +24,6 @@
 
 package io.audioshinigami.currencyconverter.utils
 
-import io.audioshinigami.currencyconverter.BuildConfig
-import io.audioshinigami.currencyconverter.R
-
-const val api_key = BuildConfig.API_KEY
 const val BASE_URL = "https://free.currconv.com"
 const val FROM_CODE_KEY = "from_code_key"
 const val TO_CODE_KEY = "to_code_key"

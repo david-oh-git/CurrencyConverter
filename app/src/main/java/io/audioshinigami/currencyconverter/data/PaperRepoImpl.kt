@@ -26,10 +26,11 @@ package io.audioshinigami.currencyconverter.data
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import androidx.lifecycle.LiveData
 import io.audioshinigami.currencyconverter.utils.FROM_CODE_KEY
 import io.audioshinigami.currencyconverter.utils.TO_CODE_KEY
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -51,13 +52,9 @@ class PaperRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getPapers(): List<Paper> = withContext(ioDispatcher){
-        paperDatabaseSource.getAllPapers()
-    }
-
-    override fun observePapers(): LiveData<List<Paper>> {
-        return paperDatabaseSource.observePapers()
-    }
+    override fun getPapers() = flow {
+        emit(paperDatabaseSource.getAllPapers())
+    }.flowOn(ioDispatcher)
 
     override suspend fun save(paper: Paper) = withContext(ioDispatcher){
         paperDatabaseSource.save(paper)

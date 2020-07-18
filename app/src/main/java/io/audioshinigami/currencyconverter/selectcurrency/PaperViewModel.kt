@@ -28,6 +28,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.data.PaperRepository
@@ -44,16 +45,14 @@ class PaperViewModel @Inject constructor(
 
     val searchQuery = MutableLiveData<String>().apply { value = "" }
 
-    private val _papers
-        get() = Transformations.switchMap(searchQuery) { query ->
+    val papers: LiveData<List<Paper>> = Transformations.switchMap(searchQuery) { query ->
 
-            Transformations.switchMap( repository.observePapers()) { papers ->
-                papers?.let {
-                    searchPapers(query, papers)
-                }
+        Transformations.switchMap( repository.getPapers().asLiveData()) { papers ->
+            papers?.let {
+                searchPapers(query, papers)
             }
         }
-    val papers: LiveData<List<Paper>> = _papers
+    }
 
     // for testing
     fun setQuery(query: String){
@@ -71,7 +70,7 @@ class PaperViewModel @Inject constructor(
     private fun searchPapers(query: String, papers: List<Paper>): LiveData<List<Paper>> {
 
         if( query.isEmpty() || query.isBlank()){
-            return repository.observePapers()
+            return MutableLiveData(papers)
         }
 
         val result = MutableLiveData<List<Paper>>()

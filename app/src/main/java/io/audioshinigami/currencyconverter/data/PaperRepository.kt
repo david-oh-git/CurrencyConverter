@@ -24,7 +24,7 @@
 
 package io.audioshinigami.currencyconverter.data
 
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 
 interface PaperRepository {
 
@@ -32,9 +32,7 @@ interface PaperRepository {
 
     suspend fun setToCode(code: String)
 
-    suspend fun getPapers(): List<Paper>
-
-    fun observePapers(): LiveData<List<Paper>>
+    fun getPapers(): Flow<List<Paper>>
 
     suspend fun save(paper: Paper)
 
