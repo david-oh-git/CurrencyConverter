@@ -24,9 +24,6 @@
 
 package io.audioshinigami.currencyconverter.data
 
-import androidx.lifecycle.LiveData
-import io.audioshinigami.currencyconverter.network.Result
-
 interface DatabaseSource {
 
     suspend fun save(rate: Rate)
@@ -36,8 +33,6 @@ interface DatabaseSource {
     suspend fun delete( rate: Rate)
 
     suspend fun find(code: String): Rate?
-
-    fun observeRates(): LiveData<List<Rate>>
 
     suspend fun getAllRates(): List<Rate>
 

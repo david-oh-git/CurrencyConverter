@@ -24,7 +24,6 @@
 
 package io.audioshinigami.currencyconverter.data.source.local
 
-import androidx.lifecycle.LiveData
 import io.audioshinigami.currencyconverter.data.DatabaseSource
 import io.audioshinigami.currencyconverter.data.Rate
 import kotlinx.coroutines.CoroutineDispatcher
@@ -56,8 +55,6 @@ class LocalDatabaseSource @Inject constructor(
     override suspend fun deleteAll() = withContext(ioDispatcher){
         rateDao.deleteAllRates()
     }
-
-    override fun observeRates(): LiveData<List<Rate>> = rateDao.observeRates()
 
     override suspend fun getAllRates(): List<Rate> = withContext(ioDispatcher){
         return@withContext rateDao.getRates()

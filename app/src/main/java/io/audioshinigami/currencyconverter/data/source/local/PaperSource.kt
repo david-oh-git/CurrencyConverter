@@ -46,8 +46,6 @@ class PaperSource @Inject constructor(
         paperDao.add(papers)
     }
 
-    override fun observePapers() = paperDao.observeAllPaper()
-
     override suspend fun getAllPapers(): List<Paper> = withContext(ioDispatcher){
         return@withContext paperDao.getAllPaper()
     }

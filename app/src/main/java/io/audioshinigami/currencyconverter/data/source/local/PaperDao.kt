@@ -24,8 +24,11 @@
 
 package io.audioshinigami.currencyconverter.data.source.local
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import io.audioshinigami.currencyconverter.data.Paper
 import io.audioshinigami.currencyconverter.utils.PAPER_TABLE_NAME
 
@@ -43,9 +46,6 @@ interface PaperDao {
 
     @Delete
     fun delete(paper:Paper)
-
-    @Query("SELECT * FROM $PAPER_TABLE_NAME ORDER BY paperId ASC")
-    fun observeAllPaper(): LiveData<List<Paper>>
 
     @Query("SELECT * FROM $PAPER_TABLE_NAME ORDER BY paperId ASC")
     suspend fun getAllPaper(): List<Paper>
