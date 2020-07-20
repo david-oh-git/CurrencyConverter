@@ -22,38 +22,30 @@
  * SOFTWARE.
  */
 
-package io.audioshinigami.currencyconverter.data.source.local
+package io.audioshinigami.currencyconverter.di.components
 
-import io.audioshinigami.currencyconverter.data.DatabaseSource
-import io.audioshinigami.currencyconverter.data.Rate
+import android.content.Context
+import dagger.BindsInstance
+import dagger.Component
+import io.audioshinigami.currencyconverter.data.DefaultRepositoryTest
+import io.audioshinigami.currencyconverter.data.PaperRepoImplTest
+import io.audioshinigami.currencyconverter.di.modules.TestAppModule
+import javax.inject.Singleton
 
-class FakeDatabaseSource(
-    var rateStorage: MutableList<Rate> = mutableListOf()
-): DatabaseSource {
 
-    override suspend fun save(rate: Rate) {
-        rateStorage.add(rate)
+@Singleton
+@Component( modules = [
+        TestAppModule::class
+    ]
+)
+interface TestAppComponent {
+
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance applicationContext: Context): TestAppComponent
     }
 
-    override suspend fun save(rates: List<Rate>) {
-        rateStorage.addAll(rates)
-    }
+    fun inject(repository: DefaultRepositoryTest)
 
-    override suspend fun find(code: String): Rate? = rateStorage.find { it.code == code }
-
-    override suspend fun delete(rate: Rate) {
-        rateStorage.remove(rate)
-    }
-
-    override suspend fun getAllRates(): List<Rate> {
-        return rateStorage
-    }
-
-    override suspend fun deleteAll() {
-        rateStorage.clear()
-    }
-
-    override suspend fun deleteAllRates() {
-        rateStorage.clear()
-    }
+    fun inject(repository: PaperRepoImplTest)
 }

@@ -24,41 +24,40 @@
 
 package io.audioshinigami.currencyconverter.data
 
+import android.content.Context
+import android.os.Build
+import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
-import io.audioshinigami.currencyconverter.data.source.local.FakeDatabaseSource
-import io.audioshinigami.currencyconverter.data.source.remote.FakeRemoteDataSource
+import io.audioshinigami.currencyconverter.di.components.DaggerTestAppComponent
+import io.audioshinigami.currencyconverter.di.components.TestAppComponent
 import io.audioshinigami.currencyconverter.utils.RateFactory
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+import javax.inject.Inject
 
 /**
  * Unit tests for implementation of repository
  */
 
 @ExperimentalCoroutinesApi
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.P])
 class DefaultRepositoryTest {
 
-    private val rateDb: MutableList<Rate> = RateFactory.rates.toMutableList()
-    private lateinit var databaseSource: DatabaseSource
-    private lateinit var repository: AppRepository
-    private lateinit var remoteDataSource: RemoteSource
-    private val fackApiService: (String) -> Double =  { _ -> 0.25}
+    @Inject lateinit var repository: DefaultRepository
 
     @Before
     fun init(){
+        // init dagger2
+        val applicationContext = ApplicationProvider.getApplicationContext<Context>()
+        val component: TestAppComponent = DaggerTestAppComponent.factory().create(applicationContext)
 
-        databaseSource = FakeDatabaseSource(rateDb)
-        remoteDataSource = FakeRemoteDataSource( fackApiService )
-
-        repository = DefaultRepository(
-            databaseSource,
-            remoteDataSource,
-            Dispatchers.Unconfined
-        )
-
+        component.inject(this)
     }
 
     @Test

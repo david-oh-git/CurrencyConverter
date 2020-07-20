@@ -26,12 +26,13 @@ package io.audioshinigami.currencyconverter.data.source.remote
 
 import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.data.RemoteSource
+import io.audioshinigami.currencyconverter.utils.Date
 
 class FakeRemoteDataSource(
     var rateApiService: (String) -> Double
 ): RemoteSource {
 
     override suspend fun getRate(code: String): List<Rate> {
-        TODO("Not yet implemented")
+        return listOf(Rate(0,code, rateApiService.invoke(code), Date.currentDate))
     }
 }
