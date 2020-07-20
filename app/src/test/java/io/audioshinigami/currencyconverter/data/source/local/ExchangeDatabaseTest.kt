@@ -29,6 +29,8 @@ import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import io.audioshinigami.currencyconverter.di.components.DaggerTestAppComponent
+import io.audioshinigami.currencyconverter.di.components.TestAppComponent
 import io.audioshinigami.currencyconverter.utils.PaperFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -41,6 +43,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
@@ -49,17 +52,18 @@ class ExchangeDatabaseTest {
 
     private lateinit var paperDao: PaperDao
     private lateinit var rateDao: RateDao
-    private lateinit var db: ExchangeDatabase
+    @Inject lateinit var db: ExchangeDatabase
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init(){
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(
-            context, ExchangeDatabase::class.java
-        ).allowMainThreadQueries().build()
+        val applicationContext = ApplicationProvider.getApplicationContext<Context>()
+
+        val component: TestAppComponent = DaggerTestAppComponent.factory().create(applicationContext)
+
+        component.inject(this)
 
         paperDao = db.paperDao()
         rateDao = db.rateDao()
@@ -77,6 +81,18 @@ class ExchangeDatabaseTest {
 
         // Assert
         assertThat(result.size, `is`(2))
+    }
+
+    @Test
+    fun addListOfPaper_confirmAdded() = runBlockingTest {
+        // Arrange : add list of [Paper]  to db
+        paperDao.add( listOf(PaperFactory.getPaper(), PaperFactory.getPaper(), PaperFactory.getPaper() ) )
+
+        // Act: get all paper from db
+        val result = paperDao.getAllPaper()
+
+        // Assert: number of [Paper] in db
+        assertThat(result.size, `is`(3) )
     }
 
     @After

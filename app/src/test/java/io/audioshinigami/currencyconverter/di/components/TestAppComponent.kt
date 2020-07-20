@@ -29,7 +29,9 @@ import dagger.BindsInstance
 import dagger.Component
 import io.audioshinigami.currencyconverter.data.DefaultRepositoryTest
 import io.audioshinigami.currencyconverter.data.PaperRepoImplTest
+import io.audioshinigami.currencyconverter.data.source.local.ExchangeDatabaseTest
 import io.audioshinigami.currencyconverter.di.modules.TestAppModule
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Singleton
 
 
@@ -45,7 +47,12 @@ interface TestAppComponent {
         fun create(@BindsInstance applicationContext: Context): TestAppComponent
     }
 
-    fun inject(repository: DefaultRepositoryTest)
+    @ExperimentalCoroutinesApi
+    fun inject(target: DefaultRepositoryTest)
 
-    fun inject(repository: PaperRepoImplTest)
+    @ExperimentalCoroutinesApi
+    fun inject(target: PaperRepoImplTest)
+
+    @ExperimentalCoroutinesApi
+    fun inject(target: ExchangeDatabaseTest)
 }

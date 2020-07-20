@@ -24,7 +24,9 @@
 
 package io.audioshinigami.currencyconverter.di.modules
 
+import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import io.audioshinigami.currencyconverter.data.AppRepository
@@ -36,9 +38,9 @@ import io.audioshinigami.currencyconverter.data.PaperRepoImpl
 import io.audioshinigami.currencyconverter.data.PaperRepository
 import io.audioshinigami.currencyconverter.data.Rate
 import io.audioshinigami.currencyconverter.data.RemoteSource
+import io.audioshinigami.currencyconverter.data.source.local.ExchangeDatabase
 import io.audioshinigami.currencyconverter.data.source.local.FakeDatabaseSource
 import io.audioshinigami.currencyconverter.data.source.local.FakePaperSource
-import io.audioshinigami.currencyconverter.data.source.local.PaperSource
 import io.audioshinigami.currencyconverter.data.source.remote.FakeRemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -98,6 +100,14 @@ object TestAppModule {
         sharedPreferences: SharedPreferences,
         ioDispatcher: CoroutineDispatcher
     ): AppRepository = DefaultRepository(databaseSource, remoteSource, sharedPreferences, ioDispatcher)
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideExchangeDatabase(context: Context): ExchangeDatabase =
+        Room.inMemoryDatabaseBuilder(
+            context, ExchangeDatabase::class.java
+            ).allowMainThreadQueries().build()
 
     @JvmStatic
     @Singleton
