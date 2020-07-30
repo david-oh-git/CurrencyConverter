@@ -142,6 +142,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     // WorkerManager
     implementation "androidx.work:work-runtime-ktx:$work_version"
+    // sharedPreference
     implementation "androidx.preference:preference:$preference_version"
     // multidex
     implementation "androidx.multidex:multidex:2.0.1"

@@ -25,6 +25,7 @@
 package io.audioshinigami.currencyconverter.data
 
 import android.content.Context
+import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import io.audioshinigami.currencyconverter.di.components.DaggerTestAppComponent
 import io.audioshinigami.currencyconverter.di.components.TestAppComponent
@@ -33,9 +34,14 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.P])
 class PaperRepoImplTest {
 
     @Inject lateinit var paperRepository: PaperRepository
